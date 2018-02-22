@@ -7,8 +7,5 @@ echo ""
 
 for i in $(find ../schema_examples -name "posix_*.json"); do
 	echo "Validating JSON file $(basename "${i}")"
-	jsonschema -i "${i}" ../schemas/posix_interface.schema
-	if [ $? = 0 ]; then
-		echo "ok"
-	fi
+	ajv -d "${i}" -s ../schemas/posix_interface.schema
 done
