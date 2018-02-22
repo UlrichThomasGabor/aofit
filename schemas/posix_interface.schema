@@ -4,6 +4,21 @@
 
 	"additionalProperties": false,
 
+	"definitions": {
+		"error_situations": {
+			"type": "array",
+			"description": "",
+			"items": {
+				"type": "object",
+				"oneOf": [ { "required":["errno"] }, { "required": ["error_return_value"] } ],
+				"properties": {
+					"errno": { "type": "string" },
+					"error_return_value": { "type": "string" }
+				}
+			}
+		}
+	},
+
 	"type": "object",
 	"required": ["system_interface_name", "functions"],
 	"properties": {
@@ -23,16 +38,7 @@
 			"description": "The default error return value of the system interface."
 		},
 		"error_situations": {
-			"type": "array",
-			"description": "",
-			"items": {
-				"type": "object",
-				"oneOf": [ { "required":["errno"] }, { "required": ["error_return_value"] } ],
-				"properties": {
-					"errno": { "type": "string" },
-					"error_return_value": { "type": "string" }
-				}
-			}
+			"$ref": "#/definitions/error_situations"
 		},
 		"functions": {
 			"type": "array",
@@ -50,16 +56,7 @@
 						"description": "The default error return value of the function."
 					},
 					"error_situations": {
-						"type": "array",
-						"description": "",
-						"items": {
-							"type": "object",
-							"oneOf": [ { "required":["errno"] }, { "required": ["error_return_value"] } ],
-							"properties": {
-								"errno": { "type": "string" },
-								"error_return_value": { "type": "string" }
-							}
-						}
+						"$ref": "#/definitions/error_situations"
 					}
 				}
 			}
