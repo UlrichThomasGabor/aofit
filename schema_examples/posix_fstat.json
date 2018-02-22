@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "fstat",
+	"header_files": ["sys/stat.h"],
+	"functions": [
+		{
+			"signature": "int fstat(int fildes, struct stat *buf);",
+			"error_return_value": "-1",
+			"error_situations": [
+				{ "errno": "EBADF" },
+				{ "errno": "EIO" },
+				{ "errno": "EOVERFLOW" }
+			]
+		}
+	]
+}

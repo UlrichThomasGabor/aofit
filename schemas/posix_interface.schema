@@ -1,0 +1,68 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "POSIX Interface Errors",
+
+	"additionalProperties": false,
+
+	"type": "object",
+	"required": ["system_interface_name", "functions"],
+	"properties": {
+		"system_interface_name": {
+			"type": "string",
+			"description": "Name of the POSIX system interface."
+		},
+		"header_files": {
+			"type": "array",
+			"description": "List of necessary header files.",
+			"items": {
+				"type": "string"
+			}
+		},
+		"error_return_value": {
+			"type": "string",
+			"description": "The default error return value of the system interface."
+		},
+		"error_situations": {
+			"type": "array",
+			"description": "",
+			"items": {
+				"type": "object",
+				"oneOf": [ { "required":["errno"] }, { "required": ["error_return_value"] } ],
+				"properties": {
+					"errno": { "type": "string" },
+					"error_return_value": { "type": "string" }
+				}
+			}
+		},
+		"functions": {
+			"type": "array",
+			"description": "All function definitions of the POSIX interface.",
+			"items": {
+				"type": "object",
+				"required": ["signature"],
+				"properties": {
+					"signature": {
+						"type": "string",
+						"description": "The function signature as listed in the specification."
+					},
+					"error_return_value": {
+						"type": "string",
+						"description": "The default error return value of the function."
+					},
+					"error_situations": {
+						"type": "array",
+						"description": "",
+						"items": {
+							"type": "object",
+							"oneOf": [ { "required":["errno"] }, { "required": ["error_return_value"] } ],
+							"properties": {
+								"errno": { "type": "string" },
+								"error_return_value": { "type": "string" }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

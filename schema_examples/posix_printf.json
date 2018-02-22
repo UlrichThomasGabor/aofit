@@ -1,0 +1,36 @@
+{
+	"system_interface_name": "printf",
+	"header_files": ["stdio.h"],
+	"error_return_value": "-1",
+	"error_situations": [
+		{ "errno": "EILSEQ" },
+		{ "errno": "EOVERFLOW" }
+	],
+	"functions": [
+		{
+			"signature": "int dprintf(int fildes, const char *restrict format, ...);",
+			"error_situations": [
+				{ "errno": "EBADF" },
+				{ "errno": "ENOMEM" }
+			]
+		},
+		{
+			"signature": "int fprintf(FILE *restrict stream, const char *restrict format, ...);",
+			"error_situations": [
+				{ "errno": "ENOMEM" }
+			]
+		},
+		{
+			"signature": "int printf(const char *restrict format, ...);",
+			"error_situations": [
+				{ "errno": "ENOMEM" }
+			]
+		},
+		{
+			"signature": "int snprintf(char *restrict s, size_t n, const char *restrict format, ...);"
+		},
+		{
+			"signature": "int sprintf(char *restrict s, const char *restrict format, ...);"
+		}
+	]
+}

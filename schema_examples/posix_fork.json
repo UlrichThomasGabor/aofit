@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "fork",
+	"header_files": ["unistd.h"],
+	"functions": [
+		{
+			"signature": "pid_t fork(void);",
+			"error_return_value": "-1",
+			"error_situations": [
+				{ "errno": "EAGAIN" },
+				{ "errno": "ENOMEM" }
+			]
+		}
+	]
+}

@@ -1,0 +1,34 @@
+{
+	"system_interface_name": "fopen",
+	"header_files": ["stdio.h"],
+	"functions": [
+		{
+			"signature": "FILE *fopen(const char *restrict pathname, const char *restrict mode);",
+			"error_return_value": "NULL",
+			"error_situations": [
+				{ "errno": "EACCES" },
+				{ "errno": "EINTR" },
+				{ "errno": "EISDIR" },
+				{ "errno": "ELOOP" },
+				{ "errno": "EMFILE" },
+				{ "errno": "EMFILE" },
+				{ "errno": "ENAMETOOLONG" },
+				{ "errno": "ENFILE" },
+				{ "errno": "ENOENT" },
+				{ "errno": "ENOENT" },
+				{ "errno": "ENOTDIR" },
+				{ "errno": "ENOSPC" },
+				{ "errno": "ENOTDIR" },
+				{ "errno": "ENXIO" },
+				{ "errno": "EOVERFLOW" },
+				{ "errno": "EROFS" },
+				{ "errno": "EINVAL" },
+				{ "errno": "ELOOP" },
+				{ "errno": "EMFILE" },
+				{ "errno": "ENAMETOOLONG" },
+				{ "errno": "ENOMEM" },
+				{ "errno": "ETXTBSY" }
+			]
+		}
+	]
+}
