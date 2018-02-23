@@ -1,0 +1,109 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$id": "http://ulrichgabor.de/interface_specification#",
+	"title": "Definition of Interfaces for Error Injection",
+
+	"definitions": {
+		"error_situations": {
+			"type": "array",
+			"minItems": 1,
+			"description": "",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"oneOf": [
+					{ "required": ["errno"] },
+					{ "required": ["error_value"] }
+				],
+				"properties": {
+					"injectAt": {
+						"type": "string",
+						"enum": ["result", "argument"],
+						"default": "result"
+					},
+					"errno": { "type": "string" },
+					"error_value": { "type": "string" }
+				}
+			}
+		}
+	},
+
+	"type": "object",
+	"additionalProperties": false,
+	"required": ["id", "targets"],
+	"properties": {
+		"id": {
+			"type": "string",
+			"description": "Name of a target interface to be used in a campaign configuration file."
+		},
+		"system_interface_name": {
+			"type": "string",
+			"description": "Name of the POSIX system interface."
+		},
+		"header_files": {
+			"type": "array",
+			"minItems": 1,
+			"description": "List of necessary header files.",
+			"items": {
+				"type": "string"
+			}
+		},
+		"error_value": {
+			"type": "string",
+			"description": "The default error return value of the system interface.",
+			"default": "-1"
+		},
+		"error_situations": {
+			"$ref": "#/definitions/error_situations"
+		},
+		"targets": {
+			"type": "array",
+			"minItems": 1,
+			"description": "All targets to inject at or all function definitions of the POSIX interface.",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["signature"],
+				"properties": {
+					"signature": {
+						"anyOf": [
+							{
+								"type": "string",
+								"description": "The function signature as listed in the specification."
+							},
+							{
+								"type": "object",
+								"description": "Definition of target.",
+								"$comment": "oneOf kombiniert mit dependencies? https://spacetelescope.github.io/understanding-json-schema/reference/object.html",
+								"properties": {
+									"namespace": { "type": "string" },
+									"className": { "type": "string" },
+									"funcName": { "type": "string" },
+									"pointCutExp": {
+										"type": "string",
+										"description": "Pointcut expression for more detailed interface description. If set, previous fields in 'interface' will be ignored."
+									},
+									"resultType": {
+										"type": "string",
+										"description": "type of the function's return value"
+									},
+									"argType": {
+										"type": "string",
+										"description": "type of the argument to inject at"
+									}
+								}
+							}
+						]
+					},
+					"error_value": {
+						"type": "string",
+						"description": "The default error return value of the function."
+					},
+					"error_situations": {
+						"$ref": "#/definitions/error_situations"
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,12 +1,13 @@
 {
+	"id": "posix_printf",
 	"system_interface_name": "printf",
 	"header_files": ["stdio.h"],
-	"error_return_value": "-1",
+	"error_value": "-1",
 	"error_situations": [
 		{ "errno": "EILSEQ" },
 		{ "errno": "EOVERFLOW" }
 	],
-	"functions": [
+	"targets": [
 		{
 			"signature": "int dprintf(int fildes, const char *restrict format, ...);",
 			"error_situations": [

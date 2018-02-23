@@ -1,10 +1,11 @@
 {
+	"id": "posix_fputc",
 	"system_interface_name": "fputc",
 	"header_files": ["stdio.h"],
-	"functions": [
+	"targets": [
 		{
 			"signature": "int fputc(int c, FILE *stream);",
-			"error_return_value": "EOF",
+			"error_value": "EOF",
 			"error_situations": [
 				{ "errno": "EAGAIN" },
 				{ "errno": "EBADF" },

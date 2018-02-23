@@ -1,10 +1,11 @@
 {
+	"id": "posix_fopen",
 	"system_interface_name": "fopen",
 	"header_files": ["stdio.h"],
-	"functions": [
+	"targets": [
 		{
 			"signature": "FILE *fopen(const char *restrict pathname, const char *restrict mode);",
-			"error_return_value": "NULL",
+			"error_value": "NULL",
 			"error_situations": [
 				{ "errno": "EACCES" },
 				{ "errno": "EINTR" },

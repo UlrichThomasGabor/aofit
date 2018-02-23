@@ -1,0 +1,32 @@
+{
+	"customIncludes": ["lzham.h"],
+	"buildCommand": ["make", "lzhamtest"],
+	"programPath": "bin_linux/lzhamtest",
+	"goldenRunParams": ["-m3", "c", "bin_linux/ac++", "bin_linux/golden"],
+	"workloadParams": ["-m3", "c", "bin_linux/ac++", "bin_linux/test"],
+	"comparisonCommand": ["bin_linux/comp_lzham.py"],
+	"logLevel": 3,
+	"interfaces": [
+		{
+			"id": "posix_fork",
+			"system_interface_name": "fork",
+			"header_files": ["unistd.h"],
+			"targets": [
+				{
+					"signature": "pid_t fork(void);",
+					"error_value": "-1",
+					"error_situations": [
+						{ "errno": "EAGAIN" },
+						{ "errno": "ENOMEM" }
+					]
+				}
+			]
+		}
+	],
+	"experiments": [
+		{"target": "init_result", "injection_mode":"each", "each_occurrence_once": true},
+		{"target": "put_bytes_len", "injection_mode":"offset+", "probability": 20, "seed": 8427},
+		{"target": "put_bytes_buf", "injection_mode": "replace", "errorValue": "nullptr", "probability": 10, "seed": 8427},
+		{"target": "put_bytes_result", "injection_mode":"invert", "probability": 10, "seed": 8427}
+	]
+}
