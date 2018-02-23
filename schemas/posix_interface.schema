@@ -2,15 +2,18 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"title": "POSIX Interface Errors",
 
-	"additionalProperties": false,
-
 	"definitions": {
 		"error_situations": {
 			"type": "array",
+			"minItems": 1,
 			"description": "",
 			"items": {
 				"type": "object",
-				"oneOf": [ { "required":["errno"] }, { "required": ["error_return_value"] } ],
+				"additionalProperties": false,
+				"oneOf": [
+					{ "required":["errno"] },
+					{ "required": ["error_return_value"] }
+				],
 				"properties": {
 					"errno": { "type": "string" },
 					"error_return_value": { "type": "string" }
@@ -20,6 +23,7 @@
 	},
 
 	"type": "object",
+	"additionalProperties": false,
 	"required": ["system_interface_name", "functions"],
 	"properties": {
 		"system_interface_name": {
@@ -28,6 +32,7 @@
 		},
 		"header_files": {
 			"type": "array",
+			"minItems": 1,
 			"description": "List of necessary header files.",
 			"items": {
 				"type": "string"
@@ -35,16 +40,19 @@
 		},
 		"error_return_value": {
 			"type": "string",
-			"description": "The default error return value of the system interface."
+			"description": "The default error return value of the system interface.",
+			"default": "-1"
 		},
 		"error_situations": {
 			"$ref": "#/definitions/error_situations"
 		},
 		"functions": {
 			"type": "array",
+			"minItems": 1,
 			"description": "All function definitions of the POSIX interface.",
 			"items": {
 				"type": "object",
+				"additionalProperties": false,
 				"required": ["signature"],
 				"properties": {
 					"signature": {
