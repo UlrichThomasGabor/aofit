@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
-import pty, os, subprocess
+import pty
+import os
+import subprocess
+import argparse
+
+parser = argparse.ArgumentParser(description='Start QEMU and bind serial output to openend PTS.')
+parser.add_argument("image", help="The image to start.", default="build/bootdisk.vmi")
+parser.add_argument("--debug", action="store_true", default=False);
+args = parser.parse_args()
 
 master, slave = pty.openpty()
-print("master: ", os.ttyname(master), "slave: ", os.ttyname(slave))
+if args.debug:
+	print("master: " + os.ttyname(master) + "\tslave: " + os.ttyname(slave))
 slave_id = os.ttyname(slave).split('/')[-1]
 
 pts = open(master, 'rb', buffering=0)
@@ -12,19 +21,20 @@ tmp = b""
 stop = False
 magicStr = bytearray("e84fc95d3a41b3ebfccedea78311657c", encoding='ascii')
 pos = 0
-imagePath = 'build/bootdisk.vmi'
 
-# start qemu with built OS concurrently and redirect serial output to opened pts
-proc = subprocess.Popen(['qemu-system-x86_64', '-chardev', 'tty,id=pts'+slave_id+',path=/dev/pts/'+slave_id, '-device', 'isa-serial,chardev=pts'+slave_id, imagePath], stdout=subprocess.PIPE)
+# Start QEMU and redirect serial output to opened pts.
+io_options = ["-chardev", "tty,id=pts" + slave_id + ",path=/dev/pts/" + slave_id, "-device", "isa-serial,chardev=pts" + slave_id]
+image_options = ["-drive", "file=" + args.image + ",index=0,if=floppy,format=raw", "-boot", "a", "-k", "en-us"]
+proc = subprocess.Popen(['qemu-system-x86_64'] + io_options + image_options, stdout=subprocess.PIPE)
 
 while True:
     c = pts.read(1)
     if c[0] == magicStr[pos]:
         if pos == len(magicStr) - 1 and stop:
-            print("detected final magic string!")
+            print("Detected final magic string!")
             break
         elif pos == len(magicStr) - 1:
-            print("detected first magic string!")
+            print("Detected first magic string!")
             stop = True
             pos = 0
             tmp = b""
@@ -39,3 +49,4 @@ while True:
 
 proc.terminate();
 print("output: \n", read_input)
+
