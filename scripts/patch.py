@@ -5,15 +5,10 @@ import re
 import platform
 import argparse
 
-run_as_script = False #change to True if run as script instead of called as an imported function
-
 def patch_local(binaryPath, configData, configSymbol="fi_config_arr", debug=False):
     if platform.system() != "Linux":
         print("This tool works only on Linux, because only there objdump can print the necessary information.")
-        if run_as_script:
-            exit(1)
-        else:
-            return False
+        return False
 
     print("Searching for symbol " + configSymbol + " in ELF " + binaryPath + ".")
 
@@ -22,10 +17,7 @@ def patch_local(binaryPath, configData, configSymbol="fi_config_arr", debug=Fals
     except:
         #objdump_subprocess can't be accessed: the except block assumes that it wasn't assigned. However, objdump's output is printed
         print("Objdump failed")
-        if run_as_script:
-            exit(1)
-        else:
-            return False
+        return False
 
     objdump_output = objdump_subprocess.stdout.decode(encoding = sys.getdefaultencoding())
     if debug:
@@ -34,10 +26,7 @@ def patch_local(binaryPath, configData, configSymbol="fi_config_arr", debug=Fals
     ln = re.findall('<' + configSymbol + '>.*\n', objdump_output) # find line about config array
     if len(ln) == 0:
         print("Could not find the symbol " + configSymbol + " with configuration information in the ELF file.")
-        if run_as_script:
-            exit(1)
-        else:
-            return False
+        return False
     else:
         if debug:
             print('Found the symbol on line:', ln)
@@ -50,10 +39,7 @@ def patch_local(binaryPath, configData, configSymbol="fi_config_arr", debug=Fals
             binary = open(binaryPath, 'r+b')
         except OSError:
             print("Failed to open binary file", binaryPath)
-            if run_as_script:                
-                exit(1)
-            else:
-                return False
+            return False
 
         offset = int(offset[0], base=16)
         binary.seek(offset)
@@ -61,14 +47,9 @@ def patch_local(binaryPath, configData, configSymbol="fi_config_arr", debug=Fals
         binary.close()
 
         print("Successfully patched", binaryPath)
-        if run_as_script:
-            exit(0)
-        else:
-            return True
+        return True
 
 if __name__ == "__main__":
-    run_as_script = True
-
     parser = argparse.ArgumentParser(description='Modify an ELF file.')
     parser.add_argument("elf_file", help="The ELF file to modify.")
     parser.add_argument("--config_symbol", help="The symbol to modify.", default="fi_config_arr")
@@ -80,4 +61,5 @@ if __name__ == "__main__":
     configSymbol = args.config_symbol # name of config array, set in config aspect
     configData = bytes(args.config_data, encoding=sys.getdefaultencoding())
 
-    patch_local(binaryPath, configData, configSymbol, args.debug)
+    exit(not patch_local(binaryPath, configData, configSymbol, args.debug))
+

@@ -5,8 +5,6 @@ import os
 import subprocess
 import argparse
 
-run_as_script = False #change to True if run as script instead of called as an imported function
-
 def launch_serial(image, magicStr, debug=False):
     master, slave = pty.openpty()
     if debug:
@@ -27,10 +25,7 @@ def launch_serial(image, magicStr, debug=False):
         proc = subprocess.Popen(['qemu-system-x86_64'] + io_options + image_options, stdout=subprocess.PIPE) # stdout=subprocess.PIPE leads to qemu not terminating
     except:
         print("Launching Qemu failed.")
-        if run_as_script:
-            exit(1)
-        else:
-            return None
+        return None
 
     ok=False
     try:
@@ -42,10 +37,7 @@ def launch_serial(image, magicStr, debug=False):
 
     if not ok and proc.returncode != 0:
         print("Qemu failed")
-        if run_as_script:
-            exit(1)
-        else:
-            return None
+        return None
 
     while True:
         c = pts.read(1)
@@ -70,19 +62,19 @@ def launch_serial(image, magicStr, debug=False):
             read_input += c
 
     proc.terminate();
-    if run_as_script:
-        print("retrieved data:")
-        print(read_input) #TODO dump to file?
-    else:
-        return read_input
+    return read_input
 
 if __name__=="__main__":
-    run_as_script = True
-
     parser = argparse.ArgumentParser(description='Start QEMU and bind serial output to openend PTS.')
     parser.add_argument("image", help="The image to start.", default="build/bootdisk.vmi")
     parser.add_argument("magic_string", help="The magic string framing the relevant output")
     parser.add_argument("--debug", action="store_true", default=False);
     args = parser.parse_args()
 
-    launch_serial(args.image, bytearray(args.magic_string, encoding='ascii'), args.debug)
+    retval = launch_serial(args.image, bytearray(args.magic_string, encoding='ascii'), args.debug)
+    if type(retval) is bool:
+        exit(not retval)
+    else:
+        print(retval)
+        exit(0)
+
