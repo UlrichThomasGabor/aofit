@@ -30,12 +30,8 @@
 
 	"type": "object",
 	"additionalProperties": false,
-	"required": ["id", "targets"],
+	"required": ["targets"],
 	"properties": {
-		"id": {
-			"type": "string",
-			"description": "Name of a target interface to be used in a campaign configuration file."
-		},
 		"system_interface_name": {
 			"type": "string",
 			"description": "Name of the POSIX system interface."
@@ -63,8 +59,12 @@
 			"items": {
 				"type": "object",
 				"additionalProperties": false,
-				"required": ["signature"],
+				"required": ["id", "signature", "error_situations"],
 				"properties": {
+					"id": {
+						"type": "string",
+						"description": "Name of a target interface to be used in a campaign configuration file."
+					},
 					"signature": {
 						"anyOf": [
 							{
