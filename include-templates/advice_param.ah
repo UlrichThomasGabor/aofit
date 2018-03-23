@@ -1,0 +1,24 @@
+	advice call("$signature")$pointcutadditions : before($variabledefinition) {
+		if (${aspectName}_countOccurences) {
+			occurrences[$id]++;
+		}
+		if (${aspectName}_activeTargets[$id]) {
+			callCounts[$id]++;
+			if (callCounts[$id] == ${aspectName}_callCountLimits[$id]) {
+				int index = $argNumber; // index of argument
+				if (index != -1) {
+					$argType* arg = ($argType*)tjp->arg(index);
+
+					// Dummy function calls to trigger AC++ dynamic code generation for the
+					// template function inject().
+					tjp->filename(); tjp->signature(); tjp->line();
+
+					if (${aspectName}_injection_mode != replace) {
+						inject(tjp, result);
+					} else {
+						inject(tjp, result, ${aspectName}_valueVector_$id[${aspectName}_valueID[$id]]);
+					}
+				}
+			}
+		}
+	}

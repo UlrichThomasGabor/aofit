@@ -1,0 +1,209 @@
+#ifndef __testcampaign_AH__
+#define __testcampaign_AH__
+
+// We need this only for logging. A workaround can be to redefine log to printf.
+#include <stdarg.h>
+
+enum injection_type {
+	none = 0,
+	invert = 1,
+	offsetplus = 2,
+	offsetminus = 3,
+	replace = 4,
+	each = 5,
+};
+
+#include <stdio.h>
+#include <cerrno>
+#define TARGETS 1
+
+extern "C" {
+	// These variables should be changed before every experiment.
+	// Initialize with values != 0 to store them in .DATA segment.
+	__attribute__((used)) static int testcampaign_callCountLimits[TARGETS] = {1};
+	__attribute__((used)) static int testcampaign_valueID[TARGETS] = {1};
+	__attribute__((used)) static int testcampaign_loglevel = 1;
+	__attribute__((used)) static injection_type testcampaign_injection_mode = none;
+	__attribute__((used)) static bool testcampaign_activeTargets[TARGETS] = {true};
+	__attribute__((used)) static bool testcampaign_goldenrun = true;
+	__attribute__((used)) static FILE * testcampaign_valueVector_0[] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, (FILE *)NULL };
+
+__attribute__((used)) static int testcampaign_valueVectorErrno_0[] = {EACCES, EINTR, EISDIR, ELOOP, EMFILE, EMFILE, ENAMETOOLONG, ENFILE, ENOENT, ENOENT, ENOTDIR, ENOSPC, ENOTDIR, ENXIO, EOVERFLOW, EROFS, EINVAL, ELOOP, EMFILE, ENAMETOOLONG, ENOMEM, ETXTBSY, 0 };
+
+}
+
+aspect testcampaign {
+	int callCounts[TARGETS];
+	int occurrences[TARGETS];
+
+	testcampaign() {
+		for (int i = 0; i < TARGETS; i++) {
+			callCounts[i] = 0;
+			occurrences[i] = 0;
+		}
+	}
+
+	void log(int loglevel, const char *format, ...) {
+		if (testcampaign_loglevel >= loglevel) {
+			va_list args;
+			va_start(args, format);
+			vprintf(format, args);
+			va_end(args);
+			fflush(stdout);
+		}
+	}
+
+	void logChange(const char *filename, const char *sig, int line, const bool& val_original, const bool& val_changed) {
+		if (val_original) {
+			log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\ttrue ---> false\n", sig, filename, line);
+		} else {
+			log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\tfalse ---> true\n", sig, filename, line);
+		}
+	}
+
+	template <typename T>
+	void logChange(const char *filename, const char *sig, int line, const T& val_original, const T& val_changed) {
+		log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\t%d ---> %d\n", sig, filename, line, val_original, val_changed);
+	}
+
+	template <typename T>
+	void logChange(const char *filename, const char *sig, int line, const T& val_original, const T& val_changed, const char *msg) {
+		log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\t%s\n", sig, filename, line, msg);
+	}
+
+	const char *injection_type2str(injection_type injection_mode) {
+		switch (injection_mode) {
+			case none:
+				return "none";
+			case invert:
+				return "invert";
+			case offsetplus:
+				return "offsetplus";
+			case offsetminus:
+				return "offsetminus";
+			case replace:
+				return "replace";
+			case each:
+				return "each";
+		}
+		return "";
+	}
+
+	// Called for injection_mode = replace.
+	template <class JP, typename T, typename U>
+	void inject(JP *tjp, T *location, U value) {
+		if (*location != value) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value);
+			*location = value;
+		} else {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value, "value to inject equals argument");
+		}
+	}
+	template <class JP, typename T, typename U>
+	void inject(JP *tjp, T *location, U value, int replace_errno) {
+		if (*location != value) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value);
+			log(2, "[injection] also modifying errno to %d\n", replace_errno);
+			*location = value;
+			errno = replace_errno;
+		} else {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value, "value to inject equals argument");
+		}
+	}
+
+	// Following functions are called for other injection_modes.
+	template <class JP>
+	void inject(JP *tjp, bool *location) {
+		logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, !(*location));
+		*location = !(*location);
+	}
+
+	template <class JP>
+	void inject (JP *tjp, signed int *location) {
+		if (testcampaign_injection_mode == offsetplus) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) + 1);
+			(*location)++;
+		} else if (testcampaign_injection_mode == offsetminus) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) - 1);
+			(*location)--;
+		} else if (testcampaign_injection_mode == invert) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, -(*location));
+			*location *= -1;
+		} else {
+			log(0, "#-> Unknown injection_mode\n");
+		}
+	}
+
+	template <class JP>
+	void inject(JP *tjp, unsigned int *location) {
+		if (testcampaign_injection_mode == offsetplus) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) + 1);
+			(*location)++;
+		} else if (testcampaign_injection_mode == offsetminus) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) - 1);
+			(*location)--;
+		} else {
+			log(0, "#-> Unknown injection_mode\n");
+		}
+	}
+
+	template <class JP, typename T>
+	void inject(JP *tjp, T *location) {
+		log(0, "#-> invalid attempt to apply %s to non-bool / non-arithmetic!\n", injection_type2str(testcampaign_injection_mode));
+	}
+
+	advice execution("% main(...)") : around() {
+		log(1, "Experiment begins (loglevel: %d).\n", testcampaign_loglevel);
+
+		if (testcampaign_loglevel >= 2) {
+			for (int i = 0; i < TARGETS; i++) {
+				if (testcampaign_activeTargets[i]) {
+					log(2, "config for target %d\n", i);
+					log(2, "callCount: %d\n", testcampaign_callCountLimits[i]);
+					log(2, "occurrence: %d\n", 0);
+					log(2, "injection mode: %s\n", injection_type2str(testcampaign_injection_mode));
+				}
+			}
+		}
+
+		// Call regular main(...)
+		tjp->proceed();
+
+		log(0, "\nExperiment ends.\n");
+
+		if (testcampaign_goldenrun) {
+			for (int i = 0; i < TARGETS; i++) {
+				log(0, "%d\n", occurrences[i]);
+			}
+		}
+	}
+
+	//-----------------------------------------
+
+	advice call("% fopen(...)") && result(theresult) && args(argument0, argument1) : after(FILE * theresult, const char * argument0, const char * argument1) {
+		occurrences[0]++; // used for 'each_occurrence_once' experiment style
+		if (testcampaign_activeTargets[0]) {
+			FILE ** result = tjp->result();
+			callCounts[0]++;
+			if (callCounts[0] == testcampaign_callCountLimits[0]) {
+
+				// Dummy function calls to trigger AC++ dynamic code generation for the
+				// template function inject().
+				tjp->filename(); tjp->signature(); tjp->line();
+
+				if (testcampaign_injection_mode != replace) {
+					inject(tjp, result);
+				} else if (true) {
+					inject(tjp, result, testcampaign_valueVector_0[testcampaign_valueID[0]], testcampaign_valueVectorErrno_0[testcampaign_valueID[0]]);
+				} else {
+					inject(tjp, result, testcampaign_valueVector_0[testcampaign_valueID[0]]);
+				}
+				
+			}
+		}
+	}
+
+
+};
+
+#endif

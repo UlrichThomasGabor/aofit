@@ -1,0 +1,185 @@
+#ifndef __${aspectName}_AH__
+#define __${aspectName}_AH__
+
+// We need this only for logging. A workaround can be to redefine log to printf.
+#include <stdarg.h>
+
+enum injection_type {
+	none = 0,
+	invert = 1,
+	offsetplus = 2,
+	offsetminus = 3,
+	replace = 4,
+	each = 5,
+};
+
+$customIncludes
+#define TARGETS $numTargets
+
+extern "C" {
+	// These variables should be changed before every experiment.
+	// Initialize with values != 0 to store them in .DATA segment.
+	__attribute__((used)) static int ${aspectName}_callCountLimits[TARGETS] = {1};
+	__attribute__((used)) static int ${aspectName}_valueID[TARGETS] = {1};
+	__attribute__((used)) static int ${aspectName}_loglevel = 1;
+	__attribute__((used)) static injection_type ${aspectName}_injection_mode = none;
+	__attribute__((used)) static bool ${aspectName}_activeTargets[TARGETS] = {true};
+	__attribute__((used)) static bool ${aspectName}_countOccurences = true;
+$valueVectors
+}
+
+aspect $aspectName {
+	int callCounts[TARGETS];
+	int occurrences[TARGETS];
+
+	$aspectName() {
+		for (int i = 0; i < TARGETS; i++) {
+			callCounts[i] = 0;
+			occurrences[i] = 0;
+		}
+	}
+
+	void log(int loglevel, const char *format, ...) {
+		if (${aspectName}_loglevel >= loglevel) {
+			va_list args;
+			va_start(args, format);
+			vprintf(format, args);
+			va_end(args);
+			fflush(stdout);
+		}
+	}
+
+	void logChange(const char *filename, const char *sig, int line, const bool& val_original, const bool& val_changed) {
+		if (val_original) {
+			log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\ttrue ---> false\n", sig, filename, line);
+		} else {
+			log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\tfalse ---> true\n", sig, filename, line);
+		}
+	}
+
+	template <typename T>
+	void logChange(const char *filename, const char *sig, int line, const T& val_original, const T& val_changed) {
+		log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\t%d ---> %d\n", sig, filename, line, val_original, val_changed);
+	}
+
+	template <typename T>
+	void logChange(const char *filename, const char *sig, int line, const T& val_original, const T& val_changed, const char *msg) {
+		log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\t%s\n", sig, filename, line, msg);
+	}
+
+	const char *injection_type2str(injection_type injection_mode) {
+		switch (injection_mode) {
+			case none:
+				return "none";
+			case invert:
+				return "invert";
+			case offsetplus:
+				return "offsetplus";
+			case offsetminus:
+				return "offsetminus";
+			case replace:
+				return "replace";
+			case each:
+				return "each";
+		}
+		return "";
+	}
+
+	// Called for injection_mode = replace.
+	template <class JP, typename T, typename U>
+	void inject(JP *tjp, T *location, U value) {
+		if (*location != value) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value);
+			*location = value;
+		} else {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value, "value to inject equals argument");
+		}
+	}
+	template <class JP, typename T, typename U>
+	void inject(JP *tjp, T *location, U value, int replace_errno) {
+		if (*location != value) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value);
+			log(2, "[injection] also modifying errno to %d\n", replace_errno);
+			*location = value;
+			errno = replace_errno;
+		} else {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value, "value to inject equals argument");
+		}
+	}
+
+	// Following functions are called for other injection_modes.
+	template <class JP>
+	void inject(JP *tjp, bool *location) {
+		logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, !(*location));
+		*location = !(*location);
+	}
+
+	template <class JP>
+	void inject (JP *tjp, signed int *location) {
+		if (${aspectName}_injection_mode == offsetplus) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) + 1);
+			(*location)++;
+		} else if (${aspectName}_injection_mode == offsetminus) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) - 1);
+			(*location)--;
+		} else if (${aspectName}_injection_mode == invert) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, -(*location));
+			*location *= -1;
+		} else {
+			log(0, "#-> Unknown injection_mode\n");
+		}
+	}
+
+	template <class JP>
+	void inject(JP *tjp, unsigned int *location) {
+		if (${aspectName}_injection_mode == offsetplus) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) + 1);
+			(*location)++;
+		} else if (${aspectName}_injection_mode == offsetminus) {
+			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) - 1);
+			(*location)--;
+		} else {
+			log(0, "#-> Unknown injection_mode\n");
+		}
+	}
+
+	template <class JP, typename T>
+	void inject(JP *tjp, T *location) {
+		log(0, "#-> invalid attempt to apply %s to non-bool / non-arithmetic!\n", injection_type2str(${aspectName}_injection_mode));
+	}
+
+	advice execution("% main(...)") : around() {
+		log(1, "Experiment begins (loglevel: %d).\n", ${aspectName}_loglevel);
+
+		if (${aspectName}_loglevel >= 2) {
+			for (int i = 0; i < TARGETS; i++) {
+				if (${aspectName}_activeTargets[i]) {
+					log(2, "config for target %d\n", i);
+					log(2, "callCount: %d\n", ${aspectName}_callCountLimits[i]);
+					log(2, "occurrence: %d\n", 0);
+					log(2, "injection mode: %s\n", injection_type2str(${aspectName}_injection_mode));
+				}
+			}
+		}
+
+		// Call regular main(...)
+		tjp->proceed();
+
+		log(0, "\nExperiment ends.\n");
+
+		if (${aspectName}_countOccurences) {
+			for (int i = 0; i < TARGETS; i++) {
+				log(0, "%d\n", occurrences[i]);
+			}
+		}
+	}
+
+	// Our aspect should always be called last.
+	advice call("% ...::%(...)") : order(!derived("$aspectName")$notEcAspects, derived("$aspectName")$ecAspects);
+
+	//-----------------------------------------
+
+$advices
+};
+
+#endif

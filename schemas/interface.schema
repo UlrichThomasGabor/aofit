@@ -69,7 +69,7 @@
 						"anyOf": [
 							{
 								"type": "string",
-								"description": "The function signature as listed in the specification."
+								"description": "The function signature as listed in the specification. MUST include parameter names."
 							},
 							{
 								"type": "object",
@@ -87,9 +87,9 @@
 										"type": "string",
 										"description": "type of the function's return value"
 									},
-									"argType": {
-										"type": "string",
-										"description": "type of the argument to inject at"
+									"argNumber": {
+										"type": "integer",
+										"description": "Number of the argument (starting with 0) to inject the value at."
 									}
 								}
 							}
