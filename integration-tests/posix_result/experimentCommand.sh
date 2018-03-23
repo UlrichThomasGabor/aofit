@@ -19,19 +19,7 @@ GDBCOMMANDS=$(mktemp)
 trap "rm -Rf $GDBCOMMANDS" EXIT
 
 echo "" > $GDBCOMMANDS
-if false; then
-	echo "break *0x0" >> $GDBCOMMANDS # Break on entry.
-	echo "run >& $EXPERIMENT_DIR/output.log" >> $GDBCOMMANDS
-	# List all variables:
-	# $ info variables
-	# Change one variable:
-	# $ set variable idx = 1
-	cat "$1" | sed 's/^/set variable /' >> $GDBCOMMANDS
-	echo "continue" >> $GDBCOMMANDS
-	echo "quit" >> $GDBCOMMANDS
-	cd $BASEPATH/../testproject/
-	gdb -x $GDBCOMMANDS $BASEPATH/../testproject/a.out
-else
+if [[ $(command -v lldb &>/dev/null ; echo $?) == 0 ]]; then
 	echo "process launch --stop-at-entry -o $EXPERIMENT_DIR/output.log -e $EXPERIMENT_DIR/output.log --" >> $GDBCOMMANDS
 	# List all variables:
 	# $ target variable
@@ -44,6 +32,18 @@ else
 	echo "exit" >> $GDBCOMMANDS
 	cd $BASEPATH/../testproject/
 	lldb -s $GDBCOMMANDS $BASEPATH/../testproject/a.out
+else
+	echo "break *0x0" >> $GDBCOMMANDS # Break on entry.
+	echo "run >& $EXPERIMENT_DIR/output.log" >> $GDBCOMMANDS
+	# List all variables:
+	# $ info variables
+	# Change one variable:
+	# $ set variable idx = 1
+	cat "$1" | sed 's/^/set variable /' >> $GDBCOMMANDS
+	echo "continue" >> $GDBCOMMANDS
+	echo "quit" >> $GDBCOMMANDS
+	cd $BASEPATH/../testproject/
+	gdb -x $GDBCOMMANDS $BASEPATH/../testproject/a.out
 fi
 
 if [[ "$OCCURENCESFILE" != "" ]]; then
