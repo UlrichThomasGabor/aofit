@@ -1,0 +1,10 @@
+Experiment begins (loglevel: 3).
+config for target 0
+callCount: 1
+occurrence: 0
+injection mode: replace
+[injection] function: 'int test(int)' in file 'main.cc' in line '8':
+	5 ---> 42
+42
+
+Experiment ends.
