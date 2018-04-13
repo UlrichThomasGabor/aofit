@@ -30,8 +30,8 @@ if [[ $(command -v lldb &>/dev/null ; echo $?) == 0 ]]; then
 	cat "$1" | sed 's/^/expr /' >> $GDBCOMMANDS
 	echo "continue" >> $GDBCOMMANDS
 	echo "exit" >> $GDBCOMMANDS
-	cd $BASEPATH/../testproject/
-	lldb -s $GDBCOMMANDS $BASEPATH/../testproject/a.out
+	cd $BASEPATH/testproject/
+	lldb -s $GDBCOMMANDS $BASEPATH/testproject/a.out
 else
 	echo "break *0x0" >> $GDBCOMMANDS # Break on entry.
 	echo "run >& $EXPERIMENT_DIR/output.log" >> $GDBCOMMANDS
@@ -42,8 +42,8 @@ else
 	cat "$1" | sed 's/^/set variable /' >> $GDBCOMMANDS
 	echo "continue" >> $GDBCOMMANDS
 	echo "quit" >> $GDBCOMMANDS
-	cd $BASEPATH/../testproject/
-	gdb -x $GDBCOMMANDS $BASEPATH/../testproject/a.out
+	cd $BASEPATH/testproject/
+	gdb -x $GDBCOMMANDS $BASEPATH/testproject/a.out
 fi
 
 if [[ "$OCCURENCESFILE" != "" ]]; then

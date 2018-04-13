@@ -1,5 +1,5 @@
 {
-	"buildCommand": "cp testcampaign.ah ../testproject/ && cd ../testproject && ag++ -std=c++98 -g main.cc ; rm -Rf testcampaign.ah",
+	"buildCommand": "cp testcampaign.ah testproject/ && cd testproject && ag++ -std=c++98 -g main.cc ; rm -Rf testcampaign.ah",
 	"experimentCommand": "./experimentCommand.sh",
 	"logLevel": 3,
 	"interfaces": [
