@@ -4,5 +4,5 @@ cd $(dirname "$0")
 
 cd posix_result
 
-../../aofit.py testcampaign.json >/dev/null
+../../generate_aspect.py testcampaign.json
 cat testcampaign.ah

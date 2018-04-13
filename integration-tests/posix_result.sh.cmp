@@ -25,10 +25,10 @@ extern "C" {
 	__attribute__((used)) static int testcampaign_loglevel = 1;
 	__attribute__((used)) static injection_type testcampaign_injection_mode = none;
 	__attribute__((used)) static bool testcampaign_activeTargets[TARGETS] = {true};
-	__attribute__((used)) static bool testcampaign_goldenrun = true;
+	__attribute__((used)) static bool testcampaign_countOccurences = true;
 	__attribute__((used)) static FILE * testcampaign_valueVector_0[] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, (FILE *)NULL };
 
-__attribute__((used)) static int testcampaign_valueVectorErrno_0[] = {EACCES, EINTR, EISDIR, ELOOP, EMFILE, EMFILE, ENAMETOOLONG, ENFILE, ENOENT, ENOENT, ENOTDIR, ENOSPC, ENOTDIR, ENXIO, EOVERFLOW, EROFS, EINVAL, ELOOP, EMFILE, ENAMETOOLONG, ENOMEM, ETXTBSY, 0 };
+	__attribute__((used)) static int testcampaign_valueVectorErrno_0[] = {EACCES, EINTR, EISDIR, ELOOP, EMFILE, EMFILE, ENAMETOOLONG, ENFILE, ENOENT, ENOENT, ENOTDIR, ENOSPC, ENOTDIR, ENXIO, EOVERFLOW, EROFS, EINVAL, ELOOP, EMFILE, ENAMETOOLONG, ENOMEM, ETXTBSY, 0 };
 
 }
 
@@ -99,6 +99,7 @@ aspect testcampaign {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value, "value to inject equals argument");
 		}
 	}
+	#if true
 	template <class JP, typename T, typename U>
 	void inject(JP *tjp, T *location, U value, int replace_errno) {
 		if (*location != value) {
@@ -110,6 +111,7 @@ aspect testcampaign {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value, "value to inject equals argument");
 		}
 	}
+	#endif
 
 	// Following functions are called for other injection_modes.
 	template <class JP>
@@ -171,34 +173,39 @@ aspect testcampaign {
 
 		log(0, "\nExperiment ends.\n");
 
-		if (testcampaign_goldenrun) {
+		if (testcampaign_countOccurences) {
 			for (int i = 0; i < TARGETS; i++) {
 				log(0, "%d\n", occurrences[i]);
 			}
 		}
 	}
 
+	// Our aspect should always be called last.
+	advice call("% ...::%(...)") : order("testcampaign", "%" && !"testcampaign");
+
 	//-----------------------------------------
 
 	advice call("% fopen(...)") && result(theresult) && args(argument0, argument1) : after(FILE * theresult, const char * argument0, const char * argument1) {
-		occurrences[0]++; // used for 'each_occurrence_once' experiment style
+		if (testcampaign_countOccurences) {
+			occurrences[0]++;
+		}
 		if (testcampaign_activeTargets[0]) {
 			FILE ** result = tjp->result();
 			callCounts[0]++;
 			if (callCounts[0] == testcampaign_callCountLimits[0]) {
-
 				// Dummy function calls to trigger AC++ dynamic code generation for the
 				// template function inject().
 				tjp->filename(); tjp->signature(); tjp->line();
 
 				if (testcampaign_injection_mode != replace) {
 					inject(tjp, result);
+				#if true
 				} else if (true) {
 					inject(tjp, result, testcampaign_valueVector_0[testcampaign_valueID[0]], testcampaign_valueVectorErrno_0[testcampaign_valueID[0]]);
+				#endif
 				} else {
 					inject(tjp, result, testcampaign_valueVector_0[testcampaign_valueID[0]]);
 				}
-				
 			}
 		}
 	}
