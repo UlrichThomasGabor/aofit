@@ -52,6 +52,7 @@ def makeArgumentTypes(target):
 	# Match params, e.g. "const char *restrict pathname, const char *restrict mode", in signatures, e.g. "FILE *fopen(const char *restrict pathname, const char *restrict mode);".
 	result = re.match(_function_matcher, target['signature'])
 	params = result.group(4).split(",")
+	params = list(filter(None, params)) # Filter empty strings
 	params_without_varnames = []
 	for param in params:
 		types = [type.strip() for type in param.strip().split(" ")]
