@@ -1,0 +1,23 @@
+{
+	"buildCommand": "cp testcampaign.ah testproject/ && cd testproject && ag++ -std=c++98 -r repo.acp -k -g main.cc ; rm -Rf testcampaign.ah",
+	"experimentCommand": "./experimentCommand.sh",
+	"logLevel": 3,
+	"ecAspects": ["myecc"],
+	"interfaces": [
+		{
+			"header_files": ["stdio.h"],
+			"targets": [
+				{
+					"id": "testinjection",
+					"signature": "int test();",
+					"error_situations": [
+						{ "error_value": "42" }
+					]
+				}
+			]
+		}
+	],
+	"experiments": [
+		{"target": "testinjection", "experiment_mode": "call_count", "callCount": 1, "injection_mode": "replace", "error_situation_index": 0}
+	]
+}
