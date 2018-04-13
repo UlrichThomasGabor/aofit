@@ -16,11 +16,6 @@
 					{ "required": ["error_value"] }
 				],
 				"properties": {
-					"injectAt": {
-						"type": "string",
-						"enum": ["result", "argument"],
-						"default": "result"
-					},
 					"errno": { "type": "string" },
 					"error_value": { "type": "string" }
 				}
@@ -86,14 +81,19 @@
 									"resultType": {
 										"type": "string",
 										"description": "type of the function's return value"
-									},
-									"argNumber": {
-										"type": "integer",
-										"description": "Number of the argument (starting with 0) to inject the value at."
 									}
 								}
 							}
 						]
+					},
+					"injectAt": {
+						"type": "string",
+						"enum": ["result", "argument"],
+						"default": "result"
+					},
+					"argNumber": {
+						"type": "integer",
+						"description": "Number of the argument (starting with 0) to inject the value at."
 					},
 					"error_value": {
 						"type": "string",

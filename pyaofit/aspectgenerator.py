@@ -76,7 +76,7 @@ def makeValueVectors(campaign):
 			if (not 'injectAt' in target) or (target['injectAt'] == "result"):
 				error_type = makeResultType(target)
 			elif target['injectAt'] == "argument":
-				error_type = target['signature']['argType']
+				error_type = makeArgumentTypes(target)[target['argNumber']]
 
 			definitions += "\t__attribute__((used)) static " + error_type + " ${aspectName}_valueVector_" + str(target_id) + "[] = {"
 			definitions_errno += "\t__attribute__((used)) static int ${aspectName}_valueVectorErrno_" + str(target_id) + "[] = {"
@@ -137,8 +137,9 @@ def generateAspect(campaign):
 				adv = templates.raw_advice_result.safe_substitute()
 				adv = Template(adv).safe_substitute(signature=signature, resultType=result_type, pointcutadditions=pointcutadditions, variabledefinition=variabledefinition)
 			elif target['injectAt'] == 'argument':
+				arg_type = makeArgumentTypes(target)[target['argNumber']]
 				adv = templates.raw_advice_argument.safe_substitute()
-				adv = Template(adv).safe_substitute(signature=signature, argNumber=target['argNumber'], pointcutadditions=pointcutadditions, variabledefinition=variabledefinition)
+				adv = Template(adv).safe_substitute(signature=signature, argType=arg_type, argNumber=target['argNumber'], pointcutadditions=pointcutadditions, variabledefinition=variabledefinition)
 
 			adv = Template(adv).safe_substitute(id=target_id)
 			advices += adv + "\n"
