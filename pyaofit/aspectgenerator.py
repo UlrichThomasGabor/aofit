@@ -82,7 +82,7 @@ def makeValueVectors(campaign):
 			definitions_errno += "\t__attribute__((used)) static int ${aspectName}_valueVectorErrno_" + str(target_id) + "[] = {"
 			for errsituation in target['error_situations']:
 				definitions += errsituation['error_value'] + ", "
-				if "errno" in errsituation:
+				if errsituation['errno'] != None:
 					definitions_errno += errsituation["errno"] + ", "
 				else:
 					definitions_errno += "0, "

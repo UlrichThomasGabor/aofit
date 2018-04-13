@@ -95,6 +95,7 @@ aspect $aspectName {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value, "value to inject equals argument");
 		}
 	}
+	#if $errno_active
 	template <class JP, typename T, typename U>
 	void inject(JP *tjp, T *location, U value, int replace_errno) {
 		if (*location != value) {
@@ -106,6 +107,7 @@ aspect $aspectName {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value, "value to inject equals argument");
 		}
 	}
+	#endif
 
 	// Following functions are called for other injection_modes.
 	template <class JP>
