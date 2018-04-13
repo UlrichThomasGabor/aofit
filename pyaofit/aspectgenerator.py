@@ -154,8 +154,10 @@ def generateAspect(campaign):
 
 	ah = templates.raw_aspect_header.safe_substitute(customIncludes=customIncludes, numTargets=campaign.numberOfTargets, valueVectors=valueVectors, advices=advices)
 
-	notEcAspects = "".join([" && !derived(\"" + aspect + "\")" for aspect in campaign['ecAspects']])
-	ecAspects = "".join([", derived(\"" + aspect + "\")" for aspect in campaign['ecAspects']])
+	notEcAspects = "".join([" && !\"" + aspect + "\"" for aspect in campaign['ecAspects']])
+	ecAspects = "".join([" || \"" + aspect + "\"" for aspect in campaign['ecAspects']])
+	if len(ecAspects) > 0:
+		ecAspects = ecAspects[4:] + ", "
 	ah = Template(ah).safe_substitute(notEcAspects=notEcAspects, ecAspects=ecAspects)
 
 	# Use substitute here, because we expect an error if an identifier is left in the generated code.

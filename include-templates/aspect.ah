@@ -177,7 +177,7 @@ aspect $aspectName {
 	}
 
 	// Our aspect should always be called last.
-	advice call("% ...::%(...)") : order(!derived("$aspectName")$notEcAspects, derived("$aspectName")$ecAspects);
+	advice call("% ...::%(...)") : order($ecAspects"$aspectName", "%" && !"$aspectName"$notEcAspects);
 
 	//-----------------------------------------
 
