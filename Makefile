@@ -5,9 +5,9 @@ all_integrationtests := $(filter-out %.cmp,$(all_files_in_integrationtests))
 all_integrationtest_targets := $(addsuffix .test, $(all_integrationtests))
 
 all: test
-	@echo "Success, all tests passed."
 
 test: $(all_integrationtest_targets)
+	@echo "Success, all tests passed."
 
 %.test: %.cmp
 	$(basename $@) | diff -q $< - >/dev/null || (echo "Test $(basename $@) failed" && exit 1)
