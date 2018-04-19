@@ -1,0 +1,14 @@
+{
+    "id": "posix_time",
+    "system_interface_name": "time",
+    "header_files":["time.h"],
+    "error_value": "-1",
+    "error_situations": [
+        {"errno": "EOVERFLOW"}
+    ],
+    "targets": [
+        {
+            "signature": "time_t time(time_t *tloc);"
+        }        
+    ]
+}
