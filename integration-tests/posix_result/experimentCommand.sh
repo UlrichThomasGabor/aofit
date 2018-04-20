@@ -42,7 +42,6 @@ else
 	# $ set variable idx = 1
 	cat "$1" | sed 's/^/set variable /' >> $GDBCOMMANDS
 	sed -i 's/=true/="true"/' $GDBCOMMANDS
-	echo $GDBCOMMANDS
 	echo "continue" >> $GDBCOMMANDS
 	echo "quit" >> $GDBCOMMANDS
 	cd $BASEPATH/testproject/
