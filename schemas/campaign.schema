@@ -7,6 +7,11 @@
 	"additionalProperties": false,
 	"required": ["buildCommand", "experimentCommand", "logLevel", "interfaces", "experiments"],
 	"properties": {
+		"predefined_interfaces": {
+			"type": "array",
+			"description": "Paths to predefined interface specification files.",
+			"items": {"type": "string"}
+		},
 		"customIncludes": {
 			"type": "array",
 			"description": "List of header-files to be included, if e.g. an error code should be replaced, which is not part of the standard interface.",

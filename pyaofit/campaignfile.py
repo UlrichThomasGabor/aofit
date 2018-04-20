@@ -11,6 +11,11 @@ class campaignfile(campaign):
 			campaign_dict = json.load(campaign_file)
 		campaign_name = os.path.splitext(os.path.basename(campaign_filename))[0]
 		campaign_prefix = re.sub('[\W_]+', '', campaign_name, re.UNICODE)
+
+		for predefined_interface_path in campaign_dict["predefined_interfaces"]:
+			predefined_interface = json.load(open(predefined_interface_path))
+			campaign_dict["interfaces"] += [predefined_interface]
+
 		campaign = cls(campaign_name, campaign_prefix, campaign_dict)
 
 		campaign.filename = campaign_filename
