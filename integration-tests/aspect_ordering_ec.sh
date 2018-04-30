@@ -2,7 +2,8 @@
 set -ue
 cd $(dirname "$0")
 
-cd aspect_ordering_ec
+filename=$(basename -- "$0")
+cd "${filename%%.*}"
 
 ../../generate_aspect.py testcampaign.json
 

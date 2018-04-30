@@ -2,7 +2,8 @@
 set -ue
 cd $(dirname "$0")
 
-cd posix_result
+filename=$(basename -- "$0")
+cd "${filename%%.*}"
 
 ../../generate_aspect.py testcampaign.json
 ls testcampaign.ah

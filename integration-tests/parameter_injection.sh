@@ -2,7 +2,8 @@
 set -ue
 cd $(dirname "$0")
 
-cd parameter_injection
+filename=$(basename -- "$0")
+cd "${filename%%.*}"
 
 ../../generate_aspect.py testcampaign.json
 
