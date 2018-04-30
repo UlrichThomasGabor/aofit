@@ -67,7 +67,6 @@ def makeArgumentTypes(target):
 	return params
 
 def makeValueVectors(campaign):
-	declarations = ""
 	definitions = ""
 	definitions_errno = ""
 	target_id = 0
