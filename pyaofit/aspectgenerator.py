@@ -85,6 +85,8 @@ def makeValueVectors(campaign):
 					definitions_errno += errsituation["errno"] + ", "
 				else:
 					definitions_errno += "0, "
+			# Append another element for custom injection values in campaign file,
+			# which are not based on interface definition.
 			definitions += "(" + error_type + ")NULL };\n"
 			definitions_errno += "0 };\n"
 			target_id += 1
