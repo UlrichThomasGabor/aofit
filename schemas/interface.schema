@@ -11,13 +11,17 @@
 			"items": {
 				"type": "object",
 				"additionalProperties": false,
-				"oneOf": [
+				"anyOf": [
 					{ "required": ["errno"] },
-					{ "required": ["error_value"] }
+					{ "required": ["error_value"] },
+					{ "required": ["delay"] }
 				],
 				"properties": {
 					"errno": { "type": "string" },
-					"error_value": { "type": "string" }
+					"error_value": { "type": "string" },
+					"delay": {
+						"type": "integer", "description": "Delay return of interface for specified milliseconds."
+					}
 				}
 			}
 		}
