@@ -36,6 +36,7 @@ else
 	ENTRY=$(readelf -h $BASEPATH/../testproject/a.out | grep "Entry point address" | grep -P '0x[0-9a-f]+' -o)
 	echo "break *$ENTRY" >> $GDBCOMMANDS # Break on entry.
 	echo "run >& $EXPERIMENT_DIR/output.log" >> $GDBCOMMANDS
+	echo "del 1"
 	# List all variables:
 	# $ info variables
 	# Change one variable:

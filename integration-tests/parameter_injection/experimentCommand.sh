@@ -35,6 +35,7 @@ if [[ $(command -v lldb &>/dev/null ; echo $?) == 0 ]]; then
 else
 	echo "break *0x0" >> $GDBCOMMANDS # Break on entry.
 	echo "run >& $EXPERIMENT_DIR/output.log" >> $GDBCOMMANDS
+	echo "del 1"
 	# List all variables:
 	# $ info variables
 	# Change one variable:
