@@ -16,32 +16,31 @@ class campaign(dict):
 				self.targetspecifiers[target['id']] = target_id
 				target_id += 1
 
-		self.__init__populate_error_values()
+		self.__init__populate_values_down()
 		self.name = name
 		self.prefix = prefix
 		self.errno_active = self.__init__errno_used()
 		if not "ecAspects" in self:
 			self["ecAspects"] = []
 
-	def __init__populate_error_values(self):
+	def __init__populate_values_down(self):
 		'''
-		Propagates error_values given in higher structures down to the lower ones.
+		Propagate values, e.g. error_value, errno and delay, given at interface level
+		down to each error_situation.
 		'''
+		propagate_values = ['error_value', 'errno', 'delay']
 		for i, interface in enumerate(self['interfaces']):
-			if not 'error_value' in interface:
-				interface['error_value'] = None
-			if not 'errno' in interface:
-				interface['errno'] = None
+			for key in propagate_values:
+				if not key in interface:
+					interface[key] = None
 			for j, target in enumerate(interface['targets']):
-				if not 'error_value' in target:
-					target['error_value'] = interface['error_value']
-				if not 'errno' in target:
-					target['errno'] = interface['errno']
+				for key in propagate_values:
+					if not key in target:
+						target[key] = interface[key]
 				for k, error_situation in enumerate(target['error_situations']):
-					if not 'error_value' in error_situation:
-						error_situation['error_value'] = target['error_value']
-					if not 'errno' in error_situation:
-						error_situation['errno'] = target['errno']
+					for key in propagate_values:
+						if not key in error_situation:
+							error_situation[key] = target[key]
 					target['error_situations'][k] = error_situation
 				interface['targets'][j] = target
 			self['interfaces'][i] = interface
