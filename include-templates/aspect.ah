@@ -97,8 +97,9 @@ aspect $aspectName {
 
 	inline void inject_errno(unsigned int id) {
 		#if $errno_active
+		unsigned int replace_errno = ${aspectName}_valueVectorErrno[id][${aspectName}_valueID[id]];
 		log(2, "[injection] also modifying errno to %d\n", replace_errno);
-		errno = ${aspectName}_valueVectorErrno[id][${aspectName}_valueID[id]];
+		errno = replace_errno;
 		#endif
 	}
 
