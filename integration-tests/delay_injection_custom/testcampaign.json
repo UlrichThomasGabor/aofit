@@ -1,0 +1,27 @@
+{
+	"buildCommand": "cp testcampaign.ah testproject/ && cd testproject && ag++ -std=c++11 -g main.cc ; rm -Rf testcampaign.ah",
+	"experimentCommand": "./experimentCommand.sh",
+	"logLevel": 3,
+	"customDelayInclude": "#include <unistd.h>",
+	"customDelayCode": "sleep(duration_in_ms);",
+	"interfaces": [
+		{
+			"header_files": ["stdio.h"],
+			"targets": [
+				{
+					"id": "testinjection",
+					"signature": "int test();",
+					"error_situations": [
+						{
+							"error_value": "5",
+							"delay": 1
+						}
+					]
+				}
+			]
+		}
+	],
+	"experiments": [
+		{"target": "testinjection", "experiment_mode": "call_count", "callCount": 1, "injection_mode": "replace", "error_situation_index": 0}
+	]
+}

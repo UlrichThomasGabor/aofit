@@ -9,3 +9,6 @@ with open(os.path.dirname(__file__) + "/../include-templates/advice_param.ah") a
 
 with open(os.path.dirname(__file__) + "/../include-templates/advice_result.ah") as f:
 	raw_advice_result = Template(f.read())
+
+with open(os.path.dirname(__file__) + "/../include-templates/delay_code.cc") as f:
+	raw_delay_code = Template(f.read())

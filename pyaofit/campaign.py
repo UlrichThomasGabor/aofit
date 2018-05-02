@@ -20,6 +20,8 @@ class campaign(dict):
 		self.name = name
 		self.prefix = prefix
 		self.errno_active = self.__init__errno_used()
+		# self.delay_active = self.__init__delay_used()
+		self.delay_active = True
 		if not "ecAspects" in self:
 			self["ecAspects"] = []
 
@@ -50,6 +52,14 @@ class campaign(dict):
 			for target in interface['targets']:
 				for error_situation in target['error_situations']:
 					if error_situation['errno'] != None:
+						return True
+		return False
+
+	def __init__delay_used(self):
+		for interface in self['interfaces']:
+			for target in interface['targets']:
+				for error_situation in target['error_situations']:
+					if error_situation['delay'] != None:
 						return True
 		return False
 

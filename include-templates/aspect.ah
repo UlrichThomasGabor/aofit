@@ -85,9 +85,19 @@ aspect $aspectName {
 		return "";
 	}
 
+	inline void inject_sleep(unsigned int duration_in_ms) {
+		#if $delay_active
+		if (duration_in_ms > 0) {
+			log(2, "[injection] waiting for %d ms\n", duration_in_ms);
+			$delay_code
+		}
+		#endif
+	}
+
 	// Called for injection_mode = replace.
 	template <class JP, typename T, typename U>
-	void inject(JP *tjp, T *location, U value) {
+	void inject(JP *tjp, T *location, U value, unsigned int delay) {
+		inject_sleep(delay);
 		if (*location != value) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value);
 			*location = value;
@@ -97,7 +107,8 @@ aspect $aspectName {
 	}
 	#if $errno_active
 	template <class JP, typename T, typename U>
-	void inject(JP *tjp, T *location, U value, int replace_errno) {
+	void inject(JP *tjp, T *location, U value, int replace_errno, unsigned int delay) {
+		inject_sleep(delay);
 		if (*location != value) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value);
 			log(2, "[injection] also modifying errno to %d\n", replace_errno);
@@ -111,13 +122,15 @@ aspect $aspectName {
 
 	// Following functions are called for other injection_modes.
 	template <class JP>
-	void inject(JP *tjp, bool *location) {
+	void inject(JP *tjp, bool *location, unsigned int delay) {
+		inject_sleep(delay);
 		logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, !(*location));
 		*location = !(*location);
 	}
 
 	template <class JP>
-	void inject (JP *tjp, signed int *location) {
+	void inject (JP *tjp, signed int *location, unsigned int delay) {
+		inject_sleep(delay);
 		if (${aspectName}_injection_mode == offsetplus) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) + 1);
 			(*location)++;
@@ -133,7 +146,8 @@ aspect $aspectName {
 	}
 
 	template <class JP>
-	void inject(JP *tjp, unsigned int *location) {
+	void inject(JP *tjp, unsigned int *location, unsigned int delay) {
+		inject_sleep(delay);
 		if (${aspectName}_injection_mode == offsetplus) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) + 1);
 			(*location)++;
@@ -146,7 +160,8 @@ aspect $aspectName {
 	}
 
 	template <class JP, typename T>
-	void inject(JP *tjp, T *location) {
+	void inject(JP *tjp, T *location, unsigned int delay) {
+		inject_sleep(delay);
 		log(0, "#-> invalid attempt to apply %s to non-bool / non-arithmetic!\n", injection_type2str(${aspectName}_injection_mode));
 	}
 

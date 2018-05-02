@@ -69,6 +69,7 @@ def makeArgumentTypes(target):
 def makeValueVectors(campaign):
 	definitions = ""
 	definitions_errno = ""
+	definitions_delay = ""
 	target_id = 0
 	for interface in campaign['interfaces']:
 		for target in interface['targets']:
@@ -79,19 +80,30 @@ def makeValueVectors(campaign):
 
 			definitions += "\t__attribute__((used)) static " + error_type + " ${aspectName}_valueVector_" + str(target_id) + "[] = {"
 			definitions_errno += "\t__attribute__((used)) static int ${aspectName}_valueVectorErrno_" + str(target_id) + "[] = {"
+			definitions_delay += "\t__attribute__((used)) static unsigned int ${aspectName}_valueVectorDelay_" + str(target_id) + "[] = {"
 			for errsituation in target['error_situations']:
 				definitions += errsituation['error_value'] + ", "
 				if errsituation['errno'] != None:
 					definitions_errno += errsituation["errno"] + ", "
 				else:
 					definitions_errno += "0, "
+				if errsituation['delay'] != None:
+					definitions_delay += str(errsituation["delay"]) + ", "
+				else:
+					definitions_delay += "0, "
 			# Append another element for custom injection values in campaign file,
 			# which are not based on interface definition.
 			definitions += "(" + error_type + ")NULL };\n"
 			definitions_errno += "0 };\n"
+			definitions_delay += "0 };\n"
 			target_id += 1
 
-	return definitions + "\n" + definitions_errno
+	result = definitions;
+	if campaign.errno_active:
+		result += definitions_errno + "\n"
+	if campaign.delay_active:
+		result += definitions_delay + "\n"
+	return result
 
 def generateAspect(campaign):
 	valueVectors = makeValueVectors(campaign)
@@ -149,12 +161,24 @@ def generateAspect(campaign):
 
 	if campaign.errno_active:
 		customIncludes += ["#include <cerrno>"]
-	customIncludes = "\n".join(customIncludes)
+	customIncludes = "\n".join(customIncludes) + "\n"
 	if 'customIncludes' in campaign:
 		for header in campaign['customIncludes']:
 			customIncludes += "#include \"" + header + "\"\n"
 
-	ah = templates.raw_aspect_header.safe_substitute(customIncludes=customIncludes, numTargets=campaign.numberOfTargets, valueVectors=valueVectors, advices=advices)
+	if campaign.delay_active:
+		if 'customDelayInclude' in campaign:
+			customIncludes += campaign['customDelayInclude'] + "\n"
+		else:
+			customIncludes += "#include <time.h>\n#include <math.h>\n"
+		if 'customDelayCode' in campaign:
+			delay_code = campaign['customDelayCode']
+		else:
+			delay_code = templates.raw_delay_code.safe_substitute()
+	else:
+		delay_code = ""
+
+	ah = templates.raw_aspect_header.safe_substitute(customIncludes=customIncludes, numTargets=campaign.numberOfTargets, valueVectors=valueVectors, advices=advices, delay_code=delay_code)
 
 	notEcAspects = "".join([" && !\"" + aspect + "\"" for aspect in campaign['ecAspects']])
 	ecAspects = "".join([" || \"" + aspect + "\"" for aspect in campaign['ecAspects']])
@@ -163,6 +187,6 @@ def generateAspect(campaign):
 	ah = Template(ah).safe_substitute(notEcAspects=notEcAspects, ecAspects=ecAspects)
 
 	# Use substitute here, because we expect an error if an identifier is left in the generated code.
-	ah = Template(ah).substitute(aspectName=campaign.prefix, errno_active=str(campaign.errno_active).lower())
+	ah = Template(ah).substitute(aspectName=campaign.prefix, errno_active=str(campaign.errno_active).lower(), delay_active=str(campaign.delay_active).lower())
 
 	return ah

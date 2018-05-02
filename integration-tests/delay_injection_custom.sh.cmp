@@ -1,0 +1,11 @@
+Experiment begins (loglevel: 3).
+config for target 0
+callCount: 1
+occurrence: 0
+injection mode: replace
+[injection] waiting for 1 ms
+[injection] function: 'int test()' in file 'main.cc' in line '22':
+	value to inject equals argument
+2
+
+Experiment ends.
