@@ -20,8 +20,7 @@ class campaign(dict):
 		self.name = name
 		self.prefix = prefix
 		self.errno_active = self.__init__errno_used()
-		# self.delay_active = self.__init__delay_used()
-		self.delay_active = True
+		self.delay_active = self.__init__delay_used()
 		if not "ecAspects" in self:
 			self["ecAspects"] = []
 
