@@ -22,6 +22,14 @@
 			"description": "If the project contains aspects, which should be run after the error injecting aspects, e.g. error correcting aspects, name them here.",
 			"items": { "type": "string" }
 		},
+		"customDelayInclude": {
+			"type": "string",
+			"description": "Change this if you do not have a <time.h> to be included."
+		},
+		"customDelayCode": {
+			"type": "string",
+			"description": "Change this if you do not want to call nanosleep() for delay. Your code should make use of the variable unsigned int duration_in_ms."
+		},
 		"buildCommand": {
 			"type": "string",
 			"description": "Command to build the software with AspectC++ with each array element representing one parameter."
