@@ -38,6 +38,14 @@
 			"type": "string",
 			"description": "Command to execute on each experiment. Beware that this will be called from different directories. The first part of the string will be converted to an absolute path, but if you chain commands or do magic stuff you must use absolute paths by yourself."
 		},
+		"acmodelfilename": {
+			"type": "string",
+			"description": "Path to the ac-model file of the golden run, to search for attribute information."
+		},
+		"noerrorattributequalifier": {
+			"type": "string",
+			"description": "Fully qualified name of the attribute, which prohibits injection of specific errors, e.g. `::aofit::noerror`."
+		},
 		"logLevel": {
 			"type": "integer",
 			"minimum": 0,

@@ -48,12 +48,21 @@ if __name__ == "__main__":
 		output_lines = f.read().splitlines()
 	normal_output_ended = False
 	occurences = []
+	jpids = []
+	i = 1
 	for line in output_lines:
 		if normal_output_ended:
-			occurences.append(int(line))
+			if i <= campaign.numberOfTargets:
+				occurences.append(int(line))
+			else:
+				jpids.append(int(line))
+			i += 1
 		elif line == "Experiment ends.":
 			normal_output_ended = True
-	print(occurences)
+	if normal_output_ended == False:
+		sys.exit("Application was not executed correctly.")
+	printVerbose("Received occurences: " + str(occurences))
+	printVerbose("Received JPIDs: " + str(jpids))
 
 	printVerbose("Preparing campaign '" + campaign.name + "'...")
 	experiment_dir = campaign.experiment_directory + "goldenrun/"
@@ -81,6 +90,12 @@ if __name__ == "__main__":
 		else:
 			sys.exit("Unknown experiment_mode.")
 
+		if "acmodelfilename" in campaign and "noerrorattributequalifier" in campaign:
+			ignoreErrorSituations = ignorableErrorSituationsForJPID(campaign.directory + campaign["acmodelfilename"], campaign["noerrorattributequalifier"], jpids[target_id])
+			printVerbose("Ignore Error Situations: " + str(ignoreErrorSituations))
+		else:
+			ignoreErrorSituations = []
+
 		for i in range(experiment_counter_start, experiment_counter_stop+1):
 			if experiment['injection_mode'] == "each":
 				injection_counter_start = 0
@@ -91,6 +106,10 @@ if __name__ == "__main__":
 			else:
 				sys.exit("Unknown injection_mode.")
 			for j in range(injection_counter_start, injection_counter_stop+1):
+				if target['error_situations'][j]["errno"] != None and target['error_situations'][j]["errno"] in ignoreErrorSituations:
+					printVerbose("Skipped experiment " + str(j) + ", because it was in `ignoreErrorSituations`.")
+					continue;
+
 				vars = {}
 				vars[campaign.prefix + '_countOccurences'] = "false"
 				if experiment['injection_mode'] == "each":
