@@ -1,0 +1,42 @@
+{
+	"buildCommand": "cp testcampaign.ah testproject/ && cd testproject && rm -Rf a.out repo.acp && ag++ -k --attributes -r repo.acp -std=c++11 -g main.cc ; rm -Rf testcampaign.ah",
+	"experimentCommand": "./experimentCommand.sh",
+	"acmodelfilename": "testproject/repo.acp",
+	"noerrorattributequalifier": "::aofit::noerror",
+	"logLevel": 3,
+	"interfaces": [
+		{
+			"system_interface_name": "fopen",
+			"header_files": ["stdio.h"],
+			"targets": [
+				{
+					"id": "posix_fopen",
+					"signature": "FILE *fopen(const char *restrict pathname, const char *restrict mode);",
+					"error_value": "NULL",
+					"error_situations": [
+						{ "errno": "EACCES" },
+						{ "errno": "EINTR" },
+						{ "errno": "EISDIR" },
+						{ "errno": "ELOOP" },
+						{ "errno": "EMFILE" },
+						{ "errno": "ENAMETOOLONG" },
+						{ "errno": "ENFILE" },
+						{ "errno": "ENOENT" },
+						{ "errno": "ENOTDIR" },
+						{ "errno": "ENOSPC" },
+						{ "errno": "ENOTDIR" },
+						{ "errno": "ENXIO" },
+						{ "errno": "EOVERFLOW" },
+						{ "errno": "EROFS" },
+						{ "errno": "EINVAL" },
+						{ "errno": "ENOMEM" },
+						{ "errno": "ETXTBSY" }
+					]
+				}
+			]
+		}
+	],
+	"experiments": [
+		{"target": "posix_fopen", "experiment_mode": "call_count", "callCount": 1, "injection_mode": "each"}
+	]
+}
