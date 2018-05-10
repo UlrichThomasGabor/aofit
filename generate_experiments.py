@@ -84,7 +84,7 @@ if __name__ == "__main__":
 		for i in range(experiment_counter_start, experiment_counter_stop+1):
 			if experiment['injection_mode'] == "each":
 				injection_counter_start = 0
-				injection_counter_stop = len(target['error_situations'])
+				injection_counter_stop = len(target['error_situations']) - 1
 			elif experiment['injection_mode'] in ["replace", "invert", "offsetplus", "offsetminus"]:
 				injection_counter_start = 0
 				injection_counter_stop = 0
