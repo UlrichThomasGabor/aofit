@@ -31,11 +31,13 @@ $valueVectors
 aspect $aspectName {
 	int callCounts[TARGETS];
 	int occurrences[TARGETS];
+	int jpid[TARGETS];
 
 	$aspectName() {
 		for (int i = 0; i < TARGETS; i++) {
 			callCounts[i] = 0;
 			occurrences[i] = 0;
+			jpid[i] = -1;
 		}
 	}
 
@@ -178,6 +180,9 @@ aspect $aspectName {
 			for (int i = 0; i < TARGETS; i++) {
 				log(0, "%d\n", occurrences[i]);
 			}
+				for (int i = 0; i < TARGETS; i++) {
+					log(0, "%d\n", jpid[i]);
+				}
 		}
 	}
 

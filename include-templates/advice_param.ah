@@ -1,6 +1,7 @@
 	advice call("$signature")$pointcutadditions : before($variabledefinition) {
 		if (${aspectName}_countOccurences) {
 			occurrences[$id]++;
+			jpid[$id] = JoinPoint::JPID;
 		}
 		if (${aspectName}_activeTargets[$id]) {
 			callCounts[$id]++;
