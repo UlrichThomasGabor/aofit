@@ -17,6 +17,7 @@ class campaign(dict):
 				target_id += 1
 
 		self.__init__populate_values_down()
+		self.__init__error_situation_ids()
 		self.name = name
 		self.prefix = prefix
 		self.errno_active = self.__init__errno_used()
@@ -42,6 +43,24 @@ class campaign(dict):
 					for key in propagate_values:
 						if not key in error_situation:
 							error_situation[key] = target[key]
+					target['error_situations'][k] = error_situation
+				interface['targets'][j] = target
+			self['interfaces'][i] = interface
+
+	def __init__error_situation_ids(self):
+		'''
+		Set default ids for error_situations.
+		'''
+		for i, interface in enumerate(self['interfaces']):
+			for j, target in enumerate(interface['targets']):
+				for k, error_situation in enumerate(target['error_situations']):
+					if not "id" in error_situation:
+						if error_situation["errno"] != None:
+							error_situation["id"] = error_situation["errno"]
+						elif error_situation["error_value"] != None:
+							error_situation["id"] = error_situation["error_value"]
+						else:
+							error_situation["id"] = k
 					target['error_situations'][k] = error_situation
 				interface['targets'][j] = target
 			self['interfaces'][i] = interface

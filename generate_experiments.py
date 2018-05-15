@@ -106,7 +106,7 @@ if __name__ == "__main__":
 			else:
 				sys.exit("Unknown injection_mode.")
 			for j in range(injection_counter_start, injection_counter_stop+1):
-				if target['error_situations'][j]["errno"] != None and target['error_situations'][j]["errno"] in ignoreErrorSituations:
+				if target['error_situations'][j]["id"] != None and target['error_situations'][j]["id"] in ignoreErrorSituations:
 					printVerbose("Skipped experiment " + str(j) + ", because it was in `ignoreErrorSituations`.")
 					continue;
 

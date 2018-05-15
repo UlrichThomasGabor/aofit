@@ -17,6 +17,7 @@
 					{ "required": ["delay"] }
 				],
 				"properties": {
+					"id": { "type": "string" },
 					"errno": { "type": "string" },
 					"error_value": { "type": "string" },
 					"delay": {
