@@ -1,0 +1,13 @@
+{
+    "system_interface_name": "acosh",
+    "header_files": ["math.h"],
+    "targets": [
+        {
+            "signature": "double acosh(double x);",
+            "error_value": "NaN",
+            "error_situations": [
+                {"errno": "EDOM"}
+            ]
+        }
+    ]
+}
