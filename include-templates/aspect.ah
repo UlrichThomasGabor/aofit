@@ -87,23 +87,21 @@ aspect $aspectName {
 		return "";
 	}
 
-	inline void inject_delay(unsigned int id) {
-		#if $delay_active
-		unsigned int duration_in_ms = ${aspectName}_valueVectorDelay[id][${aspectName}_valueID[id]];
+	#if $delay_active
+	inline void inject_delay(unsigned int duration_in_ms) {
 		if (duration_in_ms > 0) {
 			log(2, "[injection] also waiting for %d ms\n", duration_in_ms);
 			$delay_code
 		}
-		#endif
 	}
+	#endif
 
-	inline void inject_errno(unsigned int id) {
-		#if $errno_active
-		unsigned int replace_errno = ${aspectName}_valueVectorErrno[id][${aspectName}_valueID[id]];
+	#if $errno_active
+	inline void inject_errno(int replace_errno) {
 		log(2, "[injection] also modifying errno to %d\n", replace_errno);
 		errno = replace_errno;
-		#endif
 	}
+	#endif
 
 	// Called for injection_mode = replace.
 	template <class JP, typename T, typename U>

@@ -67,7 +67,7 @@ def makeArgumentTypes(target):
 	return params
 
 def makeValueVectors(campaign):
-	definitions = ""
+	definitions_error_values = {}
 	definitions_errno = {}
 	definitions_delay = {}
 	target_id = 0
@@ -78,12 +78,11 @@ def makeValueVectors(campaign):
 			elif target['injectAt'] == "argument":
 				error_type = makeArgumentTypes(target)[target['argNumber']]
 
-			definitions += "\t__attribute__((used)) static " + error_type + " ${aspectName}_valueVector_" + str(target_id) + "[] = {"
-
+			error_values = []
 			errnos = []
 			delays = []
 			for errsituation in target['error_situations']:
-				definitions += errsituation['error_value'] + ", "
+				error_values.append(errsituation['error_value'])
 				if errsituation['errno'] != None:
 					errnos.append(errsituation["errno"])
 				else:
@@ -94,26 +93,30 @@ def makeValueVectors(campaign):
 					delays.append("0")
 			# Append another element for custom injection values in campaign file,
 			# which are not based on interface definition.
-			definitions += "(" + error_type + ")NULL };\n"
+			error_values.append("(" + error_type + ")NULL")
 			errnos.append("0")
 			delays.append("0")
+			definitions_error_values[target_id] = error_values
 			definitions_errno[target_id] = errnos
 			definitions_delay[target_id] = delays
 			target_id += 1
 
-	result = definitions;
+	result = ""
+	for target_id, values in definitions_error_values.items():
+		result += "\t__attribute__((used)) static " + error_type + " ${aspectName}_valueVector_" + str(target_id) + "[] = {"
+		result += ", ".join(values)
+		result += "};\n";
 	if campaign.errno_active:
-		result += "\t__attribute__((used)) static int ${aspectName}_valueVectorErrno[" + str(max(definitions_errno, key=int) + 1) + "][" + str(len(definitions_errno[0])) + "] = {"
-		for id, values in definitions_errno.items():
-			definitions_errno[id] = ", ".join(values)
-		result += ", ".join(e for i, e in definitions_errno.items())
-		result += "};\n"
+		for target_id, values in definitions_errno.items():
+			result += "\t__attribute__((used)) static int ${aspectName}_valueVectorErrno_" + str(target_id) + "[] = {"
+			result += ", ".join(values)
+			result += "};\n"
+
 	if campaign.delay_active:
-		result += "\t__attribute__((used)) static unsigned int ${aspectName}_valueVectorDelay[" + str(max(definitions_delay, key=int) + 1) + "][" + str(len(definitions_delay[0])) + "] = {"
-		for id, values in definitions_delay.items():
-			definitions_delay[id] = ", ".join(values)
-		result += ", ".join(e for i, e in definitions_delay.items())
-		result += "};\n"
+		for target_id, values in definitions_delay.items():
+			result += "\t__attribute__((used)) static unsigned int ${aspectName}_valueVectorDelay_" + str(target_id) + "[] = {"
+			result += ", ".join(values)
+			result += "};\n"
 	return result
 
 def generateAspect(campaign):
