@@ -17,6 +17,7 @@ class campaign(dict):
 				target_id += 1
 
 		self.__init__populate_values_down()
+		self.__init__propagate_global_error_situations()
 		self.__init__error_situation_ids()
 		self.__init__set_error_situation_index_for_custom_error_value()
 		self.name = name
@@ -48,6 +49,17 @@ class campaign(dict):
 					target['error_situations'][k] = error_situation
 				interface['targets'][j] = target
 			self['interfaces'][i] = interface
+
+	def __init__propagate_global_error_situations(self):
+		'''
+		Propagate global error situations of an interface to its targets.
+		'''
+		for i, interface in enumerate(self['interfaces']):
+			if "error_situations" in interface:
+				for j, target in enumerate(interface['targets']):
+					target["error_situations"] = interface["error_situations"] + target["error_situations"]
+					interface['targets'][j] = target
+				self['interfaces'][i] = interface
 
 	def __init__error_situation_ids(self):
 		'''
