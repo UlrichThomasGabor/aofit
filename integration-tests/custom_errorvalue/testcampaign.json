@@ -17,6 +17,7 @@
 		}
 	],
 	"experiments": [
-		{"target": "testinjection", "experiment_mode": "call_count", "callCount": 1, "injection_mode": "replace", "error_value": "43"}
+		{"target": "testinjection", "experiment_mode": "call_count", "callCount": 1, "injection_mode": "replace", "error_value": "43"},
+		{"target": "testinjection", "experiment_mode": "call_count", "callCount": 1, "injection_mode": "replace", "error_value": "44"}
 	]
 }

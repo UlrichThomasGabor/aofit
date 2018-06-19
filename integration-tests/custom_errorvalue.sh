@@ -13,3 +13,4 @@ rm -Rf testcampaign_experiments
 ../../run_experiments.py testcampaign.json > /dev/null
 
 cat testcampaign_experiments/exp_0_1_0/output.log
+cat testcampaign_experiments/exp_1_1_0/output.log
