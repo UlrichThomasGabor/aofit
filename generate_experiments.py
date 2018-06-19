@@ -124,10 +124,7 @@ if __name__ == "__main__":
 							vars[campaign.prefix + '_valueID[' + str(targetid) + ']'] = j
 						else:
 							vars[campaign.prefix + '_callCountLimits[' + str(targetid) + ']'] = i
-							if "error_value" in experiment:
-								vars[campaign.prefix + '_valueID[' + str(targetid) + ']'] = len(target['error_situations'])
-								vars[campaign.prefix + '_valueVector_' + str(targetid) + '[' + str(len(target['error_situations'])) + ']'] = experiment["error_value"]
-							elif "error_situation_index" in experiment:
+							if "error_situation_index" in experiment:
 								vars[campaign.prefix + '_valueID[' + str(targetid) + ']'] = int(experiment["error_situation_index"])
 							else:
 								vars[campaign.prefix + '_valueID[' + str(targetid) + ']'] = 0

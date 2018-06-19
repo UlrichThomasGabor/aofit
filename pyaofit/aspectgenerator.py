@@ -91,11 +91,18 @@ def makeValueVectors(campaign):
 					delays.append(str(errsituation["delay"]))
 				else:
 					delays.append("0")
-			# Append another element for custom injection values in campaign file,
-			# which are not based on interface definition.
-			error_values.append("(" + error_type + ")NULL")
-			errnos.append("0")
-			delays.append("0")
+
+			# Append values out of experiments, which are not based on
+			# interface definition.
+			for experiment in campaign['experiments']:
+				if campaign.getTargetId(experiment['target']) == target_id:
+					if 'error_value' in experiment:
+						error_values.append(experiment['error_value'])
+					if 'errno' in experiment:
+						errnos.append(experiment['errno'])
+					if 'delay' in experiment:
+						delays.append(experiment['delay'])
+
 			definitions_error_values[target_id] = error_values
 			definitions_errno[target_id] = errnos
 			definitions_delay[target_id] = delays

@@ -18,6 +18,7 @@ class campaign(dict):
 
 		self.__init__populate_values_down()
 		self.__init__error_situation_ids()
+		self.__init__set_error_situation_index_for_custom_error_value()
 		self.name = name
 		self.prefix = prefix
 		self.errno_active = self.__init__errno_used()
@@ -80,6 +81,21 @@ class campaign(dict):
 					if error_situation['delay'] != None:
 						return True
 		return False
+
+	def __init__set_error_situation_index_for_custom_error_value(self):
+		'''
+		This generates new error_situation_indexes per target for the custom
+		values given in experiments.
+		'''
+		index = {}
+		for interface in self['interfaces']:
+			for target in interface['targets']:
+				index[self.getTargetId(target['id'])] = len(target['error_situations'])
+		for i, experiment in enumerate(self['experiments']):
+			if 'error_value' in experiment:
+				experiment['error_situation_index'] = index[self.getTargetId(experiment['target'])]
+				index[self.getTargetId(experiment['target'])] = index[self.getTargetId(experiment['target'])] + 1
+			self['experiments'][i] = experiment
 
 	def getTargetId(self, targetspecifier):
 		if targetspecifier in self.targetspecifiers:
