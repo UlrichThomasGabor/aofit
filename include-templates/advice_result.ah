@@ -4,7 +4,7 @@
 			jpid[$id] = JoinPoint::JPID;
 		}
 		if (${aspectName}_activeTargets[$id]) {
-			$resultType* result = tjp->result();
+			JoinPoint::Result* result = tjp->result();
 			callCounts[$id]++;
 			if (callCounts[$id] == ${aspectName}_callCountLimits[$id]) {
 				// Dummy function calls to trigger AC++ dynamic code generation for the
@@ -20,7 +20,7 @@
 				if (${aspectName}_injection_mode != replace) {
 					inject(tjp, result);
 				} else {
-					inject(tjp, result, ${aspectName}_valueVector_$id[${aspectName}_valueID[$id]]);
+					inject(tjp, result, (JoinPoint::Result)${aspectName}_valueVector_$id[${aspectName}_valueID[$id]]);
 				}
 			}
 		}

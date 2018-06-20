@@ -105,8 +105,8 @@ aspect $aspectName {
 	#endif
 
 	// Called for injection_mode = replace.
-	template <class JP, typename T, typename U>
-	void inject(JP *tjp, T *location, U value) {
+	template <class JP, typename T>
+	void inject(JP *tjp, T *location, T value) {
 		if (*location != value) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value);
 			*location = value;
