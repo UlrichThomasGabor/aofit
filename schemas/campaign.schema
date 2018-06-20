@@ -5,7 +5,7 @@
 
 	"type": "object",
 	"additionalProperties": false,
-	"required": ["buildCommand", "experimentCommand", "logLevel", "interfaces", "experiments"],
+	"required": ["buildCommand", "experimentCommand", "logLevel", "useEnvironmentVariables", "interfaces", "experiments"],
 	"properties": {
 		"predefined_interfaces": {
 			"type": "array",
@@ -50,6 +50,9 @@
 			"type": "integer",
 			"minimum": 0,
 			"maximum": 3
+		},
+		"useEnvironmentVariables": {
+			"type": "boolean"
 		},
 		"interfaces": {
 			"type": "array",

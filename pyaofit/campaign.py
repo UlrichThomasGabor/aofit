@@ -23,6 +23,7 @@ class campaign(dict):
 		self.prefix = prefix
 		self.errno_active = self.__init__errno_used()
 		self.delay_active = self.__init__delay_used()
+		self.environment_config_active = self.__init__environment_config_used()
 		if not "ecAspects" in self:
 			self["ecAspects"] = []
 
@@ -81,6 +82,10 @@ class campaign(dict):
 					if error_situation['delay'] != None:
 						return True
 		return False
+
+	def __init__environment_config_used(self):
+		return 'useEnvironmentVariables' in self and self['useEnvironmentVariables']
+
 
 	def __init__set_error_situation_index_for_custom_error_value(self):
 		'''

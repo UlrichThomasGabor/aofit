@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
 	printVerbose("########## Occurence Count ##########")
 	with open(variableFileName, 'w') as f:
-		writeConfig(generateOccurenceCountConfig(campaign), f)
+		writeConfig(campaign, generateOccurenceCountConfig(campaign), f)
 	printVerbose(campaign['experimentCommand'] + " " + variableFileName + " " + occurencesFileName)
 	count_process = subprocess.run(campaign['experimentCommand'] + " " + variableFileName + " " + occurencesFileName, shell=True)
 	print("Count Occurences Run: program returned " + str(count_process.returncode) + "\n\n")
@@ -68,7 +68,7 @@ if __name__ == "__main__":
 	experiment_dir = campaign.experiment_directory + "goldenrun/"
 	os.makedirs(experiment_dir)
 	with open(experiment_dir + "configuration", 'w') as f:
-		writeConfig(generateGoldenRunConfig(campaign), f)
+		writeConfig(campaign, generateGoldenRunConfig(campaign), f)
 
 	exp = 0
 	for experiment in campaign['experiments']:
@@ -135,7 +135,7 @@ if __name__ == "__main__":
 				experiment_dir = campaign.experiment_directory + "exp_" + str(exp) + "_" + str(i) + "_" + str(j) + "/"
 				os.makedirs(experiment_dir)
 				with open(experiment_dir + "configuration", 'w') as f:
-					writeConfig(vars, f)
+					writeConfig(campaign, vars, f)
 		exp += 1
 
 	print("Generated all experiments.")

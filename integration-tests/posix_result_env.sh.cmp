@@ -1,0 +1,9 @@
+Parsing environment variables
+Experiment begins (loglevel: 3).
+config for target 0
+callCount: 1
+occurrence: 0
+injection mode: replace
+[injection] also modifying errno to 24
+[injection] function: '__sFILE *fopen(const char *,const char *)' in file 'main.cc' in line '4':
+	-1989828560 ---> 0

@@ -29,9 +29,23 @@ def generateGoldenRunConfig(campaign):
 		#vars[campaign.prefix + '_valueID[' + str(targetid) + ']'] = 0
 	return vars
 
-def writeConfig(variables, f):
-	for varname, value in variables.items():
-		f.write(str(varname) + "=" + str(value) + "\n")
+def writeConfig(campaign, variables, f):
+	if campaign.environment_config_active:
+		re_index = re.compile('.*\[(\d+)\].*')
+		for varname, value in variables.items():
+			printVerbose("-- writeConfig at key " + str(varname) + " value " + str(value))
+			mtch = re_index.match(varname)
+			if mtch:
+				indx = mtch.group(1)
+				varname_new = varname.replace('['+indx+']', '')
+				printVerbose("array, writing: export " + str(varname_new) + "=\"" + str(value) + ";" + str(indx) + "\"\n")
+				f.write("export " + str(varname_new) + "=\"" + str(value) + ";" + str(indx) + "\"\n")
+			else:
+				printVerbose("NON-ARRAY, writing: export " + str(varname) + "=\"" + str(value) + "\"\n")
+				f.write("export " + str(varname) + "=\"" + str(value) + "\"\n")
+	else:
+		for varname, value in variables.items():
+			f.write(str(varname) + "=" + str(value) + "\n")
 
 def ignorableErrorSituationsForJPID(repository, qualifiedAttributeName, jpid):
 	if False and shutil.which("xqilla") != None:

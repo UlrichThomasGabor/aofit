@@ -106,6 +106,119 @@ aspect $aspectName {
 	}
 	#endif
 
+	#if $environment_config_active
+	${aspectName}_injection_type::injection_type_enum str2injection_type(const char * const injection_mode) {
+		if (is_equal(injection_mode, "(${aspectName}_injection_type::injection_type_enum)${aspectName}_injection_type::invert")) {
+			return ${aspectName}_injection_type::invert;
+		} else if (is_equal(injection_mode, "(${aspectName}_injection_type::injection_type_enum)${aspectName}_injection_type::offsetplus")) {
+			return ${aspectName}_injection_type::offsetplus;
+		} else if (is_equal(injection_mode, "(${aspectName}_injection_type::injection_type_enum)${aspectName}_injection_type::offsetminus")) {
+			return ${aspectName}_injection_type::offsetminus;
+		} else if (is_equal(injection_mode, "(${aspectName}_injection_type::injection_type_enum)${aspectName}_injection_type::replace")) {
+			return ${aspectName}_injection_type::replace;
+		} else if (is_equal(injection_mode, "(${aspectName}_injection_type::injection_type_enum)${aspectName}_injection_type::each")) {
+			return ${aspectName}_injection_type::each;
+		} else {
+			return ${aspectName}_injection_type::none;
+		}
+	}
+
+	bool split(const char * const var, char * const name, char * const value, const char sep) {
+		int nameptr = 0, valptr = 0;
+		bool before_sep = true;
+		for (int i = 0; var[i] != '\0'; i++) {
+			if (var[i] == sep) {
+				before_sep = false;
+				continue;
+			}
+			if (before_sep) {
+				if (i >= 255) {
+					name[0] = '\0';
+					value[0] = '\0';
+					return false;
+				}
+				name[nameptr++] = var[i];
+			} else {
+				if (i >= (255 + 255)) {
+					name[0] = '\0';
+					value[0] = '\0';
+					return false;
+				}
+				value[valptr++] = var[i];
+			}
+		}
+		name[nameptr] = '\0';
+		value[valptr] = '\0';
+		return true;
+	}
+
+	int atoi(char* str) {
+		int i = 0;
+		int sign = 1;
+		if (str[0] == '-') {
+			sign = -1;
+			i = 1;
+		}
+		int result = 0;
+		for (; str[i] != '\0'; i++) {
+			result = (result * 10) + str[i] - int('0');
+		}
+		return result * sign;
+	}
+
+	bool is_equal(const char * const str1, const char * const str2) {
+		int i = 0;
+		for (; str1[i] != '\0' && str2[i] != '\0'; i++) {
+			if (str1[i] != str2[i]) {
+				return false;
+			}
+		}
+		return (str1[i] == str2[i]);
+	}
+
+	bool atob(char* str) {
+		return is_equal(str, "true") || is_equal(str, "1");
+	}
+
+	void get_environment_config() {
+		extern const char **environ;
+		char name[255], value[255];
+		log(0, "Parsing environment variables\n");
+		for (int i = 0; environ[i] != '\0'; i++) {
+			log(255, "iteration %d, var %s\n", i, environ[i]);
+			if (!split(environ[i], name, value, '=')) {
+				continue;
+			}
+			log(255, "varsplit, name:%s, value:%s\n", name, value);
+			if (is_equal(name, "${aspectName}_loglevel")) {
+				${aspectName}_loglevel = atoi(value);
+			} else if (is_equal(name, "${aspectName}_callCountLimits")) {
+				if (!split(value, name, value, ';')) {
+					continue;
+				}
+				${aspectName}_callCountLimits[atoi(value)] = atoi(name);
+			} else if (is_equal(name, "${aspectName}_valueID")) {
+				if (!split(value, name, value, ';')) {
+					continue;
+				}
+				${aspectName}_valueID[atoi(value)] = atoi(name);
+			} else if (is_equal(name, "${aspectName}_injection_mode")) {
+				log(255, "Found injection mode %s\n", value);
+				${aspectName}_injection_mode = str2injection_type(value);
+			} else if (is_equal(name, "${aspectName}_activeTargets")) {
+				if (!split(value, name, value, ';')) {
+					continue;
+				}
+				log(255, "assign active target: %d, value: %d\n", atoi(value), atob(name));
+				${aspectName}_activeTargets[atoi(value)] = atob(name);
+				log(255, "${aspectName}_activeTargets[0]: %d\n", ${aspectName}_activeTargets[0]);
+			} else if (is_equal(name, "${aspectName}_countOccurences")) {
+				${aspectName}_countOccurences = atob(value);
+			}
+		}
+	}
+	#endif
+
 	// Called for injection_mode = replace.
 	template <class JP, typename T>
 	void inject(JP *tjp, T * const location, T value) {
@@ -159,6 +272,10 @@ aspect $aspectName {
 	}
 
 	advice execution("% main(...)") : around() {
+		#if $environment_config_active
+		get_environment_config();
+		#endif
+
 		log(1, "Experiment begins (loglevel: %d).\n", ${aspectName}_loglevel);
 
 		if (${aspectName}_loglevel >= 2) {

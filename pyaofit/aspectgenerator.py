@@ -220,6 +220,6 @@ def generateAspect(campaign):
 	ah = Template(ah).safe_substitute(notEcAspects=notEcAspects, ecAspects=ecAspects)
 
 	# Use substitute here, because we expect an error if an identifier is left in the generated code.
-	ah = Template(ah).substitute(aspectName=campaign.prefix, errno_active=str(campaign.errno_active).lower(), delay_active=str(campaign.delay_active).lower())
+	ah = Template(ah).substitute(aspectName=campaign.prefix, errno_active=str(campaign.errno_active).lower(), delay_active=str(campaign.delay_active).lower(), environment_config_active=str(campaign.environment_config_active).lower())
 
 	return ah
