@@ -142,7 +142,8 @@ def generateAspect(campaign):
 	for interface in campaign['interfaces']:
 		# Include all headers, because they are required for the
 		# predefined pointcut functions (see below).
-		customIncludes += ["#include <" + header + ">" for header in interface['header_files']]
+		if 'header_files' in interface:
+			customIncludes += ["#include <" + header + ">" for header in interface['header_files']]
 
 		for target in interface['targets']:
 			signature = makeSignature(target)
