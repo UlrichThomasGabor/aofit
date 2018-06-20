@@ -75,13 +75,14 @@ def makeValueVectors(campaign):
 	definitions_error_values = {}
 	definitions_errno = {}
 	definitions_delay = {}
+	error_type = {}
 	target_id = 0
 	for interface in campaign['interfaces']:
 		for target in interface['targets']:
 			if (not 'injectAt' in target) or (target['injectAt'] == "result"):
-				error_type = makeResultType(target)
+				error_type[target_id] = makeResultType(target)
 			elif target['injectAt'] == "argument":
-				error_type = makeArgumentTypes(target)[target['argNumber']]
+				error_type[target_id] = makeArgumentTypes(target)[target['argNumber']]
 
 			error_values = []
 			errnos = []
@@ -115,7 +116,7 @@ def makeValueVectors(campaign):
 
 	result = ""
 	for target_id, values in definitions_error_values.items():
-		result += "\t__attribute__((used)) static " + error_type + " ${aspectName}_valueVector_" + str(target_id) + "[] = {"
+		result += "\t__attribute__((used)) static " + error_type[target_id] + " ${aspectName}_valueVector_" + str(target_id) + "[] = {"
 		result += ", ".join(values)
 		result += "};\n";
 	if campaign.errno_active:
