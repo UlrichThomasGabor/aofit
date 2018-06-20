@@ -41,30 +41,35 @@ def makeSignature(target):
 		return "% " + namespace + className + funcName + "(...)"
 
 def makeResultType(target):
-	if 'resultType' in target:
-		return target['resultType']
-	else:
+	if 'resultType' in target['signature']:
+		return target['signature']['resultType']
+	elif not isinstance(target['signature'], dict):
 		# Match type, e.g. "FILE *", in signatures, e.g. "FILE *fopen(const char *restrict pathname, const char *restrict mode);".
 		result = re.match(_function_matcher, target['signature'])
 		return result.group(1)
+	else:
+		return None
 
 def makeArgumentTypes(target):
-	# Match params, e.g. "const char *restrict pathname, const char *restrict mode", in signatures, e.g. "FILE *fopen(const char *restrict pathname, const char *restrict mode);".
-	result = re.match(_function_matcher, target['signature'])
-	params = result.group(4).split(",")
-	params = list(filter(None, params)) # Filter empty strings
-	params_without_varnames = []
-	for param in params:
-		types = [type.strip() for type in param.strip().split(" ")]
-		# Pop of variable name.
-		types.pop()
-		# Remove restrict, because it is not a C++ keyword.
-		if "restrict" in types:
-			types.remove("restrict")
-		params_without_varnames += [" ".join(types)]
-	# Remove restrict again, because it might be prepended with *.
-	params = [ re.sub(r"\brestrict\b", "", p) for p in params_without_varnames]
-	return params
+	if not isinstance(target, dict):
+		# Match params, e.g. "const char *restrict pathname, const char *restrict mode", in signatures, e.g. "FILE *fopen(const char *restrict pathname, const char *restrict mode);".
+		result = re.match(_function_matcher, target['signature'])
+		params = result.group(4).split(",")
+		params = list(filter(None, params)) # Filter empty strings
+		params_without_varnames = []
+		for param in params:
+			types = [type.strip() for type in param.strip().split(" ")]
+			# Pop of variable name.
+			types.pop()
+			# Remove restrict, because it is not a C++ keyword.
+			if "restrict" in types:
+				types.remove("restrict")
+			params_without_varnames += [" ".join(types)]
+		# Remove restrict again, because it might be prepended with *.
+		params = [ re.sub(r"\brestrict\b", "", p) for p in params_without_varnames]
+		return params
+	else:
+		return []
 
 def makeValueVectors(campaign):
 	definitions_error_values = {}
@@ -142,30 +147,35 @@ def generateAspect(campaign):
 			signature = makeSignature(target)
 			result_type = makeResultType(target)
 			arg_types = makeArgumentTypes(target)
-			# We cannot match for the correct return type in the PCE (pointcut
-			# expression), because AC++ cannot resolve typedefs in PCEs. Instead
-			# we use a PCE, which matches every type and use the
-			# predefined pointcut functions result/args to match only those
-			# having a type we want.
-			pointcutadditions = []
-			variabledefinition = []
-			if result_type != "%" and result_type != None:
-				pointcutadditions += ["result(theresult)"]
-				variabledefinition += [result_type + " theresult"]
-			if len(arg_types) != 0 and arg_types[0] != "...":
-				args = []
-				args_names = []
-				argi = 0
-				for arg_type in arg_types:
-					args += [arg_type + " argument" + str(argi)]
-					args_names += ["argument" + str(argi)]
-					argi += 1
-				argument_string = ", ".join(args)
-				argument_names_string = ", ".join(args_names)
-				pointcutadditions += ["args(" + argument_names_string + ")"]
-				variabledefinition += [argument_string]
-			pointcutadditions = " && " + " && ".join(pointcutadditions)
-			variabledefinition = ", ".join(variabledefinition)
+
+			if isinstance(target['signature'], dict) and "pointCutExp" in target['signature']:
+				pointcutadditions = ""
+				variabledefinition = ""
+			else:
+				# We cannot match for the correct return type in the PCE (pointcut
+				# expression), because AC++ cannot resolve typedefs in PCEs. Instead
+				# we use a PCE, which matches every type and use the
+				# predefined pointcut functions result/args to match only those
+				# having a type we want.
+				pointcutadditions = []
+				variabledefinition = []
+				if result_type != "%" and result_type != None:
+					pointcutadditions += ["result(theresult)"]
+					variabledefinition += [result_type + " theresult"]
+				if len(arg_types) != 0 and arg_types[0] != "...":
+					args = []
+					args_names = []
+					argi = 0
+					for arg_type in arg_types:
+						args += [arg_type + " argument" + str(argi)]
+						args_names += ["argument" + str(argi)]
+						argi += 1
+					argument_string = ", ".join(args)
+					argument_names_string = ", ".join(args_names)
+					pointcutadditions += ["args(" + argument_names_string + ")"]
+					variabledefinition += [argument_string]
+				pointcutadditions = " && " + " && ".join(pointcutadditions)
+				variabledefinition = ", ".join(variabledefinition)
 
 			if (not 'injectAt' in target) or (target['injectAt'] == 'result'):
 				adv = templates.raw_advice_result.safe_substitute()
