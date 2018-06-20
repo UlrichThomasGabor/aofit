@@ -5,13 +5,15 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-enum injection_type {
-	none = 0,
-	invert = 1,
-	offsetplus = 2,
-	offsetminus = 3,
-	replace = 4,
-	each = 5,
+namespace ${aspectName}_injection_type {
+	enum injection_type_enum {
+		none = 0,
+		invert = 1,
+		offsetplus = 2,
+		offsetminus = 3,
+		replace = 4,
+		each = 5,
+	};
 };
 
 $customIncludes
@@ -23,7 +25,7 @@ extern "C" {
 	__attribute__((used)) static int ${aspectName}_callCountLimits[TARGETS] = {1};
 	__attribute__((used)) static int ${aspectName}_valueID[TARGETS] = {1};
 	__attribute__((used)) static int ${aspectName}_loglevel = 1;
-	__attribute__((used)) static injection_type ${aspectName}_injection_mode = none;
+	__attribute__((used)) static ${aspectName}_injection_type::injection_type_enum ${aspectName}_injection_mode = ${aspectName}_injection_type::none;
 	__attribute__((used)) static bool ${aspectName}_activeTargets[TARGETS] = {true};
 	__attribute__((used)) static bool ${aspectName}_countOccurences = true;
 $valueVectors
@@ -70,19 +72,19 @@ aspect $aspectName {
 		log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\t%s\n", sig, filename, line, msg);
 	}
 
-	const char *injection_type2str(injection_type injection_mode) {
+	const char *injection_type2str(const ${aspectName}_injection_type::injection_type_enum injection_mode) {
 		switch (injection_mode) {
-			case none:
+			case ${aspectName}_injection_type::none:
 				return "none";
-			case invert:
+			case ${aspectName}_injection_type::invert:
 				return "invert";
-			case offsetplus:
+			case ${aspectName}_injection_type::offsetplus:
 				return "offsetplus";
-			case offsetminus:
+			case ${aspectName}_injection_type::offsetminus:
 				return "offsetminus";
-			case replace:
+			case ${aspectName}_injection_type::replace:
 				return "replace";
-			case each:
+			case ${aspectName}_injection_type::each:
 				return "each";
 		}
 		return "";
@@ -123,14 +125,14 @@ aspect $aspectName {
 	}
 
 	template <class JP>
-	void inject (JP *tjp, signed int *location) {
-		if (${aspectName}_injection_mode == offsetplus) {
+	void inject (JP *tjp, signed int * const location) {
+		if (${aspectName}_injection_mode == ${aspectName}_injection_type::offsetplus) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) + 1);
 			(*location)++;
-		} else if (${aspectName}_injection_mode == offsetminus) {
+		} else if (${aspectName}_injection_mode == ${aspectName}_injection_type::offsetminus) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) - 1);
 			(*location)--;
-		} else if (${aspectName}_injection_mode == invert) {
+		} else if (${aspectName}_injection_mode == ${aspectName}_injection_type::invert) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, -(*location));
 			*location *= -1;
 		} else {
@@ -139,11 +141,11 @@ aspect $aspectName {
 	}
 
 	template <class JP>
-	void inject(JP *tjp, unsigned int *location) {
-		if (${aspectName}_injection_mode == offsetplus) {
+	void inject(JP *tjp, unsigned int * const location) {
+		if (${aspectName}_injection_mode == ${aspectName}_injection_type::offsetplus) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) + 1);
 			(*location)++;
-		} else if (${aspectName}_injection_mode == offsetminus) {
+		} else if (${aspectName}_injection_mode == ${aspectName}_injection_type::offsetminus) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, (*location) - 1);
 			(*location)--;
 		} else {

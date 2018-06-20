@@ -113,9 +113,9 @@ if __name__ == "__main__":
 				vars = {}
 				vars[campaign.prefix + '_countOccurences'] = "false"
 				if experiment['injection_mode'] == "each":
-					vars[campaign.prefix + '_injection_mode'] = '(injection_type)replace'
+					vars[campaign.prefix + '_injection_mode'] = '(' + campaign.prefix + '_injection_type::injection_type_enum)' + campaign.prefix + '_injection_type::replace'
 				else:
-					vars[campaign.prefix + '_injection_mode'] = '(injection_type)' + experiment['injection_mode']
+					vars[campaign.prefix + '_injection_mode'] = '(' + campaign.prefix + '_injection_type::injection_type_enum)' + campaign.prefix + '_injection_type::' + experiment['injection_mode']
 				vars[campaign.prefix + '_loglevel'] = int(campaign['logLevel'])
 				for targetid in range(0, campaign.numberOfTargets):
 					if targetid == target_id:

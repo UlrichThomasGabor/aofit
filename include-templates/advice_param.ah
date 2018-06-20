@@ -14,7 +14,7 @@
 					// template function inject().
 					tjp->filename(); tjp->signature(); tjp->line();
 
-					if (${aspectName}_injection_mode != replace) {
+					if (${aspectName}_injection_mode != ${aspectName}_injection_type::replace) {
 						inject(tjp, arg);
 					} else {
 						inject(tjp, arg, ${aspectName}_valueVector_$id[${aspectName}_valueID[$id]]);

@@ -17,7 +17,7 @@
 				#if $errno_active
 				inject_errno(${aspectName}_valueVectorErrno_$id[${aspectName}_valueID[$id]]);
 				#endif
-				if (${aspectName}_injection_mode != replace) {
+				if (${aspectName}_injection_mode != ${aspectName}_injection_type::replace) {
 					inject(tjp, result);
 				} else {
 					inject(tjp, result, (JoinPoint::Result)${aspectName}_valueVector_$id[${aspectName}_valueID[$id]]);
