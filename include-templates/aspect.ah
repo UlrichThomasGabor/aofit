@@ -3,6 +3,7 @@
 
 // We need this only for logging. A workaround can be to redefine log to printf.
 #include <stdarg.h>
+#include <stdio.h>
 
 enum injection_type {
 	none = 0,
