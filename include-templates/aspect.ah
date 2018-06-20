@@ -44,7 +44,7 @@ aspect $aspectName {
 		}
 	}
 
-	void log(int loglevel, const char *format, ...) {
+	void log(const int loglevel, const char * const format, ...) {
 		if (${aspectName}_loglevel >= loglevel) {
 			va_list args;
 			va_start(args, format);
@@ -54,7 +54,7 @@ aspect $aspectName {
 		}
 	}
 
-	void logChange(const char *filename, const char *sig, int line, const bool& val_original, const bool& val_changed) {
+	void logChange(const char * const filename, const char * const sig, const int line, const bool& val_original, const bool& val_changed) {
 		if (val_original) {
 			log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\ttrue ---> false\n", sig, filename, line);
 		} else {
@@ -63,12 +63,12 @@ aspect $aspectName {
 	}
 
 	template <typename T>
-	void logChange(const char *filename, const char *sig, int line, const T& val_original, const T& val_changed) {
+	void logChange(const char * const filename, const char * const sig, const int line, const T& val_original, const T& val_changed) {
 		log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\t%d ---> %d\n", sig, filename, line, val_original, val_changed);
 	}
 
 	template <typename T>
-	void logChange(const char *filename, const char *sig, int line, const T& val_original, const T& val_changed, const char *msg) {
+	void logChange(const char * const filename, const char * const sig, const int line, const T& val_original, const T& val_changed, const char * const msg) {
 		log(2, "[injection] function: '%s' in file '%s' in line '%d':\n\t%s\n", sig, filename, line, msg);
 	}
 
@@ -91,7 +91,7 @@ aspect $aspectName {
 	}
 
 	#if $delay_active
-	inline void inject_delay(unsigned int duration_in_ms) {
+	inline void inject_delay(const unsigned int duration_in_ms) {
 		if (duration_in_ms > 0) {
 			log(2, "[injection] also waiting for %d ms\n", duration_in_ms);
 			$delay_code
@@ -100,7 +100,7 @@ aspect $aspectName {
 	#endif
 
 	#if $errno_active
-	inline void inject_errno(int replace_errno) {
+	inline void inject_errno(const int replace_errno) {
 		log(2, "[injection] also modifying errno to %d\n", replace_errno);
 		errno = replace_errno;
 	}
@@ -108,7 +108,7 @@ aspect $aspectName {
 
 	// Called for injection_mode = replace.
 	template <class JP, typename T>
-	void inject(JP *tjp, T *location, T value) {
+	void inject(JP *tjp, T * const location, T value) {
 		if (*location != value) {
 			logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, value);
 			*location = value;
@@ -119,7 +119,7 @@ aspect $aspectName {
 
 	// Following functions are called for other injection_modes.
 	template <class JP>
-	void inject(JP *tjp, bool *location) {
+	void inject(JP *tjp, bool * const location) {
 		logChange(tjp->filename(), tjp->signature(), tjp->line(), *location, !(*location));
 		*location = !(*location);
 	}
@@ -154,7 +154,7 @@ aspect $aspectName {
 	}
 
 	template <class JP, typename T>
-	void inject(JP *tjp, T *location) {
+	void inject(JP *tjp, T * const location) {
 		log(0, "#-> invalid attempt to apply %s to non-bool / non-arithmetic!\n", injection_type2str(${aspectName}_injection_mode));
 	}
 
