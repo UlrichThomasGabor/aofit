@@ -7,7 +7,7 @@ from pyaofit import *
 def get_default_args_parser():
 	parser = argparse.ArgumentParser(description='Run campaign')
 	parser.add_argument("campaign_filename", help="The campaign file.", default="campaign.json")
-	parser.add_argument("--validate-json", action="store_true", default=True);
+	parser.add_argument("--validate-json", action="store_true", default=False);
 	parser.add_argument("--verbose", action="store_true", default=False);
 	return parser
 
