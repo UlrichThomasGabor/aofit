@@ -33,7 +33,8 @@ if [[ $(command -v lldb &>/dev/null ; echo $?) == 0 ]]; then
 	cd $BASEPATH/testproject/
 	lldb -s $GDBCOMMANDS $BASEPATH/testproject/a.out
 else
-	echo "break *0x0" >> $GDBCOMMANDS # Break on entry.
+	ENTRY=$(readelf -h $BASEPATH/testproject/a.out | grep "Entry point address" | grep -P '0x[0-9a-f]+' -o)
+	echo "break *$ENTRY" >> $GDBCOMMANDS # Break on entry.
 	echo "run >& $EXPERIMENT_DIR/output.log" >> $GDBCOMMANDS
 	echo "del 1"
 	# List all variables:
@@ -41,6 +42,7 @@ else
 	# Change one variable:
 	# $ set variable idx = 1
 	cat "$1" | sed 's/^/set variable /' >> $GDBCOMMANDS
+	sed -i 's/=true/="true"/' $GDBCOMMANDS
 	echo "continue" >> $GDBCOMMANDS
 	echo "quit" >> $GDBCOMMANDS
 	cd $BASEPATH/testproject/
