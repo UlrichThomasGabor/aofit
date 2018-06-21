@@ -42,11 +42,12 @@ class campaign(dict):
 				for key in propagate_values:
 					if not key in target:
 						target[key] = interface[key]
-				for k, error_situation in enumerate(target['error_situations']):
-					for key in propagate_values:
-						if not key in error_situation:
-							error_situation[key] = target[key]
-					target['error_situations'][k] = error_situation
+				if 'error_situations' in target:
+					for k, error_situation in enumerate(target['error_situations']):
+						for key in propagate_values:
+							if not key in error_situation:
+								error_situation[key] = target[key]
+						target['error_situations'][k] = error_situation
 				interface['targets'][j] = target
 			self['interfaces'][i] = interface
 
@@ -57,7 +58,10 @@ class campaign(dict):
 		for i, interface in enumerate(self['interfaces']):
 			if "error_situations" in interface:
 				for j, target in enumerate(interface['targets']):
-					target["error_situations"] = interface["error_situations"] + target["error_situations"]
+					if 'error_situations' in target:
+						target["error_situations"] = interface["error_situations"] + target["error_situations"]
+					else:
+						target["error_situations"] = interface["error_situations"]
 					interface['targets'][j] = target
 				self['interfaces'][i] = interface
 
@@ -91,7 +95,7 @@ class campaign(dict):
 		for interface in self['interfaces']:
 			for target in interface['targets']:
 				for error_situation in target['error_situations']:
-					if error_situation['delay'] != None:
+					if 'delay' in error_situation and error_situation['delay'] != None:
 						return True
 		return False
 
