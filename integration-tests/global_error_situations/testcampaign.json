@@ -1,0 +1,52 @@
+{
+	"buildCommand": "cp testcampaign.ah testproject/ && cd testproject && rm -Rf a.out && ag++ -std=c++98 -g main.cc ; rm -Rf testcampaign.ah",
+	"experimentCommand": "./experimentCommand.sh",
+	"logLevel": 3,
+	"interfaces": [
+		{
+			"id": "posix_printf",
+			"system_interface_name": "printf",
+			"header_files": ["stdio.h"],
+			"error_value": "-1",
+			"error_situations": [
+				{ "errno": "EILSEQ" },
+				{ "errno": "EOVERFLOW" }
+			],
+			"targets": [
+				{
+					"id": "posix_dprintf",
+					"signature": "int dprintf(int fildes, const char *restrict format, ...);",
+					"error_situations": [
+						{ "errno": "EBADF" },
+						{ "errno": "ENOMEM" }
+					]
+				},
+				{
+					"id": "posix_fprintf",
+					"signature": "int fprintf(FILE *restrict stream, const char *restrict format, ...);",
+					"error_situations": [
+						{ "errno": "ENOMEM" }
+					]
+				},
+				{
+					"id": "posix_printf",
+					"signature": "int printf(const char *restrict format, ...);",
+					"error_situations": [
+						{ "errno": "ENOMEM" }
+					]
+				},
+				{
+					"id": "posix_snprintf",
+					"signature": "int snprintf(char *restrict s, size_t n, const char *restrict format, ...);"
+				},
+				{
+					"id": "posix_sprintf",
+					"signature": "int sprintf(char *restrict s, const char *restrict format, ...);"
+				}
+			]
+		}
+	],
+	"experiments": [
+		{"target": "posix_printf", "experiment_mode": "each_occurrence_once", "injection_mode": "each"}
+	]
+}
