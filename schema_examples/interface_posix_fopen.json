@@ -1,9 +1,9 @@
 {
-	"id": "posix_fopen",
 	"system_interface_name": "fopen",
 	"header_files": ["stdio.h"],
 	"targets": [
 		{
+			"id": "posix_fopen",
 			"signature": "FILE *fopen(const char *restrict pathname, const char *restrict mode);",
 			"error_value": "NULL",
 			"error_situations": [

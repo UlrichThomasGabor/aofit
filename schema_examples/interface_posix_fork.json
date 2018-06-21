@@ -1,9 +1,9 @@
 {
-	"id": "posix_fork",
 	"system_interface_name": "fork",
 	"header_files": ["unistd.h"],
 	"targets": [
 		{
+			"id": "posix_fork",
 			"signature": "pid_t fork(void);",
 			"error_value": "-1",
 			"error_situations": [

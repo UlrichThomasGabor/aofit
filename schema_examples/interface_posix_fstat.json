@@ -1,9 +1,9 @@
 {
-	"id": "posix_fstat",
 	"system_interface_name": "fstat",
 	"header_files": ["sys/stat.h"],
 	"targets": [
 		{
+			"id": "posix_fstat",
 			"signature": "int fstat(int fildes, struct stat *buf);",
 			"error_value": "-1",
 			"error_situations": [

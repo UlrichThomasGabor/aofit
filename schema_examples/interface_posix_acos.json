@@ -1,13 +1,14 @@
 {
-    "system_interface_name": "acos",
-    "header_files": ["math.h"],
-    "targets": [
-        {
-            "signature": "double acos(double x);",
-            "error_value": "NaN",
-            "error_situations": [
-                {"errno": "EDOM"}
-            ]
-        }
-    ]
+	"system_interface_name": "acos",
+	"header_files": ["math.h"],
+	"targets": [
+		{
+			"id": "posix_acos",
+			"signature": "double acos(double x);",
+			"error_value": "NaN",
+			"error_situations": [
+				{"errno": "EDOM"}
+			]
+		}
+	]
 }

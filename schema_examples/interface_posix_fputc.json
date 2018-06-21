@@ -1,9 +1,9 @@
 {
-	"id": "posix_fputc",
 	"system_interface_name": "fputc",
 	"header_files": ["stdio.h"],
 	"targets": [
 		{
+			"id": "posix_fputc",
 			"signature": "int fputc(int c, FILE *stream);",
 			"error_value": "EOF",
 			"error_situations": [

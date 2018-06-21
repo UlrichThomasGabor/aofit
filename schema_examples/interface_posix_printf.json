@@ -1,5 +1,4 @@
 {
-	"id": "posix_printf",
 	"system_interface_name": "printf",
 	"header_files": ["stdio.h"],
 	"error_value": "-1",
@@ -9,6 +8,7 @@
 	],
 	"targets": [
 		{
+			"id": "posix_dprintf",
 			"signature": "int dprintf(int fildes, const char *restrict format, ...);",
 			"error_situations": [
 				{ "errno": "EBADF" },
@@ -16,21 +16,25 @@
 			]
 		},
 		{
+			"id": "posix_fprintf",
 			"signature": "int fprintf(FILE *restrict stream, const char *restrict format, ...);",
 			"error_situations": [
 				{ "errno": "ENOMEM" }
 			]
 		},
 		{
+			"id": "posix_printf",
 			"signature": "int printf(const char *restrict format, ...);",
 			"error_situations": [
 				{ "errno": "ENOMEM" }
 			]
 		},
 		{
+			"id": "posix_snprintf",
 			"signature": "int snprintf(char *restrict s, size_t n, const char *restrict format, ...);"
 		},
 		{
+			"id": "posix_sprintf",
 			"signature": "int sprintf(char *restrict s, const char *restrict format, ...);"
 		}
 	]

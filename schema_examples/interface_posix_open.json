@@ -1,40 +1,41 @@
 {
-    "id": "posix_open",
-    "system_interface_name": "open",
-    "header_files": ["sys/stat.h", "fcntl.h"],
-    "error_value": "-1",
-    "error_situations": [
-        {"errno": "EACCES"},
-        {"errno": "EEXIST"},
-        {"errno": "EINTR"},
-        {"errno": "EINVAL"},
-        {"errno": "EIO"},
-        {"errno": "EISDIR"},
-        {"errno": "ELOOP"},
-        {"errno": "EMFILE"},
-        {"errno": "ENAMETOOLONG"},
-        {"errno": "ENFILE"},
-        {"errno": "ENOENT"},
-        {"errno": "ENOTDIR"},
-        {"errno": "ENXIO"},
-        {"errno": "EOVERFLOW"},
-        {"errno": "EROFS"},
+	"system_interface_name": "open",
+	"header_files": ["sys/stat.h", "fcntl.h"],
+	"error_value": "-1",
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "EEXIST"},
+		{"errno": "EINTR"},
+		{"errno": "EINVAL"},
+		{"errno": "EIO"},
+		{"errno": "EISDIR"},
+		{"errno": "ELOOP"},
+		{"errno": "EMFILE"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENFILE"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOTDIR"},
+		{"errno": "ENXIO"},
+		{"errno": "EOVERFLOW"},
+		{"errno": "EROFS"},
 
-        {"errno": "EAGAIN"},
-        {"errno": "ENOMEM"},
-        {"errno": "EOPNOTSUPP"},
-        {"errno": "ETXTBSY"}
-    ],
+		{"errno": "EAGAIN"},
+		{"errno": "ENOMEM"},
+		{"errno": "EOPNOTSUPP"},
+		{"errno": "ETXTBSY"}
+	],
 
-    "targets": [
-        {
-            "signature": "int open(const char *path, int oflag, ...);"
-        },
-        {
-            "signature": "int openat(int fd, const char *path, int oflag, ...);",
-            "error_situations": [
-                {"errno": "EBADF"}
-            ]
-        }
-    ]
+	"targets": [
+		{
+			"id": "posix_open",
+			"signature": "int open(const char *path, int oflag, ...);"
+		},
+		{
+			"id": "posix_openat",
+			"signature": "int openat(int fd, const char *path, int oflag, ...);",
+			"error_situations": [
+				{"errno": "EBADF"}
+			]
+		}
+	]
 }
