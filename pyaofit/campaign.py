@@ -16,8 +16,8 @@ class campaign(dict):
 				self.targetspecifiers[target['id']] = target_id
 				target_id += 1
 
-		self.__init__populate_values_down()
 		self.__init__propagate_global_error_situations()
+		self.__init__populate_values_down()
 		self.__init__error_situation_ids()
 		self.__init__set_error_situation_index_for_custom_error_value()
 		self.name = name
