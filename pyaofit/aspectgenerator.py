@@ -65,8 +65,12 @@ def makeArgumentTypes(target):
 			if "restrict" in types:
 				types.remove("restrict")
 			params_without_varnames += [" ".join(types)]
+		params = params_without_varnames
 		# Remove restrict again, because it might be prepended with *.
-		params = [ re.sub(r"\brestrict\b", "", p) for p in params_without_varnames]
+		params = [re.sub(r"\brestrict\b", "", p) for p in params]
+		# Remove "...", because it is used in POSIX specifications
+		params = [re.sub(r"\b\.\.\.\b", "", p) for p in params]
+		params = list(filter(None, params)) # Filter empty strings again
 		return params
 	else:
 		return []
