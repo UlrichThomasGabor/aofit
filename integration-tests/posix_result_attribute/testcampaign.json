@@ -1,5 +1,5 @@
 {
-	"buildCommand": "cp testcampaign.ah testproject/ && cd testproject && rm -Rf a.out repo.acp && ag++ -k --attributes -r repo.acp -std=c++11 -g main.cc ; rm -Rf testcampaign.ah",
+	"buildCommand": "cp testcampaign.ah testproject/ && cd testproject && rm -Rf a.out repo.acp && ag++ -k --attributes -r repo.acp -std=c++11 -g main.cc ; RETURN=$? ; rm -Rf testcampaign.ah ; exit $RETURN",
 	"experimentCommand": "./experimentCommand.sh",
 	"acmodelfilename": "testproject/repo.acp",
 	"noerrorattributequalifier": "::aofit::noerror",
