@@ -1,0 +1,18 @@
+{
+	"system_interface_name": "getsockname",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_getsockname",
+			"signature": "int getsockname(int socket, struct sockaddr *restrict address, socklen_t *restrict address_len);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "EINVAL"},
+				{"errno": "ENOBUFS"}
+			]
+		}
+	]
+}

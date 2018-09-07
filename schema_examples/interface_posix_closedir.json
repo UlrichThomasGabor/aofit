@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "closedir",
+	"header_files": ["dirent.h"],
+	"targets": [
+		{
+			"id": "posix_closedir",
+			"signature": "int closedir(DIR *dirp);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EINTR"}
+			]
+		}
+	]
+}

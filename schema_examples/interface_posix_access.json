@@ -1,0 +1,32 @@
+{
+	"system_interface_name": "access",
+	"header_files": ["unistd.h", "fcntl.h"],
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "ELOOP"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOTDIR"},
+		{"errno": "EROFS"},
+		{"errno": "EINVAL"},
+		{"errno": "ETXTBSY"}
+	],
+	"targets": [
+		{
+			"id": "posix_access",
+			"signature": "int access(const char *path, int amode);",
+			"error_value": "-1"
+		},
+		{
+			"id": "posix_faccessat",
+			"signature": "int faccessat(int fd, const char *path, int amode, int flag);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EBADF"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

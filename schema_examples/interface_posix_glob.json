@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "glob",
+	"header_files": ["glob.h"],
+	"targets": [
+		{
+			"id": "posix_glob",
+			"signature": "int glob(const char *restrict pattern, int flags, int(*errfunc)(const char *epath, int eerrno), glob_t *restrict pglob);",
+			"error_situations": [
+				{"error_value": "GLOB_ABORTED"},
+				{"error_value": "GLOB_NOMATCH"},
+				{"error_value": "GLOB_NOSPACE"}
+			]
+		}
+	]
+}

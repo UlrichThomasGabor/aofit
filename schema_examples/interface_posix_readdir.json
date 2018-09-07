@@ -1,0 +1,25 @@
+{
+	"system_interface_name": "readdir",
+	"header_files": ["dirent.h"],
+	"targets": [
+		{
+			"id": "posix_readdir",
+			"signature": "struct dirent *readdir(DIR *dirp);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EOVERFLOW"},
+				{"errno": "EBADF"},
+				{"errno": "ENOENT"}
+			]
+		},
+		{
+			"id": "posix_readdir_r",
+			"signature": "int readdir_r(DIR *restrict dirp, struct dirent *restrict entry, struct dirent **restrict result);",
+			"error_situations": [
+				{"error_value": "EOVERFLOW"},
+				{"error_value": "EBADF"},
+				{"error_value": "ENOENT"}
+			]
+		}
+	]
+}

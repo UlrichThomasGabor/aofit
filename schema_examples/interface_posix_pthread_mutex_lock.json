@@ -1,0 +1,35 @@
+{
+	"system_interface_name": "pthread_mutex_lock",
+	"header_files": ["pthread.h"],
+	"targets": [
+		{
+			"id": "posix_pthread_mutex_lock",
+			"signature": "int pthread_mutex_lock(pthread_mutex_t *mutex);",
+			"error_situations": [
+				{"error_value": "EAGAIN"},
+				{"error_value": "EINVAL"},
+				{"error_value": "ENOTRECOVERABLE"},
+				{"error_value": "EOWNERDEAD"},
+				{"error_value": "EDEADLK"}
+			]
+		},
+		{
+			"id": "posix_pthread_mutex_trylock",
+			"signature": "int pthread_mutex_trylock(pthread_mutex_t *mutex);",
+			"error_situations": [
+				{"error_value": "EAGAIN"},
+				{"error_value": "EINVAL"},
+				{"error_value": "ENOTRECOVERABLE"},
+				{"error_value": "EOWNERDEAD"},
+				{"error_value": "EBUSY"}
+			]
+		},
+		{
+			"id": "posix_pthread_mutex_unlock",
+			"signature": "int pthread_mutex_unlock(pthread_mutex_t *mutex);",
+			"error_situations": [
+				{"error_value": "EPERM"}
+			]
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"system_interface_name": "endnetent",
+	"header_files": ["netdb.h"],
+	"targets": [
+		{
+			"id": "posix_endnetent",
+			"signature": "struct netent *getnetbyaddr(uint32_t net, int type);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_getnetbyname",
+			"signature": "struct netent *getnetbyname(const char *name);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_getnetent",
+			"signature": "struct netent *getnetent(void);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

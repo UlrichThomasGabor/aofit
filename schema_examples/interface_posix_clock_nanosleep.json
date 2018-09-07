@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "clock_nanosleep",
+	"header_files": ["time.h"],
+	"targets": [
+		{
+			"id": "posix_clock_nanosleep",
+			"signature": "int clock_nanosleep(clockid_t clock_id, int flags, const struct timespec *rqtp, struct timespec *rmtp);",
+			"error_situations": [
+				{"error_value": "EINTR"},
+				{"error_value": "EINVAL"},
+				{"error_value": "ENOTSUP"}
+			]
+		}
+	]
+}

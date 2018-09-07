@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "crypt",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_crypt",
+			"signature": "char *crypt(const char *key, const char *salt);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "ENOSYS"}
+			]
+		}
+	]
+}

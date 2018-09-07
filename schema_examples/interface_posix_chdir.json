@@ -1,0 +1,18 @@
+{
+	"system_interface_name": "chdir",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_chdir",
+			"signature": "int chdir(const char *path);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"}
+			]
+		}
+	]
+}

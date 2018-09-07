@@ -1,0 +1,18 @@
+{
+	"system_interface_name": "aio_read",
+	"header_files": ["aio.h"],
+	"targets": [
+		{
+			"id": "posix_aio_read",
+			"signature": "int aio_read(struct aiocb *aiocbp);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EBADF"},
+				{"errno": "EINVAL"},
+				{"errno": "ECANCELED"},
+				{"errno": "EOVERFLOW"}
+			]
+		}
+	]
+}

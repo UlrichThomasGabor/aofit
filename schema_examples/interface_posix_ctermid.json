@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "ctermid",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_ctermid",
+			"signature": "char *ctermid(char *s);",
+			"error_situations": [
+				{"error_value": "\"\""}
+			]
+		}
+	]
+}

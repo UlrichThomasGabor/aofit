@@ -1,0 +1,28 @@
+{
+	"system_interface_name": "getpwnam",
+	"header_files": ["pwd.h"],
+	"targets": [
+		{
+			"id": "posix_getpwnam",
+			"signature": "struct passwd *getpwnam(const char *name);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EIO"},
+				{"errno": "EINTR"},
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"}
+			]
+		},
+		{
+			"id": "posix_getpwnam_r",
+			"signature": "int getpwnam_r(const char *name, struct passwd *pwd, char *buffer, size_t bufsize, struct passwd **result);",
+			"error_situations": [
+				{"error_value": "EIO"},
+				{"error_value": "EINTR"},
+				{"error_value": "EMFILE"},
+				{"error_value": "ENFILE"},
+				{"error_value": "ERANGE"}
+			]
+		},
+	]
+}

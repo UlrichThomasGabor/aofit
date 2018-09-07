@@ -1,0 +1,16 @@
+{
+	"system_interface_name": "aio_fsync",
+	"header_files": ["aio.h"],
+	"targets": [
+		{
+			"id": "posix_aio_fsync",
+			"signature": "int aio_fsync(int op, struct aiocb *aiocbp);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EBADF"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

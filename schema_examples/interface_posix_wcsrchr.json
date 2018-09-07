@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "wcsrchr",
+	"header_files": ["wchar.h"],
+	"targets": [
+		{
+			"id": "posix_wcsrchr",
+			"signature": "wchar_t *wcsrchr(const wchar_t *ws, wchar_t wc);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

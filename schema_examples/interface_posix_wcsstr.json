@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "wcsstr",
+	"header_files": ["wchar.h"],
+	"targets": [
+		{
+			"id": "posix_wcsstr",
+			"signature": "wchar_t *wcsstr(const wchar_t *restrict ws1, const wchar_t *restrict ws2);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "sqrt",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"error_value": "NaN", "errno": "EDOM"},
+		{"error_value": "NaN"},
+	],
+	"targets": [
+		{
+			"id": "posix_sqrt",
+			"signature": "double sqrt(double x);"
+		},
+		{
+			"id": "posix_sqrtf",
+			"signature": "float sqrtf(float x);"
+		},
+		{
+			"id": "posix_sqrtl",
+			"signature": "long double sqrtl(long double x);"
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "feof",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_feof",
+			"signature": "int feof(FILE *stream);",
+			"error_situations": [
+				{"error_value": "0"}
+			]
+		}
+	]
+}

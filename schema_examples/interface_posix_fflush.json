@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "fflush",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_fflush",
+			"signature": "int fflush(FILE *stream);",
+			"error_value": "EOF",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EBADF"},
+				{"errno": "EFBIG"},
+				{"errno": "EINTR"},
+				{"errno": "EIO"},
+				{"errno": "ENOMEM"},
+				{"errno": "ENOSPC"},
+				{"errno": "EPIPE"},
+				{"errno": "ENXIO"}
+			]
+		}
+	]
+}

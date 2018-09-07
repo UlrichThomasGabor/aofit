@@ -1,0 +1,27 @@
+{
+	"system_interface_name": "endservent",
+	"header_files": ["netdb.h"],
+	"targets": [
+		{
+			"id": "posix_endservent",
+			"signature": "struct servent *getservbyname(const char *name, const char *proto);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_getservbyport",
+			"signature": "struct servent *getservbyport(int port, const char *proto);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_getservent",
+			"signature": "struct servent *getservent(void);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

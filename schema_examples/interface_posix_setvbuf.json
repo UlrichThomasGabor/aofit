@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "setvbuf",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_setvbuf",
+			"signature": "int setvbuf(FILE *restrict stream, char *restrict buf, int type, size_t size);",
+			"error_value": "1",
+			"error_situations": [
+				{"errno": "EBADF"}
+			]
+		}
+	]
+}

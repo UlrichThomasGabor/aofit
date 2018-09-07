@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "memchr",
+	"header_files": ["string.h"],
+	"targets": [
+		{
+			"id": "posix_memchr",
+			"signature": "void *memchr(const void *s, int c, size_t n);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

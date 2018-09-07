@@ -1,0 +1,26 @@
+{
+	"system_interface_name": "recv",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_recv",
+			"signature": "ssize_t recv(int socket, void *buffer, size_t length, int flags);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EWOULDBLOCK"},
+				{"errno": "EBADF"},
+				{"errno": "ECONNRESET"},
+				{"errno": "EINTR"},
+				{"errno": "EINVAL"},
+				{"errno": "ENOTCONN"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "ETIMEDOUT"},
+				{"errno": "EIO"},
+				{"errno": "ENOBUFS"},
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

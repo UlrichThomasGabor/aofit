@@ -1,0 +1,29 @@
+{
+	"system_interface_name": "send",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_send",
+			"signature": "ssize_t send(int socket, const void *buffer, size_t length, int flags);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EWOULDBLOCK"},
+				{"errno": "EBADF"},
+				{"errno": "ECONNRESET"},
+				{"errno": "EDESTADDRREQ"},
+				{"errno": "EINTR"},
+				{"errno": "EMSGSIZE"},
+				{"errno": "ENOTCONN"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "EPIPE"},
+				{"errno": "EACCES"},
+				{"errno": "EIO"},
+				{"errno": "ENETDOWN"},
+				{"errno": "ENETUNREACH"},
+				{"errno": "ENOBUFS"}
+			]
+		}
+	]
+}

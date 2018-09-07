@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "pthread_key_create",
+	"header_files": ["pthread.h"],
+	"targets": [
+		{
+			"id": "posix_pthread_key_create",
+			"signature": "int pthread_key_create(pthread_key_t *key, void (*destructor)(void*));",
+			"error_situations": [
+				{"error_value": "EAGAIN"},
+				{"error_value": "ENOMEM"}
+			]
+		}
+	]
+}

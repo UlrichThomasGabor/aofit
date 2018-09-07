@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "setgid",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_setgid",
+			"signature": "int setgid(gid_t gid);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"},
+				{"errno": "EPERM"}
+			]
+		}
+	]
+}

@@ -1,0 +1,19 @@
+{
+	"system_interface_name": "fchown",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_fchown",
+			"signature": "int fchown(int fildes, uid_t owner, gid_t group);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EPERM"},
+				{"errno": "EROFS"},
+				{"errno": "EINVAL"},
+				{"errno": "EIO"},
+				{"errno": "EINTR"}
+			]
+		}
+	]
+}

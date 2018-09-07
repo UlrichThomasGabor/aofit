@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "calloc",
+	"header_files": ["stdlib.h"],
+	"targets": [
+		{
+			"id": "posix_calloc",
+			"signature": "void *calloc(size_t nelem, size_t elsize);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

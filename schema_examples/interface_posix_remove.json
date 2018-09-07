@@ -1,0 +1,27 @@
+{
+	"system_interface_name": "remove",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_remove",
+			"signature": "int remove(const char *path);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EBUSY"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EPERM"},
+				{"errno": "ETXTBSY"},
+				{"errno": "EBADF"},
+				{"errno": "EEXIST"},
+				{"errno": "ENOTEMPTY"},
+				{"errno": "EINVAL"},
+				{"errno": "EIO"},
+				{"errno": "EROFS"}
+			]
+		}
+	]
+}

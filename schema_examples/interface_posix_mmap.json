@@ -1,0 +1,23 @@
+{
+	"system_interface_name": "mmap",
+	"header_files": ["sys/mman.h"],
+	"targets": [
+		{
+			"id": "posix_mmap",
+			"signature": "void *mmap(void *addr, size_t len, int prot, int flags, int fildes, off_t off);",
+			"error_value": "MAP_FAILED",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EAGAIN"},
+				{"errno": "EBADF"},
+				{"errno": "EINVAL"},
+				{"errno": "EMFILE"},
+				{"errno": "ENODEV"},
+				{"errno": "ENOMEM"},
+				{"errno": "ENOTSUP"},
+				{"errno": "ENXIO"},
+				{"errno": "EOVERFLOW"}
+			]
+		}
+	]
+}

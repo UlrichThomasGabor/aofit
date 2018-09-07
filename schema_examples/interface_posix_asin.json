@@ -1,0 +1,31 @@
+{
+	"system_interface_name": "asin",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"errno": "EDOM"},
+		{"errno": "ERANGE"}
+	],
+	"targets": [
+		{
+			"id": "posix_asin",
+			"signature": "double asin(double x);",
+			"error_situations": [
+				{"error_value": "NaN"}
+			]
+		},
+		{
+			"id": "posix_asinf",
+			"signature": "float asinf(float x);",
+			"error_situations": [
+				{"error_value": "NaN"}
+			]
+		},
+		{
+			"id": "posix_asinl",
+			"signature": "long double asinl(long double x);",
+			"error_situations": [
+				{"error_value": "NaN"}
+			]
+		}
+	]
+}

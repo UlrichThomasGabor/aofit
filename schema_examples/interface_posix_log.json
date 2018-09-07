@@ -1,0 +1,32 @@
+{
+	"system_interface_name": "log",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"errno": "EDOM"},
+		{"errno": "ERANGE"},
+		{"error_value": "NaN"},
+	],
+	"targets": [
+		{
+			"id": "posix_log",
+			"signature": "double acos(double x);",
+			"error_situations": [
+				{"error_value": "-HUGE_VAL"}
+			]
+		},
+		{
+			"id": "posix_logf",
+			"signature": "float logf(float x);",
+			"error_situations": [
+				{"error_value": "-HUGE_VALF"}
+			]
+		},
+		{
+			"id": "posix_logl",
+			"signature": "long double logl(long double x);",
+			"error_situations": [
+				{"error_value": "-HUGE_VALL"}
+			]
+		}
+	]
+}

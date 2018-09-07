@@ -1,0 +1,34 @@
+{
+	"system_interface_name": "sin",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"error_value": "NaN"},
+		{"error_value": "NaN", "errno": "EDOM"}
+	],
+	"targets": [
+		{
+			"id": "posix_sin",
+			"signature": "double sin(double x);",
+			"error_value": "-1",
+			"error_situations": [
+				{"error_value": "DBL_MIN", "errno": "ERANGE"}
+			]
+		},
+		{
+			"id": "posix_sinf",
+			"signature": "float sinf(float x);",
+			"error_value": "-1",
+			"error_situations": [
+				{"error_value": "FLT_MIN", "errno": "ERANGE"}
+			]
+		},
+		{
+			"id": "posix_sinl",
+			"signature": "long double sinl(long double x);",
+			"error_value": "-1",
+			"error_situations": [
+				{"error_value": "LDBL_MIN", "errno": "ERANGE"}
+			]
+		}
+	]
+}

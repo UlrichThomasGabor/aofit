@@ -1,0 +1,21 @@
+{
+	"system_interface_name": "lround",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"errno": "EDOM"}
+	],
+	"targets": [
+		{
+			"id": "posix_lround",
+			"signature": "long lround(double x);"
+		},
+		{
+			"id": "posix_lroundf",
+			"signature": "long lroundf(float x);"
+		},
+		{
+			"id": "posix_lroundl",
+			"signature": "long lroundl(long double x);"
+		}
+	]
+}

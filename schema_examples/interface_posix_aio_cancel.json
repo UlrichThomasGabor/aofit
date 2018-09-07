@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "aio_cancel",
+	"header_files": ["aio.h"],
+	"targets": [
+		{
+			"id": "posix_aio_cancel",
+			"signature": "int aio_cancel(int fildes, struct aiocb *aiocbp);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "ECANCELED"},
+				{"errno": "EBADF"}
+			]
+		}
+	]
+}

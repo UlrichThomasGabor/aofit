@@ -1,0 +1,18 @@
+{
+	"system_interface_name": "catgets",
+	"header_files": ["nl_types.h"],
+	"targets": [
+		{
+			"id": "posix_catgets",
+			"signature": "char *catgets(nl_catd catd, int set_id, int msg_id, const char *s);",
+			"error_value": "s",
+			"error_situations": [
+				{"errno": "EINTR"},
+				{"errno": "ENOMSG"},
+				{"errno": "EBADF"},
+				{"errno": "EBADMSG"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

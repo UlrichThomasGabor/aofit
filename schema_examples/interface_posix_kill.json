@@ -1,0 +1,16 @@
+{
+	"system_interface_name": "kill",
+	"header_files": ["signal.h"],
+	"targets": [
+		{
+			"id": "posix_kill",
+			"signature": "int kill(pid_t pid, int sig);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"},
+				{"errno": "EPERM"},
+				{"errno": "ESRCH"}
+			]
+		}
+	]
+}

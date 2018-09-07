@@ -1,0 +1,30 @@
+{
+	"system_interface_name": "readlink",
+	"header_files": ["unistd.h"],
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "EINVAL"},
+		{"errno": "EIO"},
+		{"errno": "ELOOP"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOTDIR"}
+	],
+	"targets": [
+		{
+			"id": "posix_readlink",
+			"signature": "ssize_t readlink(const char *restrict path, char *restrict buf, size_t bufsize);",
+			"error_value": "-1"
+		},
+		{
+			"id": "posix_readlinkat",
+			"signature": "ssize_t readlinkat(int fd, const char *restrict path, char *restrict buf, size_t bufsize);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EBADF"},
+				{"errno": "ENOTDIR"}
+			]
+		}
+	]
+}

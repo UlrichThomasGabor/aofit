@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "pthread_detach",
+	"header_files": ["math.h"],
+	"targets": [
+		{
+			"id": "posix_pthread_detach",
+			"signature": "int pthread_detach(pthread_t thread);",
+			"error_situations": [
+				{"error_value": "1"}
+			]
+		}
+	]
+}

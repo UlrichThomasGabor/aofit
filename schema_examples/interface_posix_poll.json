@@ -1,0 +1,16 @@
+{
+	"system_interface_name": "poll",
+	"header_files": ["poll.h"],
+	"targets": [
+		{
+			"id": "posix_poll",
+			"signature": "int poll(struct pollfd fds[], nfds_t nfds, int timeout);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EINTR"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

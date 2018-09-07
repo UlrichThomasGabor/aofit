@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "sigemptyset",
+	"header_files": ["signal.h"],
+	"targets": [
+		{
+			"id": "posix_sigemptyset",
+			"signature": "int sigemptyset(sigset_t *set);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		}
+	]
+}

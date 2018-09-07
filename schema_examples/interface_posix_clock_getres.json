@@ -1,0 +1,32 @@
+{
+	"system_interface_name": "clock_getres",
+	"header_files": ["time.h"],
+	"error_situations": [
+		{"errno": "EINVAL"}
+	],
+	"targets": [
+		{
+			"id": "posix_clock_getres",
+			"signature": "int clock_getres(clockid_t clock_id, struct timespec *res);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_clock_gettime",
+			"signature": "int clock_gettime(clockid_t clock_id, struct timespec *tp);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EOVERFLOW"}
+			]
+		},
+		{
+			"id": "posix_clock_settime",
+			"signature": "int clock_settime(clockid_t clock_id, const struct timespec *tp);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EPERM"}
+			]
+		}
+	]
+}

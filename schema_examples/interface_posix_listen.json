@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "listen",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_listen",
+			"signature": "int listen(int socket, int backlog);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EDESTADDRREQ"},
+				{"errno": "EINVAL"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "EACCES"},
+				{"errno": "ENOBUFS"}
+			]
+		}
+	]
+}

@@ -1,0 +1,115 @@
+{
+	"system_interface_name": "exec",
+	"header_files": ["unistd.h"],
+	"error_situations": [
+		{"errno": "E2BIG"},
+		{"errno": "EACCES"},
+		{"errno": "EINVAL"},
+		{"errno": "ENOMEM"}
+	],
+	"targets": [
+		{
+			"id": "posix_execl",
+			"signature": "int execl(const char *path, const char *arg0, ...);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "ENOEXEC"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ETXTBSY"}
+			]
+		},
+		{
+			"id": "posix_execle",
+			"signature": "int execle(const char *path, const char *arg0, ...);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "ENOEXEC"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ETXTBSY"}
+			]
+		},
+		{
+			"id": "posix_execlp",
+			"signature": "int execlp(const char *file, const char *arg0, ...);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ETXTBSY"}
+			]
+		},
+		{
+			"id": "posix_execv",
+			"signature": "int execv(const char *path, char *const argv[]);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "ENOEXEC"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ETXTBSY"}
+			]
+		},
+		{
+			"id": "posix_execve",
+			"signature": "int execve(const char *path, char *const argv[], char *const envp[]);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "ENOEXEC"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ETXTBSY"}
+			]
+		},
+		{
+			"id": "posix_execvp",
+			"signature": "int execvp(const char *file, char *const argv[]);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ETXTBSY"}
+			]
+		},
+		{
+			"id": "posix_fexecve",
+			"signature": "int fexecve(int fd, char *const argv[], char *const envp[]);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "ENOEXEC"},
+				{"errno": "EBADF"}
+			]
+		}
+	]
+}

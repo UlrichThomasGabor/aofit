@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "fputs",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_fputs",
+			"signature": "int fputs(const char *restrict s, FILE *restrict stream);",
+			"error_value": "EOF",
+			"error_situations": [
+				{ "errno": "EAGAIN" },
+				{ "errno": "EBADF" },
+				{ "errno": "EFBIG" },
+				{ "errno": "EINTR"},
+				{ "errno": "EIO"},
+				{ "errno": "ENOSPC"},
+				{ "errno": "EPIPE"},
+				{ "errno": "ENOMEM"},
+				{ "errno": "ENXIO"}
+			]
+		}
+	]
+}

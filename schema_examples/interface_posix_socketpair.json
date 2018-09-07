@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "socketpair",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_socketpair",
+			"signature": "int socketpair(int domain, int type, int protocol, int socket_vector[2]);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAFNOSUPPORT"},
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "EPROTONOSUPPORT"},
+				{"errno": "EPROTOTYPE"},
+				{"errno": "EACCES"},
+				{"errno": "ENOBUFS"},
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

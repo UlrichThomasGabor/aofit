@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "pthread_cond_broadcast",
+	"header_files": ["pthread.h"],
+	"targets": [
+		{
+			"id": "posix_pthread_cond_broadcast",
+			"signature": "int pthread_cond_broadcast(pthread_cond_t *cond);",
+			"error_situations": [
+				{"error_value": "1"}
+			]
+		},
+		{
+			"id": "posix_pthread_cond_signal",
+			"signature": "int pthread_cond_signal(pthread_cond_t *cond);",
+			"error_situations": [
+				{"error_value": "1"}
+			]
+		}
+	]
+}

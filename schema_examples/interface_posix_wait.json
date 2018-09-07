@@ -1,0 +1,25 @@
+{
+	"system_interface_name": "wait",
+	"header_files": ["sys/wait.h"],
+	"targets": [
+		{
+			"id": "posix_wait",
+			"signature": "pid_t wait(int *stat_loc);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "ECHILD"},
+				{"errno": "EINTR"},
+			]
+		},
+		{
+			"id": "posix_waitpid",
+			"signature": "pid_t waitpid(pid_t pid, int *stat_loc, int options);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "ECHILD"},
+				{"errno": "EINTR"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

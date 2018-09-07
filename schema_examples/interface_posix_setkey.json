@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "setkey",
+	"header_files": ["stdlib.h"],
+	"targets": [
+		{
+			"id": "posix_setkey",
+			"signature": "void setkey(const char *key);",
+			"error_situations": [
+				{"errno": "ENOSYS"}
+			]
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"system_interface_name": "strtol",
+	"header_files": ["stdlib.h"],
+	"error_situations": [
+		{"errno": "EINVAL"}
+	],
+	"targets": [
+		{
+			"id": "posix_strtol",
+			"signature": "long strtol(const char *restrict nptr, char **restrict endptr, int base);",
+			"error_value": "0",
+			"error_situations": [
+				{"errno": "ERANGE", "error_value": "LONG_MIN"},
+				{"errno": "ERANGE", "error_value": "LONG_MAX"}
+			]
+		},
+		{
+			"id": "posix_strtoll",
+			"signature": "long long strtoll(const char *restrict nptr, char **restrict endptr, int base)",
+			"error_value": "0",
+			"error_situations": [
+				{"errno": "ERANGE", "error_value": "LLONG_MIN"},
+				{"errno": "ERANGE", "error_value": "LLONG_MAX"}
+			]
+		}
+	]
+}

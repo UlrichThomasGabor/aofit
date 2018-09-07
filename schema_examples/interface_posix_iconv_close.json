@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "iconv_close",
+	"header_files": ["iconv.h"],
+	"targets": [
+		{
+			"id": "posix_iconv_close",
+			"signature": "int iconv_close(iconv_t cd);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"}
+			]
+		}
+	]
+}

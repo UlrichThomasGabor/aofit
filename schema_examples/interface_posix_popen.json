@@ -1,0 +1,18 @@
+{
+	"system_interface_name": "popen",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_popen",
+			"signature": "FILE *popen(const char *command, const char *mode);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EMFILE"},
+				{"errno": "EINVAL"},
+				{"errno": "EAGAIN"},
+				{"errno": "ENOMEM"},
+				{"errno": "ENFILE"}
+			]
+		}
+	]
+}

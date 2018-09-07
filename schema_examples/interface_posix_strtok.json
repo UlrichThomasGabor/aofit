@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "strtok",
+	"header_files": ["string.h"],
+	"targets": [
+		{
+			"id": "posix_strtok",
+			"signature": "char *strtok(char *restrict s, const char *restrict sep);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_strtok_r",
+			"signature": "char *strtok_r(char *restrict s, const char *restrict sep, char **restrict state);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

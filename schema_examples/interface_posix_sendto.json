@@ -1,0 +1,39 @@
+{
+	"system_interface_name": "sendto",
+	"header_files": ["sys/socket.h.h"],
+	"targets": [
+		{
+			"id": "posix_sendto",
+			"signature": "ssize_t sendto(int socket, const void *message, size_t length, int flags, const struct sockaddr *dest_addr, socklen_t dest_len);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAFNOSUPPORT"},
+				{"errno": "EAGAIN"},
+				{"errno": "EWOULDBLOCK"},
+				{"errno": "EBADF"},
+				{"errno": "ECONNRESET"},
+				{"errno": "EINTR"},
+				{"errno": "EMSGSIZE"},
+				{"errno": "ENOTCONN"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "EPIPE"},
+				{"errno": "EIO"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EACCES"},
+				{"errno": "EDESTADDRREQ"},
+				{"errno": "EHOSTUNREACH"},
+				{"errno": "EINVAL"},
+				{"errno": "EIO"},
+				{"errno": "EISCONN"},
+				{"errno": "ENETDOWN"},
+				{"errno": "ENETUNREACH"},
+				{"errno": "ENOBUFS"},
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

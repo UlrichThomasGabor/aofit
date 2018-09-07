@@ -1,0 +1,17 @@
+{
+	"system_interface_name": "fdopen",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_fdopen",
+			"signature": "FILE *fdopen(int fildes, const char *mode);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EMFILE"},
+				{"errno": "EBADF"},
+				{"errno": "EINVAL"},
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

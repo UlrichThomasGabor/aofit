@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "pthread_create",
+	"header_files": ["pthread.h"],
+	"targets": [
+		{
+			"id": "posix_pthread_create",
+			"signature": "int pthread_create(pthread_t *restrict thread, const pthread_attr_t *restrict attr, void *(*start_routine)(void*), void *restrict arg);",
+			"error_situations": [
+				{"error_value": "EAGAIN"},
+				{"error_value": "EPERM"}
+			]
+		}
+	]
+}

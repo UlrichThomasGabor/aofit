@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "posix_atfork",
+	"header_files": ["pthread.h"],
+	"targets": [
+		{
+			"id": "posix_posix_atfork",
+			"signature": "int pthread_atfork(void (*prepare)(void), void (*parent)(void), void (*child)(void));",
+			"error_situations": [
+				{"error_value": "ENOMEM"}
+			]
+		}
+	]
+}

@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "inet_ntop",
+	"header_files": ["arpa/inet.h"],
+	"error_situations": [
+		{"errno": "EAFNOSUPPORT"},
+		{"errno": "ENOSPC"}
+	],
+	"targets": [
+		{
+			"id": "posix_inet_ntop",
+			"signature": "const char *inet_ntop(int af, const void *restrict src, char *restrict dst, socklen_t size);",
+			"error_value": "NULL"
+		},
+		{
+			"id": "posix_inet_ptop",
+			"signature": "int inet_pton(int af, const char *restrict src, void *restrict dst);",
+			"error_value": "-1"
+		}
+	]
+}

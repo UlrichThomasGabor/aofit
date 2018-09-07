@@ -1,10 +1,10 @@
 {
-	"system_interface_name": "time",
+	"system_interface_name": "mktime",
 	"header_files": ["time.h"],
 	"targets": [
 		{
-			"id": "posix_time",
-			"signature": "time_t time(time_t *tloc);",
+			"id": "posix_mktime",
+			"signature": "time_t mktime(struct tm *timeptr);",
 			"error_value": "(time_t)-1",
 			"error_situations": [
 				{"errno": "EOVERFLOW"}

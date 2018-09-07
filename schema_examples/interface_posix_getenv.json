@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "getenv",
+	"header_files": ["stdlib.h"],
+	"targets": [
+		{
+			"id": "posix_getenv",
+			"signature": "char *getenv(const char *name);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

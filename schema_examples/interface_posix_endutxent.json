@@ -1,0 +1,34 @@
+{
+	"system_interface_name": "endutxent",
+	"header_files": ["utmpx.h"],
+	"targets": [
+		{
+			"id": "posix_getutxent",
+			"signature": "struct utmpx *getutxent(void);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_getutxid",
+			"signature": "struct utmpx *getutxid(const struct utmpx *id);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_getutxline",
+			"signature": "struct utmpx *getutxline(const struct utmpx *line);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_pututxline",
+			"signature": "struct utmpx *pututxline(const struct utmpx *utmpx);",
+			"error_situations": [
+				{"error_value": "NULL", "errno": "EPERM"}
+			]
+		}
+	]
+}

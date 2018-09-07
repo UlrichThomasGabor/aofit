@@ -9,6 +9,22 @@
 			"error_situations": [
 				{"errno": "EDOM"}
 			]
+		},
+		{
+			"id": "posix_acosf",
+			"signature": "float acosf(float x);",
+			"error_value": "NaN",
+			"error_situations": [
+				{"errno": "EDOM"}
+			]
+		},
+		{
+			"id": "posix_acosl",
+			"signature": "long double acosl(long double x);",
+			"error_value": "NaN",
+			"error_situations": [
+				{"errno": "EDOM"}
+			]
 		}
 	]
 }

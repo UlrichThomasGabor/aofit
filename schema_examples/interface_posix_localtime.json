@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "localtime",
+	"header_files": ["time.h"],
+	"targets": [
+		{
+			"id": "posix_localtime",
+			"signature": "struct tm *localtime(const time_t *timer);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EOVERFLOW"}
+			]
+		},
+		{
+			"id": "posix_localtime_r",
+			"signature": "struct tm *localtime_r(const time_t *restrict timer, struct tm *restrict result);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EOVERFLOW"}
+			]
+		}
+	]
+}

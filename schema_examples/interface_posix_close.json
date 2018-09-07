@@ -1,0 +1,16 @@
+{
+	"system_interface_name": "close",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_close",
+			"signature": "int close(int fildes);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EINTR"},
+				{"errno": "EIO"}
+			]
+		}
+	]
+}

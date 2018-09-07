@@ -1,0 +1,19 @@
+{
+	"system_interface_name": "fread",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_fread",
+			"signature": "size_t fread(void *restrict ptr, size_t size, size_t nitems, FILE *restrict stream);",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EBADF"},
+				{"errno": "EINTR"},
+				{"errno": "EIO"},
+				{"errno": "EOVERFLOW"},
+				{"errno": "ENOMEM"},
+				{"errno": "ENXIO"}
+			]
+		}
+	]
+}

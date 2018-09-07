@@ -1,0 +1,27 @@
+{
+	"system_interface_name": "endprotoent",
+	"header_files": ["netdb.h"],
+	"targets": [
+		{
+			"id": "posix_getprotobyname",
+			"signature": "struct protoent *getprotobyname(const char *name);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_getprotobynumber",
+			"signature": "struct protoent *getprotobynumber(int proto);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_getprotoent",
+			"signature": "struct protoent *getprotoent(void);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

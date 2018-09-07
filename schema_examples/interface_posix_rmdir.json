@@ -1,0 +1,26 @@
+{
+	"system_interface_name": "rmdir",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_rmdir",
+			"signature": "int rmdir(const char *path);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EBUSY"},
+				{"errno": "EEXIST"},
+				{"errno": "ENOTEMPTY"},
+				{"errno": "EINVAL"},
+				{"errno": "EIO"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EPERM"},
+				{"errno": "EACCES"},
+				{"errno": "EROFS"}
+			]
+		}
+	]
+}

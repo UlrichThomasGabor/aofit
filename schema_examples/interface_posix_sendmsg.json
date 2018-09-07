@@ -1,0 +1,38 @@
+{
+	"system_interface_name": "sendmsg",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_sendmsg",
+			"signature": "ssize_t sendmsg(int socket, const struct msghdr *message, int flags);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EWOULDBLOCK"},
+				{"errno": "EAFNOSUPPORT"},
+				{"errno": "EBADF"},
+				{"errno": "ECONNRESET"},
+				{"errno": "EINTR"},
+				{"errno": "EINVAL"},
+				{"errno": "EMSGSIZE"},
+				{"errno": "ENOTCONN"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "EPIPE"},
+				{"errno": "EIO"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EACCES"},
+				{"errno": "EDESTADDRREQ"},
+				{"errno": "EHOSTUNREACH"},
+				{"errno": "EISCONN"},
+				{"errno": "ENETDOWN"},
+				{"errno": "ENETUNREACH"},
+				{"errno": "ENOBUFS"},
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

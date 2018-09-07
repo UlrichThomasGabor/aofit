@@ -1,0 +1,35 @@
+{
+	"system_interface_name": "endgrent",
+	"header_files": ["grp.h"],
+	"error_situations": [
+		{"errno": "EINTR"},
+		{"errno": "EIO"}
+	],
+	"targets": [
+		{
+			"id": "posix_endgrent",
+			"signature": "void endgrent(void);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_getgrent",
+			"signature": "struct group *getgrent(void);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"}
+			]
+		},
+		{
+			"id": "posix_setgrent",
+			"signature": "void setgrent(void);",
+			"error_value": "NULL",
+			"error_situations": [
+			{"errno": "EMFILE"},
+			{"errno": "ENFILE"}
+			]
+		}
+	]
+}

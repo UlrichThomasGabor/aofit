@@ -1,0 +1,34 @@
+{
+	"system_interface_name": "unlink",
+	"header_files": ["unistd.h"],
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "EBUSY"},
+		{"errno": "ELOOP"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOTDIR"},
+		{"errno": "EPERM"},
+		{"errno": "EACCES"},
+		{"errno": "EROFS"},
+		{"errno": "ETXTBSY"}
+	],
+	"targets": [
+		{
+			"id": "posix_unlink",
+			"signature": "int unlink(const char *path);",
+			"error_value": "-1"
+		},
+		{
+			"id": "posix_unlinkat",
+			"signature": "int unlinkat(int fd, const char *path, int flag);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EEXIST"},
+				{"errno": "ENOTEMPTY"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

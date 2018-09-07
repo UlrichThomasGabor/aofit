@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "islower",
+	"header_files": ["ctype.h"],
+	"targets": [
+		{
+			"id": "posix_islower",
+			"signature": "int islower(int c);",
+			"error_situations": [
+				{"error_value": "0"}
+			]
+		},
+		{
+			"id": "posix_islower_l",
+			"signature": "int islower_l(int c, locale_t locale);",
+			"error_situations": [
+				{"error_value": "0"}
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "freeaddrinfo",
+	"header_files": ["sys/socket.h", "netdb.h"],
+	"targets": [
+		{
+			"id": "posix_getaddrinfo",
+			"signature": "int getaddrinfo(const char *restrict nodename, const char *restrict servname, const struct addrinfo *restrict hints, struct addrinfo **restrict res);",
+			"error_value": "20",
+			"error_situations": [
+				{"errno": "EAI_AGAIN"},
+				{"errno": "EAI_BADFLAGS"},
+				{"errno": "EAI_FAIL"},
+				{"errno": "EAI_FAMILY"},
+				{"errno": "EAI_MEMORY"},
+				{"errno": "EAI_NONAME"},
+				{"errno": "EAI_SERVICE"},
+				{"errno": "EAI_SOCKTYPE"},
+				{"errno": "EAI_SYSTEM"}
+			]
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "malloc",
+	"header_files": ["stdlib.h"],
+	"targets": [
+		{
+			"id": "posix_malloc",
+			"signature": "void *malloc(size_t size);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

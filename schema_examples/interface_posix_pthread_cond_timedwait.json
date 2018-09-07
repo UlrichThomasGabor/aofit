@@ -1,0 +1,24 @@
+{
+	"system_interface_name": "pthread_cond_timedwait",
+	"header_files": ["pthread.h"],
+	"error_situations": [
+		{"error_value": "ENOTRECOVERABLE"},
+		{"error_value": "EOWNERDEAD"},
+		{"error_value": "EPERM"},
+		{"error_value": "ENOTRECOVERABLE"},
+	],
+	"targets": [
+		{
+			"id": "posix_pthread_cond_timedwait",
+			"signature": "int pthread_cond_timedwait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex, const struct timespec *restrict abstime);",
+			"error_situations": [
+				{"error_value": "ETIMEDOUT"},
+				{"error_value": "EINVAL"}
+			]
+		},
+		{
+			"id": "posix_pthread_cond_wait",
+			"signature": "int pthread_cond_wait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex);",
+		}
+	]
+}

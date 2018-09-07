@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "wmemchr",
+	"header_files": ["wchar.h"],
+	"targets": [
+		{
+			"id": "posix_wmemchr",
+			"signature": "wchar_t *wmemchr(const wchar_t *ws, wchar_t wc, size_t n);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

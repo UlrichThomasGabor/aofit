@@ -1,0 +1,17 @@
+{
+	"system_interface_name": "iconv",
+	"header_files": ["iconv.h"],
+	"targets": [
+		{
+			"id": "posix_iconv",
+			"signature": "size_t iconv(iconv_t cd, char **restrict inbuf, size_t *restrict inbytesleft, char **restrict outbuf, size_t *restrict outbytesleft);",
+			"error_value": "(size_t)-1",
+			"error_situations": [
+				{"errno": "EILSEQ"},
+				{"errno": "E2BIG"},
+				{"errno": "EINVAL"},
+				{"errno": "EBADF"}
+			]
+		}
+	]
+}

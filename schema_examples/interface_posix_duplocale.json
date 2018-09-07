@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "duplocale",
+	"header_files": ["locale.h"],
+	"targets": [
+		{
+			"id": "posix_duplocale",
+			"signature": "locale_t duplocale(locale_t locobj);",
+			"error_value": "(locale_t)0",
+			"error_situations": [
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

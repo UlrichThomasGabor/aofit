@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "encrypt",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_encrypt",
+			"signature": "void encrypt(char block[64], int edflag);",
+			"error_situations": [
+				{"errno": "ENOSYS"}
+			]
+		}
+	]
+}

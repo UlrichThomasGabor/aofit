@@ -1,7 +1,6 @@
 {
 	"system_interface_name": "open",
 	"header_files": ["sys/stat.h", "fcntl.h"],
-	"error_value": "-1",
 	"error_situations": [
 		{"errno": "EACCES"},
 		{"errno": "EEXIST"},
@@ -15,26 +14,33 @@
 		{"errno": "ENFILE"},
 		{"errno": "ENOENT"},
 		{"errno": "ENOTDIR"},
+		{"errno": "ENOSR"},
+		{"errno": "ENOSPC"},
 		{"errno": "ENXIO"},
 		{"errno": "EOVERFLOW"},
 		{"errno": "EROFS"},
-
 		{"errno": "EAGAIN"},
 		{"errno": "ENOMEM"},
 		{"errno": "EOPNOTSUPP"},
 		{"errno": "ETXTBSY"}
 	],
-
 	"targets": [
 		{
 			"id": "posix_open",
-			"signature": "int open(const char *path, int oflag, ...);"
+			"signature": "int open(const char *path, int oflag, ...);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
 		},
 		{
 			"id": "posix_openat",
 			"signature": "int openat(int fd, const char *path, int oflag, ...);",
+			"error_value": "-1",
 			"error_situations": [
-				{"errno": "EBADF"}
+				{"errno": "EACCES"},
+				{"errno": "EBADF"},
+				{"errno": "ENOTDIR"}
 			]
 		}
 	]

@@ -1,0 +1,17 @@
+{
+	"system_interface_name": "iconv_open",
+	"header_files": ["iconv.h"],
+	"targets": [
+		{
+			"id": "posix_iconv_open",
+			"signature": "iconv_t iconv_open(const char *tocode, const char *fromcode);",
+			"error_value": "(iconv_t)-1",
+			"error_situations": [
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"},
+				{"errno": "ENOMEM"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

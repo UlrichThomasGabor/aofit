@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "pipe",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_pipe",
+			"signature": "int pipe(int fildes[2]);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"}
+			]
+		}
+	]
+}

@@ -1,0 +1,24 @@
+{
+	"system_interface_name": "fcntl",
+	"header_files": ["fcntl.h"],
+	"targets": [
+		{
+			"id": "posix_fcntl",
+			"signature": "int fcntl(int fildes, int cmd, ...);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EAGAIN"},
+				{"errno": "EBADF"},
+				{"errno": "EINTR"},
+				{"errno": "EINVAL"},
+				{"errno": "EMFILE"},
+				{"errno": "ENOLCK"},
+				{"errno": "EOVERFLOW"},
+				{"errno": "ESRCH"},
+				{"errno": "EDEADLK"},
+				{"errno": "EPERM"}
+			]
+		}
+	]
+}

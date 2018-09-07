@@ -1,0 +1,29 @@
+{
+	"system_interface_name": "fseek",
+	"header_files": ["stdio.h"],
+	"error_situations": [
+		{"errno": "EAGAIN"},
+		{"errno": "EBADF"},
+		{"errno": "EFBIG"},
+		{"errno": "EINTR"},
+		{"errno": "EINVAL"},
+		{"errno": "EIO"},
+		{"errno": "ENOSPC"},
+		{"errno": "EOVERFLOW"},
+		{"errno": "EPIPE"},
+		{"errno": "ESPIPE"},
+		{"errno": "ENXIO"}
+	],
+	"targets": [
+		{
+			"id": "posix_fseek",
+			"signature": "int fseek(FILE *stream, long offset, int whence);",
+			"error_value": "-1"
+		},
+		{
+			"id": "posix_fseeko",
+			"signature": "int fseeko(FILE *stream, off_t offset, int whence);",
+			"error_value": "-1"
+		}
+	]
+}

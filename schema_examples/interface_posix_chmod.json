@@ -1,0 +1,37 @@
+{
+	"system_interface_name": "chmod",
+	"header_files": ["sys/stat.h"],
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "ELOOP"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOTDIR"},
+		{"errno": "EPERM"},
+		{"errno": "EROFS"},
+		{"errno": "EINTR"},
+		{"errno": "EINVAL"},
+		{"errno": "ELOOP"}
+	],
+	"targets": [
+		{
+			"id": "posix_chmod",
+			"signature": "int chmod(const char *path, mode_t mode);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_fchmodat",
+			"signature": "int fchmodat(int fd, const char *path, mode_t mode, int flag);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EBADF"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EINVAL"},
+				{"errno": "EOPNOTSUPP"}
+			]
+		}
+	]
+}

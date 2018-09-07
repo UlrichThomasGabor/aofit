@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "munmap",
+	"header_files": ["sys/mman.h"],
+	"targets": [
+		{
+			"id": "posix_munmap",
+			"signature": "int munmap(void *addr, size_t len);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

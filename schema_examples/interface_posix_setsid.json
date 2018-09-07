@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "setsid",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_setsid",
+			"signature": "pid_t setsid(void);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EPERM"}
+			]
+		}
+	]
+}

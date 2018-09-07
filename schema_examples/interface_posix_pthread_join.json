@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "pthread_join",
+	"header_files": ["pthread.h"],
+	"targets": [
+		{
+			"id": "posix_pthread_join",
+			"signature": "int pthread_join(pthread_t thread, void **value_ptr);",
+			"error_situations": [
+				{"error_value": "EDEADLK"}
+			]
+		}
+	]
+}

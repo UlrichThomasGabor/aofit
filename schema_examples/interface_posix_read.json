@@ -1,0 +1,41 @@
+{
+	"system_interface_name": "read",
+	"header_files": ["unistd.h"],
+	"error_situations": [
+		{"errno": "EAGAIN"},
+		{"errno": "EBADF"},
+		{"errno": "EBADMSG"},
+		{"errno": "EINTR"},
+		{"errno": "EINVAL"},
+		{"errno": "EIO"},
+		{"errno": "EISDIR"},
+		{"errno": "EOVERFLOW"},
+		{"errno": "EIO"},
+		{"errno": "ENOBUFS"},
+		{"errno": "ENOMEM"},
+		{"errno": "ENXIO"}
+	],
+	"targets": [
+		{
+			"id": "posix_pread",
+			"signature": "ssize_t pread(int fildes, void *buf, size_t nbyte, off_t offset);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"},
+				{"errno": "ESPIPE"}
+			]
+		},
+		{
+			"id": "posix_read",
+			"signature": "ssize_t read(int fildes, void *buf, size_t nbyte);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EWOULDBLOCK"},
+				{"errno": "ECONNRESET"},
+				{"errno": "ENOTCONN"},
+				{"errno": "ETIMEDOUT"}
+			]
+		}
+	]
+}

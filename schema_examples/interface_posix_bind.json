@@ -1,0 +1,33 @@
+{
+	"system_interface_name": "bind",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_bind",
+			"signature": "int bind(int socket, const struct sockaddr *address, socklen_t address_len);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EADDRINUSE"},
+				{"errno": "EADDRNOTAVAIL"},
+				{"errno": "EAFNOSUPPORT"},
+				{"errno": "EALREADY"},
+				{"errno": "EBADF"},
+				{"errno": "EINPROGRESS"},
+				{"errno": "EINVAL"},
+				{"errno": "ENOBUFS"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "EACCES"},
+				{"errno": "EDESTADDRREQ"},
+				{"errno": "EISDIR"},
+				{"errno": "EIO"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EROFS"},
+				{"errno": "EISCONN"}
+			]
+		}
+	]
+}

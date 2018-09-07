@@ -1,0 +1,37 @@
+{
+	"system_interface_name": "chown",
+	"header_files": ["unistd.h"],
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "ELOOP"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOTDIR"},
+		{"errno": "EPERM"},
+		{"errno": "EROFS"},
+		{"errno": "EIO"},
+		{"errno": "EINTR"},
+		{"errno": "EINVAL"},
+		{"errno": "ENAMETOOLONG"},
+	],
+	"targets": [
+		{
+			"id": "posix_chown",
+			"signature": "int chown(const char *path, uid_t owner, gid_t group);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_chownat",
+			"signature": "int fchownat(int fd, const char *path, uid_t owner, gid_t group, int flag);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EBADF"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

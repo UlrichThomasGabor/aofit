@@ -1,0 +1,21 @@
+{
+	"system_interface_name": "perror",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_perror",
+			"signature": "void perror(const char *s);",
+			"error_situations": [
+				{ "errno": "EAGAIN" },
+				{ "errno": "EBADF" },
+				{ "errno": "EFBIG" },
+				{ "errno": "EINTR"},
+				{ "errno": "EIO"},
+				{ "errno": "ENOSPC"},
+				{ "errno": "EPIPE"},
+				{ "errno": "ENOMEM"},
+				{ "errno": "ENXIO"}
+			]
+		}
+	]
+}

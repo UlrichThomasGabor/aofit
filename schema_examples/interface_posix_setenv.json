@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "setenv",
+	"header_files": ["stdlib.h"],
+	"targets": [
+		{
+			"id": "posix_setenv",
+			"signature": "int setenv(const char *envname, const char *envval, int overwrite);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"},
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "wcsdup",
+	"header_files": ["wchar.h"],
+	"targets": [
+		{
+			"id": "posix_wcsdup",
+			"signature": "wchar_t *wcsdup(const wchar_t *string);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

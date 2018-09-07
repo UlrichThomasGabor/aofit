@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "cfsetospeed",
+	"header_files": ["termios.h"],
+	"targets": [
+		{
+			"id": "posix_cfsetospeed",
+			"signature": "int cfsetospeed(struct termios *termios_p, speed_t speed);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

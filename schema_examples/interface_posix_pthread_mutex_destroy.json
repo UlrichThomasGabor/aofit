@@ -1,0 +1,23 @@
+{
+	"system_interface_name": "pthread_mutex_destroy",
+	"header_files": ["pthread.h"],
+	"targets": [
+		{
+			"id": "posix_pthread_mutex_destroy",
+			"signature": "int pthread_mutex_destroy(pthread_mutex_t *mutex);",
+			"error_situations": [
+				{"error_value": "1"}
+			]
+		},
+		{
+			"id": "posix_pthread_mutex_init",
+			"signature": "int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr);",
+			"error_situations": [
+				{"error_value": "EAGAIN"},
+				{"error_value": "ENOMEM"},
+				{"error_value": "EPERM"},
+				{"error_value": "EINVAL"}
+			]
+		}
+	]
+}

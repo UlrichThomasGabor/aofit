@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "pclose",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_pclose",
+			"signature": "int pclose(FILE *stream);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "ECHILD"}
+			]
+		}
+	]
+}

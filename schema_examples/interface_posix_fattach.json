@@ -1,0 +1,23 @@
+{
+	"system_interface_name": "fattach",
+	"header_files": ["stropts.h"],
+	"targets": [
+		{
+			"id": "posix_fattach",
+			"signature": "int fattach(int fildes, const char *path);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EBADF"},
+				{"errno": "EBUSY"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EPERM"},
+				{"errno": "EINVAL"},
+				{"errno": "EXDEV"}
+			]
+		}
+	]
+}

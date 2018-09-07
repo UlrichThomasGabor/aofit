@@ -1,0 +1,27 @@
+{
+	"system_interface_name": "fabs",
+	"header_files": ["math.h"],
+	"targets": [
+		{
+			"id": "posix_fabs",
+			"signature": "double fabs(double x);",
+			"error_situations": [
+				{"error_value": "NaN"}
+			]
+		},
+		{
+			"id": "posix_fabsf",
+			"signature": "float fabsf(float x);",
+			"error_situations": [
+				{"error_value": "NaN"}
+			]
+		},
+		{
+			"id": "posix_fabsl",
+			"signature": "long double fabsl(long double x);",
+			"error_situations": [
+				{"error_value": "NaN"}
+			]
+		}
+	]
+}

@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "setuid",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_setuid",
+			"signature": "int setuid(uid_t uid);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"},
+				{"errno": "EPERM"}
+			]
+		}
+	]
+}

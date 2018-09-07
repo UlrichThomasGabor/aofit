@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "aio_return",
+	"header_files": ["aio.h"],
+	"targets": [
+		{
+			"id": "posix_aio_return",
+			"signature": "ssize_t aio_return(struct aiocb *aiocbp);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

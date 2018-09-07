@@ -1,0 +1,30 @@
+{
+	"system_interface_name": "atan",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"errno": "ERANGE"}
+	],
+	"targets": [
+		{
+			"id": "posix_atan",
+			"signature": "double atan(double x);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_atanf",
+			"signature": "float atanf(float x);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_atanl",
+			"signature": "long double atanl(long double x);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		}
+	]
+}

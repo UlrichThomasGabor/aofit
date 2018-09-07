@@ -1,0 +1,18 @@
+{
+	"system_interface_name": "shutdown",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_shutdown",
+			"signature": "int shutdown(int socket, int how);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EINVAL"},
+				{"errno": "ENOTCONN"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "ENOBUFS"}
+			]
+		}
+	]
+}

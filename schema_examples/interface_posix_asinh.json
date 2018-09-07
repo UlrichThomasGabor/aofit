@@ -1,0 +1,30 @@
+{
+	"system_interface_name": "asinh",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"errno": "ERANGE"}
+	],
+	"targets": [
+		{
+			"id": "posix_asinh",
+			"signature": "double asinh(double x);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_asinhf",
+			"signature": "float asinhf(float x);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_asinhl",
+			"signature": "long double asinhl(long double x);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		}
+	]
+}

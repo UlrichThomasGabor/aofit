@@ -1,0 +1,21 @@
+{
+	"system_interface_name": "ftell",
+	"header_files": ["stdio.h"],
+	"error_situations": [
+		{"errno": "EBADF"},
+		{"errno": "EOVERFLOW"},
+		{"errno": "ESPIPE"}
+	],
+	"targets": [
+		{
+			"id": "posix_ftell",
+			"signature": "long ftell(FILE *stream);",
+			"error_value": "-1"
+		},
+		{
+			"id": "posix_ftello",
+			"signature": "off_t ftello(FILE *stream);",
+			"error_value": "-1"
+		}
+	]
+}

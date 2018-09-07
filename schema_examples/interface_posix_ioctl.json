@@ -1,0 +1,26 @@
+{
+	"system_interface_name": "ioctl",
+	"header_files": ["stropts.h"],
+	"targets": [
+		{
+			"id": "posix_ioctl",
+			"signature": "int ioctl(int fildes, int request, ...);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"},
+				{"errno": "ENXIO"},
+				{"errno": "EAGAIN"},
+				{"errno": "ENOSR"},
+				{"errno": "ERANGE"},
+				{"errno": "ETIME"},
+				{"errno": "EBADF"},
+				{"errno": "EBADMSG"},
+				{"errno": "EMFILE"},
+				{"errno": "ENODATA"},
+				{"errno": "EIO"},
+				{"errno": "ENOTTY"},
+				{"errno": "ENODEV"}
+			]
+		}
+	]
+}

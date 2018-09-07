@@ -1,0 +1,25 @@
+{
+	"system_interface_name": "dup",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_dup",
+			"signature": "int dup(int fildes);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EMFILE"}
+			]
+		},
+		{
+			"id": "posix_dup2",
+			"signature": "int dup2(int fildes, int fildes2);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EINTR"},
+				{"errno": "EIO"}
+			]
+		}
+	]
+}

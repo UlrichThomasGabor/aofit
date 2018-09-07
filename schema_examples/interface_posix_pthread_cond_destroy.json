@@ -1,0 +1,21 @@
+{
+	"system_interface_name": "pthread_cond_destroy",
+	"header_files": ["pthread.h"],
+	"targets": [
+		{
+			"id": "posix_pthread_cond_destroy",
+			"signature": "int pthread_cond_destroy(pthread_cond_t *cond);",
+			"error_situations": [
+				{"error_value": "1"}
+			]
+		},
+		{
+			"id": "posix_pthread_cond_init",
+			"signature": "int pthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr);",
+			"error_situations": [
+				{"error_value": "EAGAIN"},
+				{"error_value": "ENOMEM"}
+			]
+		}
+	]
+}

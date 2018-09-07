@@ -1,0 +1,30 @@
+{
+	"system_interface_name": "erf",
+	"header_files": ["math.h"],
+	"targets": [
+		{
+			"id": "posix_erf",
+			"signature": "double erf(double x);",
+			"error_situations": [
+				{"error_value": "NaN"},
+				{"error_value": "DBL_MIN", "errno": "ERANGE"}
+			]
+		},
+		{
+			"id": "posix_erff",
+			"signature": "float erff(float x);",
+			"error_situations": [
+				{"error_value": "NaN"},
+				{"error_value": "FLT_MIN", "errno": "ERANGE"}
+			]
+		},
+		{
+			"id": "posix_erfl",
+			"signature": "long double erfl(long double x);",
+			"error_situations": [
+				{"error_value": "NaN"},
+				{"error_value": "LDBL_MIN", "errno": "ERANGE"}
+			]
+		}
+	]
+}

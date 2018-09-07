@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "sigaction",
+	"header_files": ["signal.h"],
+	"targets": [
+		{
+			"id": "posix_sigaction",
+			"signature": "int sigaction(int sig, const struct sigaction *restrict act, struct sigaction *restrict oact);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

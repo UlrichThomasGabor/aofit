@@ -1,0 +1,30 @@
+{
+	"system_interface_name": "mkdir",
+	"header_files": ["sys/stat.h"],
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "EEXIST"},
+		{"errno": "ELOOP"},
+		{"errno": "EMLINK"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOSPC"},
+		{"errno": "ENOTDIR"},
+		{"errno": "EROFS"}
+	],
+	"targets": [
+		{
+			"id": "posix_mkdir",
+			"signature": "int mkdir(const char *path, mode_t mode);",
+			"error_value": "-1"
+		},
+		{
+			"id": "posix_mkdirat",
+			"signature": "int mkdirat(int fd, const char *path, mode_t mode);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"}
+			]
+		}
+	]
+}

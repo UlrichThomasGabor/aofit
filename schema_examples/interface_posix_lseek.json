@@ -1,0 +1,17 @@
+{
+	"system_interface_name": "lseek",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_lseek",
+			"signature": "off_t lseek(int fildes, off_t offset, int whence);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EINVAL"},
+				{"errno": "EOVERFLOW"},
+				{"errno": "ESPIPE"}
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "puts",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_puts",
+			"signature": "int puts(const char *s);",
+			"error_value": "EOF",
+			"error_situations": [
+				{ "errno": "EAGAIN" },
+				{ "errno": "EBADF" },
+				{ "errno": "EFBIG" },
+				{ "errno": "EINTR"},
+				{ "errno": "EIO"},
+				{ "errno": "ENOSPC"},
+				{ "errno": "EPIPE"},
+				{ "errno": "ENOMEM"},
+				{ "errno": "ENXIO"}
+			]
+		}
+	]
+}

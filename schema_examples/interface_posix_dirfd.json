@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "dirfd",
+	"header_files": ["dirent.h"],
+	"targets": [
+		{
+			"id": "posix_dirfd",
+			"signature": "int dirfd(DIR *dirp);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

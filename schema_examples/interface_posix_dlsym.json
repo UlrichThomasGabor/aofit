@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "dlsym",
+	"header_files": ["dlfcn.h"],
+	"targets": [
+		{
+			"id": "posix_dlsym",
+			"signature": "void *dlsym(void *restrict handle, const char *restrict name);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

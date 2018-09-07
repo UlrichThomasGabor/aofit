@@ -1,0 +1,31 @@
+{
+	"system_interface_name": "atanh",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"errno": "EDOM"},
+		{"errno": "ERANGE"}
+	],
+	"targets": [
+		{
+			"id": "posix_atanh",
+			"signature": "double atanh(double x);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_atanhf",
+			"signature": "float atanhf(float x);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_atanhl",
+			"signature": "long double atanhl(long double x);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		}
+	]
+}

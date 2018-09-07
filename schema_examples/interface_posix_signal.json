@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "signal",
+	"header_files": ["signal.h"],
+	"targets": [
+		{
+			"id": "posix_signal",
+			"signature": "void (*signal(int sig, void (*func)(int)))(int);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

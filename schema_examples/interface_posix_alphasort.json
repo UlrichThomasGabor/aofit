@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "alphasort",
+	"header_files": ["dirent.h"],
+	"targets": [
+		{
+			"id": "posix_scandir",
+			"signature": "int scandir(const char *dir, struct dirent ***namelist, int (*sel)(const struct dirent *), int (*compar)(const struct dirent **, const struct dirent **));",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOMEM"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EOVERFLOW"},
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"}
+			]
+		}
+	]
+}

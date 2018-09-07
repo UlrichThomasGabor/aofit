@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "strcoll",
+	"header_files": ["string.h"],
+	"targets": [
+		{
+			"id": "posix_strcoll",
+			"signature": "int strcoll(const char *s1, const char *s2);",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		},
+		{
+			"id": "posix_strcoll_l",
+			"signature": "int strcoll_l(const char *s1, const char *s2, locale_t locale);",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

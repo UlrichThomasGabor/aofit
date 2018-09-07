@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "strchr",
+	"header_files": ["string.h"],
+	"targets": [
+		{
+			"id": "posix_strchr",
+			"signature": "char *strchr(const char *s, int c);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

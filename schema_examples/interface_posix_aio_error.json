@@ -1,0 +1,38 @@
+{
+	"system_interface_name": "aio_error",
+	"header_files": ["aio.h"],
+	"targets": [
+		{
+			"id": "posix_aio_error",
+			"signature": "int aio_error(const struct aiocb *aiocbp);",
+			"error_value": "-1",
+			"error_situations": [
+				{"error_value": "EINPROGRESS"},
+				{"error_value": "EAGAIN"},
+				{"error_value": "EBADF"},
+				{"error_value": "EFBIG"},
+				{"error_value": "EBADMSG"},
+				{"error_value": "ENOSPC"},
+				{"error_value": "ERANGE"},
+				{"error_value": "EINTR"},
+				{"error_value": "EINVAL"},
+				{"error_value": "EIO"},
+				{"error_value": "EISDIR"},
+				{"error_value": "EOVERFLOW"},
+				{"error_value": "EWOULDBLOCK"},
+				{"error_value": "ECONNRESET"},
+				{"error_value": "ENOTCONN"},
+				{"error_value": "EPIPE"},
+				{"error_value": "ETIMEDOUT"},
+				{"error_value": "EIO"},
+				{"error_value": "ENOBUFS"},
+				{"error_value": "ENOMEM"},
+				{"error_value": "ENXIO"},
+				{"error_value": "EACCES"},
+				{"error_value": "ENETDOWN"},
+				{"error_value": "ENETUNREACH"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

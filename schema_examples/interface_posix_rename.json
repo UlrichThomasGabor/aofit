@@ -1,0 +1,41 @@
+{
+	"system_interface_name": "rename",
+	"header_files": ["stdio.h"],
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "EBUSY"},
+		{"errno": "EEXIST"},
+		{"errno": "ENOTEMPTY"},
+		{"errno": "EINVAL"},
+		{"errno": "EIO"},
+		{"errno": "EISDIR"},
+		{"errno": "ELOOP"},
+		{"errno": "EMLINK"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOSPC"},
+		{"errno": "ENOTDIR"},
+		{"errno": "EPERM"},
+		{"errno": "EACCES"},
+		{"errno": "EROFS"},
+		{"errno": "EXDEV"},
+		{"errno": "ETXTBSY"}
+	],
+	"targets": [
+		{
+			"id": "posix_rename",
+			"signature": "int rename(const char *old, const char *new);",
+			"error_value": "-1"
+		},
+		{
+			"id": "posix_renameat",
+			"signature": "int renameat(int oldfd, const char *old, int newfd, const char *new);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EBADF"},
+				{"errno": "ENOTDIR"}
+			]
+		}
+	]
+}

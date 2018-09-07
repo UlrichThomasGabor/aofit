@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "asctime",
+	"header_files": ["time.h"],
+	"targets": [
+		{
+			"id": "posix_asctime",
+			"signature": "char *asctime(const struct tm *timeptr);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_asctime_r",
+			"signature": "char *asctime_r(const struct tm *restrict tm, char *restrict buf);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

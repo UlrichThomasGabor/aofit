@@ -1,0 +1,21 @@
+{
+	"system_interface_name": "setsockopt",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_setsockopt",
+			"signature": "int setsockopt(int socket, int level, int option_name, const void *option_value, socklen_t option_len);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EDOM"},
+				{"errno": "EINVAL"},
+				{"errno": "EISCONN"},
+				{"errno": "ENOPROTOOPT"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "ENOMEM"},
+				{"errno": "ENOBUFS"}
+			]
+		}
+	]
+}

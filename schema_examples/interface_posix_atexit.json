@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "atexit",
+	"header_files": ["stdlib.h"],
+	"targets": [
+		{
+			"id": "posix_atexit",
+			"signature": "int atexit(void (*func)(void));",
+			"error_situations": [
+				{"error_value": "42"}
+			]
+		}
+	]
+}

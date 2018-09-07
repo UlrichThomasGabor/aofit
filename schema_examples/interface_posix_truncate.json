@@ -1,0 +1,25 @@
+{
+	"system_interface_name": "truncate",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_truncate",
+			"signature": "int truncate(const char *path, off_t length);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINTR"},
+				{"errno": "EINVAL"},
+				{"errno": "EFBIG"},
+				{"errno": "EIO"},
+				{"errno": "EACCES"},
+				{"errno": "EISDIR"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EROFS"},
+				{"errno": "EIELOOPNTR"}
+			]
+		}
+	]
+}

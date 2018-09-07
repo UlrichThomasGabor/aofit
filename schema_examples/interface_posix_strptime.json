@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "strptime",
+	"header_files": ["time.h"],
+	"targets": [
+		{
+			"id": "posix_strptime",
+			"signature": "char *strptime(const char *restrict buf, const char *restrict format, struct tm *restrict tm);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

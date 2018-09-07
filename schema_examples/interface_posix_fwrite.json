@@ -1,0 +1,21 @@
+{
+	"system_interface_name": "fwrite",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_fwrite",
+			"signature": "size_t fwrite(const void *restrict ptr, size_t size, size_t nitems, FILE *restrict stream);",
+			"error_situations": [
+				{ "errno": "EAGAIN" },
+				{ "errno": "EBADF" },
+				{ "errno": "EFBIG" },
+				{ "errno": "EINTR"},
+				{ "errno": "EIO"},
+				{ "errno": "ENOSPC"},
+				{ "errno": "EPIPE"},
+				{ "errno": "ENOMEM"},
+				{ "errno": "ENXIO"}
+			]
+		}
+	]
+}

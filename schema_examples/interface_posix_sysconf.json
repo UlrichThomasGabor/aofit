@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "sysconf",
+	"header_files": ["unistd.h"],
+	"targets": [
+		{
+			"id": "posix_sysconf",
+			"signature": "long sysconf(int name);",
+			"error_situations": [
+				{"error_value": "-1", "errno": "EINVAL"},
+				{"error_value": "-1"}
+			]
+		}
+	]
+}

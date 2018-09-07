@@ -1,0 +1,21 @@
+{
+	"system_interface_name": "socket",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_socket",
+			"signature": "int socket(int domain, int type, int protocol);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAFNOSUPPORT"},
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"},
+				{"errno": "EPROTONOSUPPORT"},
+				{"errno": "EPROTOTYPE"},
+				{"errno": "EACCES"},
+				{"errno": "ENOBUFS"},
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

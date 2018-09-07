@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "realloc",
+	"header_files": ["stdlib.h"],
+	"targets": [
+		{
+			"id": "posix_realloc",
+			"signature": "void *realloc(void *ptr, size_t size);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

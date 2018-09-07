@@ -1,0 +1,38 @@
+{
+	"system_interface_name": "connect",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_connect",
+			"signature": "int connect(int socket, const struct sockaddr *address, socklen_t address_len);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EADDRNOTAVAIL"},
+				{"errno": "EAFNOSUPPORT"},
+				{"errno": "EALREADY"},
+				{"errno": "EBADF"},
+				{"errno": "ECONNREFUSED"},
+				{"errno": "EINPROGRESS"},
+				{"errno": "EINTR"},
+				{"errno": "EISCONN"},
+				{"errno": "ENETUNREACH"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EPROTOTYPE"},
+				{"errno": "ETIMEDOUT"},
+				{"errno": "EIO"},
+				{"errno": "ELOOP"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOTDIR"},
+				{"errno": "EACCES"},
+				{"errno": "EADDRINUSE"},
+				{"errno": "ECONNRESET"},
+				{"errno": "EHOSTUNREACH"},
+				{"errno": "EINVAL"},
+				{"errno": "ENETDOWN"},
+				{"errno": "ENOBUFS"},
+				{"errno": "EOPNOTSUPP"}
+			]
+		}
+	]
+}

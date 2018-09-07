@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "sigaddset",
+	"header_files": ["signal.h"],
+	"targets": [
+		{
+			"id": "posix_sigaddset",
+			"signature": "int sigaddset(sigset_t *set, int signo);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

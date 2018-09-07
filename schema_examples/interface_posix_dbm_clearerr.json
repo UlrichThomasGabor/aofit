@@ -1,0 +1,48 @@
+{
+	"system_interface_name": "dbm_clearerr",
+	"header_files": ["ndbm.h"],
+	"targets": [
+		{
+			"id": "posix_dbm_delete",
+			"signature": "int dbm_delete(DBM *db, datum key);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+		{
+			"id": "posix_dbm_fetch",
+			"signature": "datum dbm_fetch(DBM *db, datum key);",
+			"error_situations": [
+				{"error_value": "http://pubs.opengroup.org/onlinepubs/9699919799/functions/dbm_clearerr.html"}
+			]
+		},
+		{
+			"id": "posix_dbm_firstkey",
+			"signature": "datum dbm_firstkey(DBM *db);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_dbm_nextkey",
+			"signature": "datum dbm_nextkey(DBM *db);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_dbm_open",
+			"signature": "DBM *dbm_open(const char *file, int open_flags, mode_t file_mode);",
+			"error_situations": [
+				{"error_value": "(DBM *)0"}
+			]
+		},
+		{
+			"id": "posix_dbm_store",
+			"signature": "int dbm_store(DBM *db, datum key, datum content, int store_mode);",
+			"error_situations": [
+				{"error_value": "-1"}
+			]
+		},
+	]
+}

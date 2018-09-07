@@ -1,0 +1,13 @@
+{
+	"system_interface_name": "setlocale",
+	"header_files": ["locale.h"],
+	"targets": [
+		{
+			"id": "posix_setlocale",
+			"signature": "char *setlocale(int category, const char *locale);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

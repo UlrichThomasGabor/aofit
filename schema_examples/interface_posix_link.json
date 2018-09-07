@@ -1,0 +1,33 @@
+{
+	"system_interface_name": "link",
+	"header_files": ["unistd.h"],
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "EEXIST"},
+		{"errno": "ELOOP"},
+		{"errno": "EMLINK"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOTDIR"},
+		{"errno": "ENOSPC"},
+		{"errno": "ENOTDIR"},
+		{"errno": "EPERM"},
+		{"errno": "EROFS"},
+		{"errno": "EXDEV"}
+	],
+	"targets": [
+		{
+			"id": "posix_link",
+			"signature": "int link(const char *path1, const char *path2);",
+			"error_value": "-1"
+		},
+		{
+			"id": "posix_linkat",
+			"signature": "int linkat(int fd1, const char *path1, int fd2, const char *path2, int flag);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"}
+			]
+		}
+	]
+}

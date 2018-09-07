@@ -1,0 +1,26 @@
+{
+	"system_interface_name": "accept",
+	"header_files": ["socket.h"],
+	"targets": [
+		{
+			"id": "posix_accept",
+			"signature": "int accept(int socket, struct sockaddr *restrict address, socklen_t *restrict address_len);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EWOULDBLOCK"},
+				{"errno": "EBADF"},
+				{"errno": "ECONNABORTED"},
+				{"errno": "EINTR"},
+				{"errno": "EINVAL"},
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"},
+				{"errno": "ENOBUFS"},
+				{"errno": "ENOMEM"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "EPROTO"}
+			]
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "times",
+	"header_files": ["sys/times.h"],
+	"targets": [
+		{
+			"id": "posix_times",
+			"signature": "clock_t times(struct tms *buffer);",
+			"error_value": "(clock_t)-1",
+			"error_situations": [
+				{"errno": "EOVERFLOW"}
+			]
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"system_interface_name": "clock_getcpuclockid",
+	"header_files": ["time.h"],
+	"targets": [
+		{
+			"id": "posix_clock_getcpuclockid",
+			"signature": "int clock_getcpuclockid(pid_t pid, clockid_t *clock_id);",
+			"error_situations": [
+				{"error_value": "EPERM"},
+				{"error_value": "ESRCH"}
+			]
+		}
+	]
+}

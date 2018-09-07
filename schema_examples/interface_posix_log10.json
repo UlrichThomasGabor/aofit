@@ -1,0 +1,32 @@
+{
+	"system_interface_name": "log10",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"errno": "EDOM"},
+		{"errno": "ERANGE"},
+		{"error_value": "NaN"},
+	],
+	"targets": [
+		{
+			"id": "posix_log10",
+			"signature": "double log10(double x);",
+			"error_situations": [
+				{"error_value": "-HUGE_VAL"}
+			]
+		},
+		{
+			"id": "posix_log10f",
+			"signature": "float log10f(float x);",
+			"error_situations": [
+				{"error_value": "-HUGE_VALF"}
+			]
+		},
+		{
+			"id": "posix_log10l",
+			"signature": "long double log10l(long double x);",
+			"error_situations": [
+				{"error_value": "-HUGE_VALL"}
+			]
+		}
+	]
+}

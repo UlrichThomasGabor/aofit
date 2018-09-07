@@ -1,0 +1,15 @@
+{
+	"system_interface_name": "catclose",
+	"header_files": ["nl_types.h"],
+	"targets": [
+		{
+			"id": "posix_catclose",
+			"signature": "int catclose(nl_catd catd);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EINTR"}
+			]
+		}
+	]
+}

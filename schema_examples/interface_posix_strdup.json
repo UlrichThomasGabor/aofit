@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "strdup",
+	"header_files": ["string.h"],
+	"targets": [
+		{
+			"id": "posix_strdup",
+			"signature": "char *strdup(const char *s);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		},
+		{
+			"id": "posix_strndup",
+			"signature": "char *strndup(const char *s, size_t size);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

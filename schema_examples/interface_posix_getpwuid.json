@@ -1,0 +1,29 @@
+{
+	"system_interface_name": "getpwuid",
+	"header_files": ["pwd.h"],
+	"targets": [
+		{
+			"id": "posix_getpwuid",
+			"signature": "struct passwd *getpwuid(uid_t uid);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EIO"},
+				{"errno": "EINTR"},
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"}
+			]
+		},
+		{
+			"id": "posix_getpwuid_r",
+			"signature": "int getpwuid_r(uid_t uid, struct passwd *pwd, char *buffer, size_t bufsize, struct passwd **result);",
+			"error_situations": [
+				{"error_value": "EIO"},
+				{"error_value": "EINTR"},
+				{"error_value": "EMFILE"},
+				{"error_value": "ENFILE"},
+				{"error_value": "ERANGE"},
+				{"error_value": "ERANGE"}
+			]
+		}
+	]
+}

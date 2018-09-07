@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "ctime",
+	"header_files": ["time.h"],
+	"targets": [
+		{
+			"id": "posix_ctime",
+			"signature": "char *ctime(const time_t *clock);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		},
+		{
+			"id": "posix_ctime_r",
+			"signature": "char *ctime_r(const time_t *clock, char *buf);",
+			"error_situations": [
+				{"error_value": "NULL"}
+			]
+		}
+	]
+}

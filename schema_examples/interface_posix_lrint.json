@@ -1,0 +1,21 @@
+{
+	"system_interface_name": "lrint",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"errno": "EDOM"},
+	],
+	"targets": [
+		{
+			"id": "posix_lrint",
+			"signature": "long lrint(double x);"
+		},
+		{
+			"id": "posix_lrintf",
+			"signature": "long lrintf(float x);"
+		},
+		{
+			"id": "posix_lrintl",
+			"signature": "long lrintl(long double x);"
+		}
+	]
+}

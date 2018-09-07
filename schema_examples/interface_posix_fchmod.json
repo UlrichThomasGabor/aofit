@@ -1,0 +1,18 @@
+{
+	"system_interface_name": "fchmod",
+	"header_files": ["sys/stat.h"],
+	"targets": [
+		{
+			"id": "posix_fchmod",
+			"signature": "int fchmod(int fildes, mode_t mode);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EPERM"},
+				{"errno": "EROFS"},
+				{"errno": "EINTR"},
+				{"errno": "EINVAL"}
+			]
+		}
+	]
+}

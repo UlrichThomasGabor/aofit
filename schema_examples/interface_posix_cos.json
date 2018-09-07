@@ -1,0 +1,30 @@
+{
+	"system_interface_name": "cos",
+	"header_files": ["math.h"],
+	"targets": [
+		{
+			"id": "posix_cos",
+			"signature": "double cos(double x);",
+			"error_situations": [
+				{"error_value": "NaN"},
+				{"error_value": "NaN", "errno": "EDOM"}
+			]
+		},
+		{
+			"id": "posix_cosf",
+			"signature": "float cosf(float x);",
+			"error_situations": [
+				{"error_value": "NaN"},
+				{"error_value": "NaN", "errno": "EDOM"}
+			]
+		},
+		{
+			"id": "posix_cosl",
+			"signature": "long double cosl(long double x);",
+			"error_situations": [
+				{"error_value": "NaN"},
+				{"error_value": "NaN", "errno": "EDOM"}
+			]
+		}
+	]
+}

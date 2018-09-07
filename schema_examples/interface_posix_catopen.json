@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "catopen",
+	"header_files": ["nl_types.h"],
+	"targets": [
+		{
+			"id": "posix_catopen",
+			"signature": "nl_catd catopen(const char *name, int oflag);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EACCES"},
+				{"errno": "EMFILE"},
+				{"errno": "ENAMETOOLONG"},
+				{"errno": "ENFILE"},
+				{"errno": "ENOENT"},
+				{"errno": "ENOMEM"},
+				{"errno": "ENOTDIR"}
+			]
+		}
+	]
+}

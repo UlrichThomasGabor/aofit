@@ -1,0 +1,35 @@
+{
+	"system_interface_name": "endpwent",
+	"header_files": ["pwd.h"],
+	"targets": [
+		{
+			"id": "posix_endpwent",
+			"signature": "void endpwent(void);",
+			"error_situations": [
+				{"errno": "EINTR"},
+				{"errno": "EIO"}
+			]
+		},
+		{
+			"id": "posix_getpwent",
+			"signature": "struct passwd *getpwent(void);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EINTR"},
+				{"errno": "EIO"},
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"}
+			]
+		},
+		{
+			"id": "posix_setpwent",
+			"signature": "void setpwent(void);",
+			"error_situations": [
+				{"errno": "EINTR"},
+				{"errno": "EIO"},
+				{"errno": "EMFILE"},
+				{"errno": "ENFILE"}
+			]
+		}
+	]
+}

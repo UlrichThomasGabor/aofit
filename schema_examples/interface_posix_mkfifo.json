@@ -1,0 +1,29 @@
+{
+	"system_interface_name": "mkfifo",
+	"header_files": ["sys/stat.h"],
+	"error_situations": [
+		{"errno": "EACCES"},
+		{"errno": "EEXIST"},
+		{"errno": "ELOOP"},
+		{"errno": "ENAMETOOLONG"},
+		{"errno": "ENOENT"},
+		{"errno": "ENOTDIR"},
+		{"errno": "ENOSPC"},
+		{"errno": "EROFS"}
+	],
+	"targets": [
+		{
+			"id": "posix_mkfifo",
+			"signature": "int mkfifo(const char *path, mode_t mode);",
+			"error_value": "-1"
+		},
+		{
+			"id": "posix_mkfifoat",
+			"signature": "int mkfifoat(int fd, const char *path, mode_t mode);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"}
+			]
+		}
+	]
+}

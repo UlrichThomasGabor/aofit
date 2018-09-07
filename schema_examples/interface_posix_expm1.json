@@ -1,0 +1,30 @@
+{
+	"system_interface_name": "expm1",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"error_value": "NaN"}
+	],
+	"targets": [
+		{
+			"id": "posix_expm1",
+			"signature": "double expm1(double x);",
+			"error_situations": [
+				{"error_value": "DBL_MIN", "errno": "ERANGE"}
+			]
+		},
+		{
+			"id": "posix_expm1f",
+			"signature": "float expm1f(float x);",
+			"error_situations": [
+				{"error_value": "FLT_MIN", "errno": "ERANGE"}
+			]
+		},
+		{
+			"id": "posix_expm1l",
+			"signature": "long double expm1l(long double x);",
+			"error_situations": [
+				{"error_value": "LDBL_MIN", "errno": "ERANGE"}
+			]
+		}
+	]
+}

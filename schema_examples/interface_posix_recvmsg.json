@@ -1,0 +1,27 @@
+{
+	"system_interface_name": "recvmsg",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_recvmsg",
+			"signature": "ssize_t recvmsg(int socket, struct msghdr *message, int flags);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EWOULDBLOCK"},
+				{"errno": "EBADF"},
+				{"errno": "ECONNRESET"},
+				{"errno": "EINTR"},
+				{"errno": "EINVAL"},
+				{"errno": "EMSGSIZE"},
+				{"errno": "ENOTCONN"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EOPNOTSUPP"},
+				{"errno": "EIETIMEDOUTNVAL"},
+				{"errno": "EIO"},
+				{"errno": "ENOBUFS"},
+				{"errno": "ENOMEM"}
+			]
+		}
+	]
+}

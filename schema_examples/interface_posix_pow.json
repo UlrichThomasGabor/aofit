@@ -1,0 +1,38 @@
+{
+	"system_interface_name": "pow",
+	"header_files": ["math.h"],
+	"error_situations": [
+		{"errno": "EDOM"},
+		{"errno": "ERANGE"},
+		{"error_value": "NaN"},
+	],
+	"targets": [
+		{
+			"id": "posix_pow",
+			"signature": "double pow(double x, double y);",
+			"error_situations": [
+				{"error_value": "HUGE_VAL"},
+				{"error_value": "-HUGE_VAL"},
+				{"error_value": "DBL_MIN"}
+			]
+		},
+		{
+			"id": "posix_powf",
+			"signature": "float powf(float x, float y);",
+			"error_situations": [
+				{"error_value": "HUGE_VALF"},
+				{"error_value": "-HUGE_VALF"},
+				{"error_value": "FLT_MIN"}
+			]
+		},
+		{
+			"id": "posix_powl",
+			"signature": "long double powl(long double x, long double y);",
+			"error_situations": [
+				{"error_value": "HUGE_VALL"},
+				{"error_value": "-HUGE_VALL"},
+				{"error_value": "LDBL_MIN"}
+			]
+		}
+	]
+}

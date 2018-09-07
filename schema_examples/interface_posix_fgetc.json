@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "fgetc",
+	"header_files": ["stdio.h"],
+	"targets": [
+		{
+			"id": "posix_fgetc",
+			"signature": "int fgetc(FILE *stream);",
+			"error_value": "EOF",
+			"error_situations": [
+				{"errno": "EAGAIN"},
+				{"errno": "EBADF"},
+				{"errno": "EINTR"},
+				{"errno": "EIO"},
+				{"errno": "EOVERFLOW"},
+				{"errno": "ENOMEM"},
+				{"errno": "ENXIO"}
+			]
+		}
+	]
+}

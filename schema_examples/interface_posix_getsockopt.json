@@ -1,0 +1,20 @@
+{
+	"system_interface_name": "getsockopt",
+	"header_files": ["sys/socket.h"],
+	"targets": [
+		{
+			"id": "posix_getsockopt",
+			"signature": "int getsockopt(int socket, int level, int option_name, void *restrict option_value, socklen_t *restrict option_len);",
+			"error_value": "-1",
+			"error_situations": [
+				{"errno": "EBADF"},
+				{"errno": "EINVAL"},
+				{"errno": "ENOPROTOOPT"},
+				{"errno": "ENOTSOCK"},
+				{"errno": "EACCES"},
+				{"errno": "EINVAL"},
+				{"errno": "ENOBUFS"}
+			]
+		}
+	]
+}

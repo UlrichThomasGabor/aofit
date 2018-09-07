@@ -1,0 +1,22 @@
+{
+	"system_interface_name": "gmtime",
+	"header_files": ["time.h"],
+	"targets": [
+		{
+			"id": "posix_gmtime",
+			"signature": "struct tm *gmtime(const time_t *timer);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EOVERFLOW"}
+			]
+		},
+		{
+			"id": "posix_gmtime",
+			"signature": "struct tm *gmtime_r(const time_t *restrict timer, struct tm *restrict result);",
+			"error_value": "NULL",
+			"error_situations": [
+				{"errno": "EOVERFLOW"}
+			]
+		}
+	]
+}

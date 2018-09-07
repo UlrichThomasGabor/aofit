@@ -1,0 +1,27 @@
+{
+	"system_interface_name": "floor",
+	"header_files": ["math.h"],
+	"targets": [
+		{
+			"id": "posix_floor",
+			"signature": "double floor(double x);",
+			"error_situations": [
+				{"error_value": "NaN"}
+			]
+		},
+		{
+			"id": "posix_floorf",
+			"signature": "float floorf(float x);",
+			"error_situations": [
+				{"error_value": "NaN"}
+			]
+		},
+		{
+			"id": "posix_floorl",
+			"signature": "long double floorl(long double x);",
+			"error_situations": [
+				{"error_value": "NaN"}
+			]
+		}
+	]
+}
