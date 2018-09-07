@@ -12,4 +12,5 @@ rm -Rf testcampaign_experiments
 
 ../../run_experiments.py testcampaign.json > /dev/null 2>&1
 
-cat testcampaign_experiments/exp_0_1_0/output.log
+# The output contains the original fp value, which changes between runs, so replace it.
+cat testcampaign_experiments/exp_0_1_0/output.log | sed -E 's/-[0-9]+ --->/-xxxxxxx --->/g'
