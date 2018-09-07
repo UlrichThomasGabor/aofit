@@ -5,7 +5,7 @@
 
 	"type": "object",
 	"additionalProperties": false,
-	"required": ["buildCommand", "experimentCommand", "logLevel", "useEnvironmentVariables", "interfaces", "experiments"],
+	"required": ["buildCommand", "experimentCommand", "logLevel", "interfaces", "experiments"],
 	"properties": {
 		"predefined_interfaces": {
 			"type": "array",
@@ -66,22 +66,53 @@
 			"minItems": 1,
 			"items": {
 				"type": "object",
-				"additionalProperties": false,
 				"required": ["target", "injection_mode"],
-				"$comment": "oneOf und required umdrehen?",
 				"oneOf" : [
-					{"required": ["probability"]},
-					{"required": ["callCount"]},
-					{"required": ["each_occurrence_once"]}
+					{
+						"required": ["probability"],
+						"properties": {
+							"experiment_mode": {
+								"type": "string",
+								"enum": ["call_count", "each_occurrence_once"]
+							},
+							"probability": {
+								"type": "integer",
+								"minimum": 0,
+								"maximum": 100,
+								"description": "NOT USED. Used if injection_mode is 'random'."
+							},
+							"seed": {
+								"type": "integer",
+								"minimum": 0,
+								"description": "NOT USED. Used if injection_mode is 'random'. Seed for the pseudo-random-number generator used by the probability-trigger."
+							}
+						}
+					},
+					{
+						"required": ["callCount"],
+						"properties": {
+							"experiment_mode": {
+								"const": "call_count"
+							},
+							"callCount": {
+								"type": "integer",
+								"minimum": 0,
+								"description": "Used if injection_mode is 'call_count'."
+							}
+						}
+					},
+					{
+						"properties": {
+							"experiment_mode": {
+								"const": "each_occurrence_once"
+							}
+						}
+					}
 				],
 				"properties": {
 					"target": {
 						"type": "string",
 						"description": "ID of a target specified in injectable interfaces configuration file."
-					},
-					"experiment_mode": {
-						"type": "string",
-						"enum": ["call_count", "each_occurrence_once"]
 					},
 					"injection_mode": {
 						"type": "string",
@@ -94,22 +125,6 @@
 					"error_situation_index": {
 						"type": "integer",
 						"description": "Used if injection_mode is 'replace'. Index of the error_situation array of the interface, whose value should be injected."
-					},
-					"probability": {
-						"type": "integer",
-						"minimum": 0,
-						"maximum": 100,
-						"description": "NOT USED. Used if injection_mode is 'random'."
-					},
-					"seed": {
-						"type": "integer",
-						"minimum": 0,
-						"description": "NOT USED. Used if injection_mode is 'random'. Seed for the pseudo-random-number generator used by the probability-trigger."
-					},
-					"callCount": {
-						"type": "integer",
-						"minimum": 0,
-						"description": "Used if injection_mode is 'call_count'."
 					}
 				}
 			}
